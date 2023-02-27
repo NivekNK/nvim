@@ -12,5 +12,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd([[ colorscheme tokyonight-moon ]])
+        end
+    }
 })
