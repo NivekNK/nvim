@@ -1,2 +1,3 @@
 require "user.config"
-require "user.plugins"
+require "user.lazy"
+require "user.mappings"

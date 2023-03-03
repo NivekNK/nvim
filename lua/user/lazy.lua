@@ -1,3 +1,4 @@
+-- Automatically install lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -11,13 +12,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd([[ colorscheme tokyonight-moon ]])
-        end
-    }
-})
+local status_ok, lazy = pcall(require, "lazy")
+if not status_ok then
+    vim.notify("Error loading lazy!", vim.log.levels.ERROR)
+    return
+end
+
+lazy.setup("plugins")
