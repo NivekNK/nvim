@@ -44,3 +44,9 @@ vim.opt.linebreak = true
 vim.keymap.set("", "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+local icons = require("config.icons")
+vim.fn.sign_define("DiagnosticSignError", { text = icons.error .. " ", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = icons.warning .. " ", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = icons.info .. " ", texthl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = icons.hint, texthl = "DiagnosticSignHint" })

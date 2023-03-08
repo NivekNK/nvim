@@ -1,9 +1,12 @@
-return {
-    "folke/which-key.nvim",
-    dependencies = {
-        "nvim-lua/plenary.nvim"
-    },
-    opts = {
+local function setup()
+    local status_ok, which_key = pcall(require, "which-key")
+    if not status_ok then
+        vim.notify("Error loading which-key!", vim.log.levels.ERROR)
+        return
+    end
+
+    local icons = require("config.icons")
+    which_key.setup({
         plugins = {
             marks = true, -- shows a list of your marks on ' and `
             registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -36,10 +39,10 @@ return {
         -- motions = {
         --     count = true
         -- },
-        icons = { -- TODO: Move to a icons file.
-            breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-            separator = "➜", -- symbol used between a key and it's label
-            group = "+" -- symbol prepended to a group
+        icons = {
+            breadcrumb = icons.breadcrumb, -- symbol used in the command line area that shows your active key combo
+            separator = icons.separator, -- symbol used between a key and it's label
+            group = icons.group -- symbol prepended to a group
         },
         popup_mappings = {
             scroll_down = "<C-d>", -- binding to scroll down inside the popup
@@ -89,5 +92,13 @@ return {
         --   buftypes = {},
         --   filetypes = {}
         -- }
-    }
+    })
+end
+
+return {
+    "folke/which-key.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim"
+    },
+    config = setup
 }

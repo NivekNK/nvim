@@ -5,16 +5,16 @@ local function setup()
         return
     end
 
-    -- TODO: Move icons to a separated file.
+    local icons = require("config.icons")
     notify.setup({
         background_colour = "Normal",
         fps = 30,
         icons = {
-            DEBUG = "",
-            ERROR = "",
-            INFO = "",
-            TRACE = "✎",
-            WARN = ""
+            DEBUG = icons.debug,
+            ERROR = icons.error,
+            INFO = icons.info,
+            TRACE = icons.trace,
+            WARN = icons.warning
         },
         level = 2,
         minimum_width = 50,

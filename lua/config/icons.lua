@@ -1,0 +1,31 @@
+M = {
+    debug = "",
+    info = "",
+    trace = "✎",
+    warning = "",
+    error = "",
+    hint = "",
+    diagnostic = "󰋠",
+    breadcrumb = "»",
+    separator = "➜",
+    group = "+",
+    truncation = "…",
+    files = "",
+    file_tree_collapsed = "",
+    file_tree_expanded = "",
+    folder_group = "",
+    folder_closed = "",
+    folder_open = "",
+    folder_empty = "ﰊ",
+    item_modified = "",
+    item_deleted = "✖",
+    item_renamed = "R",
+    git = "",
+    git_untracked = "",
+    git_ignored = "",
+    git_unstaged = "",
+    git_staged = "",
+    git_conflict = ""
+}
+
+return M
