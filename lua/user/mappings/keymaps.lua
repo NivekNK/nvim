@@ -5,28 +5,11 @@ local K = vim.keymap
 -- Save file
 K.set("n", "<C-s>", ":w<CR>")
 
--- TODO: Add this to which key.
--- Change between panels in window
---K.set("n", "<M-h>", "<C-w>h")
---K.set("n", "<M-j>", "<C-w>j")
---K.set("n", "<M-k>", "<C-w>k")
---K.set("n", "<M-l>", "<C-w>l")
-
 -- Resize selected panel
 K.set("n", "<C-Up>", ":resize +2<CR>")
 K.set("n", "<C-Down>", ":resize -2<CR>")
 K.set("n", "<C-Left>", ":vertical resize -2<CR>")
 K.set("n", "<C-Right>", ":vertical resize +2<CR>")
-
--- TODO: Add this to which key.
--- Swap buffers / Change window
---K.nmap("<S-l>", ":bnext<CR>")
---K.nmap("<S-h>", ":bprevious<CR>")
-
--- TODO: Add this to which key.
--- Split panel
---K.nmap("<C-L>", ":vsplit<CR>")
---K.nmap("<C-J>", ":split<CR>")
 
 -- Move text up and down
 K.set("n", "<A-j>", "<ESC>:m .+1<CR>")

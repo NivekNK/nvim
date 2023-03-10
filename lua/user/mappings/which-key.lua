@@ -1,3 +1,17 @@
+local keymaps = {
+    -- Change between panels in window
+    h = { "<cmd>wincmd h<CR>", "which_key_ignore" },
+    j = { "<cmd>wincmd j<CR>", "which_key_ignore" },
+    k = { "<cmd>wincmd k<CR>", "which_key_ignore" },
+    l = { "<cmd>wincmd l<CR>", "which_key_ignore" },
+
+    [","] = { "<cmd>bprevious<CR>", "Window Previous" },
+    ["."] = { "<cmd>bnext<CR>", "Window Next" },
+
+    L = { "<cmd>vsplit<CR>", "Window Vertical Split" },
+    J = { "<cmd>split<CR>", "Window Horizontal Split" }
+}
+
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
     vim.notify("[mappings] Error loading which-key!", vim.log.levels.ERROR)
@@ -30,7 +44,7 @@ local paths = scandir.scan_dir(plugins_path, {
     add_dirs = true
 })
 
-local merged_keymaps = {}
+local merged_keymaps = keymaps
 for _, path in ipairs(paths) do
     local extension = path:match("%.(%w+)$")
     if extension ~= "lua" then
@@ -41,7 +55,6 @@ for _, path in ipairs(paths) do
         end
     end
 end
-vim.notify(vim.inspect(merged_keymaps))
 
 local opts = {
     mode = "n", -- NORMAL mode
@@ -49,7 +62,7 @@ local opts = {
 	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 	silent = true, -- use `silent` when creating keymaps
 	noremap = true, -- use `noremap` when creating keymaps
-	nowait = true, -- use `nowait` when creating keymaps
+	nowait = true -- use `nowait` when creating keymaps
 }
 
 which_key.register(merged_keymaps, opts)
