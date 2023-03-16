@@ -1,10 +1,11 @@
 {
-  "lazy.nvim": { "branch": "main", "commit": "5b4444f0d7e556deba3f7ca949a2ba0e2c3369fb" },
-  "neo-tree.nvim": { "branch": "v2.x", "commit": "aec592bb1f0cf67f7e1123053d1eb17700aa9ed4" },
+  "lazy.nvim": { "branch": "main", "commit": "6b55862d2d264f0b48e0b9e42cc2d14f136bed55" },
+  "neo-tree.nvim": { "branch": "v2.x", "commit": "205184aa0e0f08e8a1249d9bb37b45bae85f01b9" },
   "nui.nvim": { "branch": "main", "commit": "0dc148c6ec06577fcf06cbab3b7dac96d48ba6be" },
-  "nvim-notify": { "branch": "master", "commit": "281e4d793c550c866bea3fb85d39de1f0188fb50" },
-  "nvim-web-devicons": { "branch": "master", "commit": "4af94fec29f508159ceab5413383e5dedd6c24e3" },
+  "nvim-lspconfig": { "branch": "master", "commit": "63f4c0082f007d2356df4bc335f55e6d414da89c" },
+  "nvim-notify": { "branch": "master", "commit": "02047199e2752223c77c624160f720ca227944a9" },
+  "nvim-web-devicons": { "branch": "master", "commit": "f1b1cee3a561590a6c1637a9326c406f6e4af914" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
-  "tokyonight.nvim": { "branch": "main", "commit": "663657d65254a7920c05b5c0d67a28d003967c2f" },
+  "tokyonight.nvim": { "branch": "main", "commit": "467d889ba82a74e26821c812aa8e70d7dff04c6c" },
   "which-key.nvim": { "branch": "main", "commit": "fb027738340502b556c3f43051f113bcaa7e8e63" }
 }

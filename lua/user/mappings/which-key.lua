@@ -19,7 +19,7 @@ if not status_ok then
 end
 
 local plenary_ok, scandir = pcall(require, "plenary.scandir")
-if not status_ok then
+if not plenary_ok then
     vim.notify("[mappings] Error loading plenary.scandir!", vim.log.levels.ERROR)
     return
 end
