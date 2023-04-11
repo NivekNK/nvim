@@ -1,41 +1,24 @@
-local keymaps = {
-    -- Change between panels in window
-    h = { "<cmd>wincmd h<CR>", "which_key_ignore" },
-    j = { "<cmd>wincmd j<CR>", "which_key_ignore" },
-    k = { "<cmd>wincmd k<CR>", "which_key_ignore" },
-    l = { "<cmd>wincmd l<CR>", "which_key_ignore" },
-
-    [","] = { "<cmd>bprevious<CR>", "Window Previous" },
-    ["."] = { "<cmd>bnext<CR>", "Window Next" },
-
-    L = { "<cmd>vsplit<CR>", "Window Vertical Split" },
-    J = { "<cmd>split<CR>", "Window Horizontal Split" }
-}
-
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
     vim.notify("[mappings] Error loading which-key!", vim.log.levels.ERROR)
     return
 end
 
+local commands = {
+    move_to_panel_up = { "<cmd>wincmd k<CR>", "which_key_ignore" },
+    move_to_panel_down = { "<cmd>wincmd j<CR>", "which_key_ignore" },
+    move_to_panel_left = { "<cmd>wincmd h<CR>", "which_key_ignore" },
+    move_to_panel_right = { "<cmd>wincmd l<CR>", "which_key_ignore" },
+    window_previous = { "<cmd>bprevious<CR>", "Window Previous" },
+    window_next = { "<cmd>bnext<CR>", "Window Next" },
+    window_vertical_split = { "<cmd>vsplit<CR>", "Window Vertical Split" },
+    window_horizontal_split ={ "<cmd>split<CR>", "Window Horizontal Split" }
+}
+
 local plenary_ok, scandir = pcall(require, "plenary.scandir")
 if not plenary_ok then
     vim.notify("[mappings] Error loading plenary.scandir!", vim.log.levels.ERROR)
     return
-end
-
-local function merge_tables(merged_table, ...)
-    for _, t in ipairs({...}) do
-        for key, value in pairs(t) do
-            if (merged_table[key]) then
-                vim.notify("Trying to merge to which-key a key already in use, skipping: " ..
-                "[Key: " .. vim.inspect(key) .. " - Value: " .. vim.inspect(value) .. "] from table:\n" .. vim.inspect(t),
-                vim.log.levels.ERROR)
-            else
-                merged_table[key] = value
-            end
-        end
-    end
 end
 
 local plugins_path = vim.fn.stdpath("config") .. "/lua/plugins"
@@ -44,15 +27,20 @@ local paths = scandir.scan_dir(plugins_path, {
     add_dirs = true
 })
 
-local merged_keymaps = keymaps
 for _, path in ipairs(paths) do
-    local extension = path:match("%.(%w+)$")
-    if extension ~= "lua" then
-        local plugin_name = string.gsub(path, plugins_path .. package.config:sub(1, 1), "")
-        local has_keymaps, plugin_keymaps = pcall(require, "plugins." .. plugin_name .. ".keymaps")
-        if has_keymaps and plugin_keymaps.which_key then
-            merge_tables(merged_keymaps, plugin_keymaps.which_key)
-        end
+    local plugin_name = string.gsub(path, plugins_path .. package.config:sub(1, 1), "")
+    plugin_name = plugin_name:match("([^/]*).lua$") or plugin_name:match("([^/]*)$")
+    local has_commands, plugin_commands = pcall(require, "plugins." .. plugin_name .. ".which_key")
+    if has_commands then
+        commands = vim.tbl_deep_extend("force", commands, plugin_commands)
+    end
+end
+
+local keymaps = require("config.which_key")
+local keymaps_commands = {}
+for _, plugin_keymaps in pairs(keymaps) do
+    for key, keymap in pairs(plugin_keymaps) do
+        keymaps_commands[keymap] = commands[key]
     end
 end
 
@@ -65,4 +53,4 @@ local opts = {
 	nowait = true -- use `nowait` when creating keymaps
 }
 
-which_key.register(merged_keymaps, opts)
+which_key.register(keymaps_commands, opts)

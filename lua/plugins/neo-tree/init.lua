@@ -1,5 +1,5 @@
 local icons = require("config.icons")
-local mappings = require("plugins.neo-tree.keymaps").mappings
+local mappings = require("config.keymaps").neo_tree
 
 local config = {
     -- If a user has a sources list it will replace this one.
@@ -434,7 +434,6 @@ return {
 
         -- Remove the deprecated commands from v1.x
         vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
         neo_tree.setup(config)
     end
 }

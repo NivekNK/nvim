@@ -30,7 +30,6 @@ return {
         end
 
         notify.setup(config)
-
         vim.notify = notify
     end
 }
