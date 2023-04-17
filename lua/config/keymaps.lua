@@ -66,7 +66,7 @@ M.neo_tree = {
     git_prev_modified = "[g",
     git_next_modified = "]g"
 }
-
+--[=====[
 M.mason = {
     -- Keymap to expand a package
     toggle_package_expand = "<CR>",
@@ -100,5 +100,6 @@ M.lsp = {
     goto_next = "]d",
     setloclist = "<leader>q"
 }
+--]=====]
 
 return M

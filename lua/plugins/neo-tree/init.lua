@@ -1,5 +1,5 @@
 local icons = require("config.icons")
-local mappings = require("config.keymaps").neo_tree
+local keymaps = require("config.keymaps").neo_tree
 
 local config = {
     -- If a user has a sources list it will replace this one.
@@ -259,34 +259,34 @@ local config = {
             nowait = true
         },
         mappings = {
-            [mappings.toggle_node] = { 
+            [keymaps.toggle_node] = { 
                 "toggle_node", 
                 nowait = false -- disable `nowait` if you have existing combos starting with this char that you want to use 
             },
-            [mappings.open] = "open",
-            [mappings.open_secondary] = "open",
-            [mappings.open_with_window_picker] = "open_with_window_picker",
-            [mappings.open_horizontal_split] = "open_split",
-            [mappings.open_vertical_split] = "open_vsplit",
-            [mappings.open_on_new_tab] = "open_tabnew",
-            [mappings.revert_preview] = "revert_preview",
-            [mappings.toggle_preview] = {
+            [keymaps.open] = "open",
+            [keymaps.open_secondary] = "open",
+            [keymaps.open_with_window_picker] = "open_with_window_picker",
+            [keymaps.open_horizontal_split] = "open_split",
+            [keymaps.open_vertical_split] = "open_vsplit",
+            [keymaps.open_on_new_tab] = "open_tabnew",
+            [keymaps.revert_preview] = "revert_preview",
+            [keymaps.toggle_preview] = {
                 "toggle_preview",
                 config = {
                     use_float = true
                 }
             },
-            [mappings.focus_preview] = "focus_preview",
+            [keymaps.focus_preview] = "focus_preview",
             -- ["S"] = "split_with_window_picker",
             -- ["s"] = "vsplit_with_window_picker",
             -- ["<cr>"] = "open_drop",
             -- ["t"] = "open_tab_drop",
             --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
-            [mappings.close_node] = "close_node",
+            [keymaps.close_node] = "close_node",
             -- ['C'] = 'close_all_subnodes',
-            [mappings.close_all_nodes] = "close_all_nodes",
+            [keymaps.close_all_nodes] = "close_all_nodes",
             --["Z"] = "expand_all_nodes",
-            [mappings.add_file] = { 
+            [keymaps.add_file] = { 
                 "add",
                 -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
                 -- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -294,41 +294,41 @@ local config = {
                     show_path = "none" -- "none", "relative", "absolute"
                 }
             },
-            [mappings.add_directory] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
-            [mappings.delete] = "delete",
-            [mappings.rename] = "rename",
-            [mappings.copy_to_clipboard] = "copy_to_clipboard",
-            [mappings.cut_to_clipboard] = "cut_to_clipboard",
-            [mappings.paste_from_clipboard] = "paste_from_clipboard",
-            [mappings.copy] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
+            [keymaps.add_directory] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+            [keymaps.delete] = "delete",
+            [keymaps.rename] = "rename",
+            [keymaps.copy_to_clipboard] = "copy_to_clipboard",
+            [keymaps.cut_to_clipboard] = "cut_to_clipboard",
+            [keymaps.paste_from_clipboard] = "paste_from_clipboard",
+            [keymaps.copy] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
             -- ["c"] = {
             --  "copy",
             --  config = {
             --    show_path = "none" -- "none", "relative", "absolute"
             --  }
             --}
-            [mappings.move] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
-            [mappings.close_window] = "close_window",
-            [mappings.refresh] = "refresh",
-            [mappings.show_help] = "show_help",
-            [mappings.prev_source] = "prev_source",
-            [mappings.next_source] = "next_source"
+            [keymaps.move] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+            [keymaps.close_window] = "close_window",
+            [keymaps.refresh] = "refresh",
+            [keymaps.show_help] = "show_help",
+            [keymaps.prev_source] = "prev_source",
+            [keymaps.next_source] = "next_source"
         }
     },
     filesystem = {
         window = {
             mappings = {
-                [mappings.navigate_up] = "navigate_up",
-                [mappings.set_as_root] = "set_root",
-                [mappings.toggle_hidden] = "toggle_hidden",
+                [keymaps.navigate_up] = "navigate_up",
+                [keymaps.set_as_root] = "set_root",
+                [keymaps.toggle_hidden] = "toggle_hidden",
                 -- ["/"] = "fuzzy_finder",
                 -- ["D"] = "fuzzy_finder_directory",
                 -- ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
                 -- ["D"] = "fuzzy_sorter_directory",
                 -- ["f"] = "filter_on_submit",
                 -- ["<c-x>"] = "clear_filter",
-                [mappings.git_prev_modified] = "prev_git_modified",
-                [mappings.git_next_modified] = "next_git_modified"
+                [keymaps.git_prev_modified] = "prev_git_modified",
+                [keymaps.git_next_modified] = "next_git_modified"
             }
         },
         async_directory_scan = "auto", -- "auto"   means refreshes are async, but it's synchronous when called from the Neotree commands.
@@ -392,9 +392,9 @@ local config = {
     buffers = {
         window = {
             mappings = {
-                [mappings.buffer_delete] = "buffer_delete",
-                [mappings.navigate_up] = "navigate_up",
-                [mappings.set_as_root] = "set_root"
+                [keymaps.buffer_delete] = "buffer_delete",
+                [keymaps.navigate_up] = "navigate_up",
+                [keymaps.set_as_root] = "set_root"
             }
         },
         bind_to_cwd = true,
