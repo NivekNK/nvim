@@ -101,4 +101,16 @@ M.lsp = {
     setloclist = "<leader>q"
 }
 
+M.cmp = {
+    select_prev_item = "<C-k>",
+    select_next_item = "<C-j>",
+    scroll_down = "<C-b>",
+    scroll_up = "<C-f>",
+    insert_mode_complete = "<C-Space>",
+    abort_and_close = "<C-e>",
+    confirm = "<CR>",
+    super_autocomplete = "<Tab>",
+    prev_super_autocomplete = "<S-Tab>"
+}
+
 return M
