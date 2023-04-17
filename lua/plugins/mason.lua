@@ -1,6 +1,21 @@
 local icons = require("config.icons")
 local keymaps = require("config.keymaps")
 
+local mason_lspconfig_config = {
+    -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
+    -- This setting has no relation with the `automatic_installation` setting.
+    ensure_installed = {},
+
+    -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
+    -- This setting has no relation with the `ensure_installed` setting.
+    -- Can either be:
+    --   - false: Servers are not automatically installed.
+    --   - true: All servers set up via lspconfig are automatically installed.
+    --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
+    --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
+    automatic_installation = true
+}
+
 local mason_config = {
     -- The directory in which to install packages.
     install_root_dir = vim.fn.stdpath("data") .. package.config:sub(1, 1) .. "mason",
@@ -89,17 +104,30 @@ local mason_config = {
 }
 
 return {
-    {
-        "williamboman/mason.nvim",
-        build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-        config = function()
-            local mason_ok, mason = pcall(require, "mason")
-            if not mason_ok then
-                vim.notify("Error loading mason!", vim.log.levels.ERROR)
-                return
-            end
-
-            mason.setup(mason_config)
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+    cmd = "Mason",
+    event = "BufReadPre",
+    dependencies = {
+        "williamboman/mason-lspconfig.nvim",
+        cond = function()
+            local lspconfig_ok, _ = pcall(require, "lspconfig")
+            return lspconfig_ok
         end
-    }
+    },
+    config = function()
+        local mason_ok, mason = pcall(require, "mason")
+        if not mason_ok then
+            vim.notify("Error loading mason!", vim.log.levels.ERROR)
+            return
+        end
+        mason.setup(mason_config)
+
+        local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+        if not mason_lspconfig_ok then
+            vim.notify("[mason] Error loading mason-lspconfig!")
+            return
+        end
+        mason_lspconfig.setup(mason_lspconfig_config)
+    end
 }
