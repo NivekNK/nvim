@@ -4,12 +4,15 @@ local keymaps = require("config.keymaps").cmp
 local icons = require("config.icons")
 
 return {
-    enabled = function() -- Disable cmp if writing a comment
-        local context = require("cmp.config.context")
+    enabled = function() -- Disable cmp if writing a comment or using a Prompt
+        if vim.bo.buftype == 'prompt' then
+            return false
+        end
 
         if vim.api.nvim_get_mode().mode == "c" then
             return true
         else
+            local context = require("cmp.config.context")
             return not context.in_treesitter_capture("comment") and
                    not context.in_syntax_group("Comment")
         end

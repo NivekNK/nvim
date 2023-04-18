@@ -4,7 +4,7 @@ local keymaps = require("config.keymaps")
 local mason_lspconfig_config = {
     -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
     -- This setting has no relation with the `automatic_installation` setting.
-    ensure_installed = {},
+    ensure_installed = require("config.servers"),
 
     -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
     -- This setting has no relation with the `ensure_installed` setting.
@@ -18,7 +18,7 @@ local mason_lspconfig_config = {
 
 local mason_config = {
     -- The directory in which to install packages.
-    install_root_dir = vim.fn.stdpath("data") .. package.config:sub(1, 1) .. "mason",
+    install_root_dir = vim.fn.stdpath("data") .. "/mason",
 
     -- Where Mason should put its bin location in your PATH. Can be one of:
     -- - "prepend" (default, Mason's bin location is put first in PATH)
