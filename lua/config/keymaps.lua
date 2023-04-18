@@ -113,4 +113,9 @@ M.cmp = {
     prev_super_autocomplete = "<S-Tab>"
 }
 
+M.illuminate = {
+    next_reference = "<A-n>",
+    prev_reference = "<A-p>"
+}
+
 return M

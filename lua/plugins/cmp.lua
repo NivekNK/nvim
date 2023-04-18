@@ -1,7 +1,8 @@
+local function get_config(cmp, luasnip, check_backspace)
+
 local keymaps = require("config.keymaps").cmp
 local icons = require("config.icons")
 
-local function get_config(cmp, luasnip, check_backspace)  
 return {
     enabled = function() -- Disable cmp if writing a comment
         local context = require("cmp.config.context")
