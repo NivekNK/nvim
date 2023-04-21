@@ -1,4 +1,4 @@
-M = {
+return {
     debug = "",
     info = "",
     trace = "✎",
@@ -54,5 +54,3 @@ M = {
         TypeParameter = ""
     }
 }
-
-return M

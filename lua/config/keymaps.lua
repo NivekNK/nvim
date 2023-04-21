@@ -1,6 +1,6 @@
-M = {}
+local K = {}
 
-M.n = {
+K.n = {
     save_file = "<C-s>",
     resize_panel_up = "<C-Up>",
     resize_panel_down = "<C-Down>",
@@ -12,14 +12,14 @@ M.n = {
     open_link = "gx"
 }
 
-M.i = {
+K.i = {
     escape_alternative = "jk",
     save_file = "<C-s>",
     move_text_up = "<A-k>",
     move_text_down = "<A-j>"
 }
 
-M.v = {
+K.v = {
     indent_left = "<",
     indent_right = ">",
     move_text_up = "<A-k>",
@@ -27,15 +27,15 @@ M.v = {
     better_paste = "p"
 }
 
-M.x = {
+K.x = {
     move_text_up = "<A-k>",
     move_text_down = "<A-j>"
 }
 
-M.neo_tree = {
+K.neo_tree = {
     toggle_node = "<Space>",
     open = "<CR>",
-    open_secondary = "<2-LeftMouse>",
+    open_secondary = "<2-LeftK.use>",
     open_with_window_picker = "w",
     open_horizontal_split = "S",
     open_vertical_split = "s",
@@ -67,7 +67,7 @@ M.neo_tree = {
     git_next_modified = "]g"
 }
 
-M.mason = {
+K.mason = {
     -- Keymap to expand a package
     toggle_package_expand = "<CR>",
     -- Keymap to install the package under the current cursor position
@@ -88,7 +88,7 @@ M.mason = {
     apply_language_filter = "<C-f>"
 }
 
-M.lsp = {
+K.lsp = {
     declaration = "gD",
     definition = "gd",
     hover = "K",
@@ -101,7 +101,7 @@ M.lsp = {
     setloclist = "<leader>q"
 }
 
-M.cmp = {
+K.cmp = {
     select_prev_item = "<C-k>",
     select_next_item = "<C-j>",
     scroll_down = "<C-b>",
@@ -113,9 +113,9 @@ M.cmp = {
     prev_super_autocomplete = "<S-Tab>"
 }
 
-M.illuminate = {
+K.illuminate = {
     next_reference = "<A-n>",
     prev_reference = "<A-p>"
 }
 
-return M
+return K

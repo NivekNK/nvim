@@ -1,6 +1,6 @@
-M = {}
+local W = {}
 
-M.vim = {
+W.vim = {
     move_to_panel_up = "k",
     move_to_panel_down = "j",
     move_to_panel_left = "h",
@@ -11,8 +11,8 @@ M.vim = {
     window_horizontal_split = "J"
 }
 
-M.neo_tree = {
+W.neo_tree = {
     toggle_explorer = "e"
 }
 
-return M
+return W

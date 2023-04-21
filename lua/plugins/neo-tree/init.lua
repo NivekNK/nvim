@@ -259,8 +259,8 @@ local config = {
             nowait = true
         },
         mappings = {
-            [keymaps.toggle_node] = { 
-                "toggle_node", 
+            [keymaps.toggle_node] = {
+                "toggle_node",
                 nowait = false -- disable `nowait` if you have existing combos starting with this char that you want to use 
             },
             [keymaps.open] = "open",
@@ -286,7 +286,7 @@ local config = {
             -- ['C'] = 'close_all_subnodes',
             [keymaps.close_all_nodes] = "close_all_nodes",
             --["Z"] = "expand_all_nodes",
-            [keymaps.add_file] = { 
+            [keymaps.add_file] = {
                 "add",
                 -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
                 -- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -421,8 +421,11 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
+        {
+            "nvim-tree/nvim-web-devicons",
+            event = "VeryLazy"
+        }
         -- "s1n7ax/nvim-window-picker" TODO: Configure later
     },
     config = function()
