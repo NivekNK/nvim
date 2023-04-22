@@ -109,11 +109,13 @@ return {
     cmd = "Mason",
     event = "BufReadPre",
     dependencies = {
-        "williamboman/mason-lspconfig.nvim",
-        cond = function()
-            local lspconfig_ok, _ = pcall(require, "lspconfig")
-            return lspconfig_ok
-        end
+        {
+            "williamboman/mason-lspconfig.nvim",
+            cond = function()
+                local lspconfig_ok, _ = pcall(require, "lspconfig")
+                return lspconfig_ok
+            end
+        }
     },
     config = function()
         local mason_ok, mason = pcall(require, "mason")

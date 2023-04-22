@@ -1,3 +1,24 @@
+local autopairs_config = {
+    check_ts = true, -- treesitter integration
+    disable_filetype = { "TelescopePrompt" },
+    ts_config = {
+        lua = { "string", "source" },
+        javascript = { "string", "template_string" },
+        java = false
+    },
+    fast_wrap = {
+        map = require("config.keymaps").treesitter.autopairs_fast_wrap,
+        chars = { "{", "[", "(", '"', "'" },
+        pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+        offset = 0, -- Offset from pattern match
+        end_key = "$",
+        keys = "qwertyuiopzxcvbnmasdfghjkl",
+        check_comma = true,
+        highlight = "PmenuSel",
+        highlight_grey = "LineNr"
+    }
+}
+
 local function get_treesitter_config(languages)
 return {
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -43,40 +64,68 @@ return {
     context_commentstring = {
         enable = true,
         enable_autocmd = false
+    },
+
+    autopairs = {
+        enable = true
     }
 }
 end
 
 return {
-    "nvim-treesitter/nvim-treesitter",
-    event = "BufReadPost",
-    dependencies = {
-        {
-            "JoosepAlviste/nvim-ts-context-commentstring",
-            event = "VeryLazy"
-        },
-        {
-            "nvim-tree/nvim-web-devicons",
-            event = "VeryLazy"
-        }
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        cond = function()
+            local cmp_ok, _ = pcall(require, "cmp")
+            return cmp_ok
+        end,
+        config = function()
+            local autopairs_ok, autopairs = pcall(require, "nvim-autopairs")
+            if not autopairs_ok then
+                vim.notify("[treesitter] Error loading autopairs!", vim.log.levels.ERROR)
+                return
+            end
+            autopairs.setup(autopairs_config)
+
+            local cmp_ok, cmp = pcall(require, "cmp")
+            if cmp_ok then
+                local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+                cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+            end
+        end
     },
-    config = function()
-        local treesitter_ok, _ = pcall(require, "nvim-treesitter")
-        if not treesitter_ok then
-            vim.notify("Error loading treesitter!", vim.log.levels.ERROR)
-            return
+    {
+        "nvim-treesitter/nvim-treesitter",
+        event = "BufReadPost",
+        dependencies = {
+            {
+                "JoosepAlviste/nvim-ts-context-commentstring",
+                event = "VeryLazy"
+            },
+            {
+                "nvim-tree/nvim-web-devicons",
+                event = "VeryLazy"
+            }
+        },
+        config = function()
+            local treesitter_ok, _ = pcall(require, "nvim-treesitter")
+            if not treesitter_ok then
+                vim.notify("Error loading treesitter!", vim.log.levels.ERROR)
+                return
+            end
+
+            local treesitter_install = require("nvim-treesitter.install")
+            treesitter_install.compilers = { "clang" }
+            treesitter_install.prefer_git = false
+
+            local languages = {}
+            for lang, _ in pairs(require("config.servers")) do
+                table.insert(languages, lang)
+            end
+
+            local treesitter_config = get_treesitter_config(languages)
+            require("nvim-treesitter.configs").setup(treesitter_config)
         end
-
-        local treesitter_install = require("nvim-treesitter.install")
-        treesitter_install.compilers = { "clang" }
-        treesitter_install.prefer_git = false
-
-        local languages = {}
-        for lang, _ in pairs(require("config.servers")) do
-            table.insert(languages, lang)
-        end
-
-        local treesitter_config = get_treesitter_config(languages)
-        require("nvim-treesitter.configs").setup(treesitter_config)
-    end
+    }
 }

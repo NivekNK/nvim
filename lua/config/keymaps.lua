@@ -118,4 +118,8 @@ K.illuminate = {
     prev_reference = "<A-p>"
 }
 
+K.treesitter = {
+    autopairs_fast_wrap = "<A-e>"
+}
+
 return K
