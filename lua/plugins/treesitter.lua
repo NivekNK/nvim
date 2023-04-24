@@ -19,6 +19,21 @@ local autopairs_config = {
     }
 }
 
+local indent_blankline_config = {
+    char = "▏",
+    space_char_blankline = " ",
+    show_trailing_blankline_indent = false,
+    show_first_indent_level = true,
+    use_treesitter = true,
+    show_current_context = true,
+    buftype_exclude = { "terminal", "nofile" },
+    filetype_exclude = {
+        "help",
+        "packer",
+        "neo-tree"
+    }
+}
+
 local function get_treesitter_config(languages)
 return {
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -68,6 +83,10 @@ return {
 
     autopairs = {
         enable = true
+    },
+
+    indent = {
+        enable = true
     }
 }
 end
@@ -93,6 +112,17 @@ return {
                 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
                 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
             end
+        end
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            local indent_blankline_ok, indent_blankline = pcall(require, "indent_blankline")
+            if not indent_blankline_ok then
+                vim.notify("[treesitter] Error loading indent-blankline!", vim.log.levels.ERROR)
+                return
+            end
+            indent_blankline.setup(indent_blankline_config)
         end
     },
     {
