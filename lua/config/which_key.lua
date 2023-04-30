@@ -22,7 +22,7 @@ W.telescope = {
     },
     mappings = {
         find_files = "f",
-        live_grep = "t",
+        live_grep = "g",
         buffers = "b"
     }
 }
