@@ -122,4 +122,11 @@ K.treesitter = {
     autopairs_fast_wrap = "<A-e>"
 }
 
+K.telescope = {
+    move_selection_next = "<Down>",
+    move_selection_next_2 = "<C-j>",
+    move_selection_prev = "<Up>",
+    move_selection_prev_2 = "<C-k>"
+}
+
 return K

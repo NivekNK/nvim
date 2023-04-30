@@ -4,17 +4,6 @@ if not status_ok then
     return
 end
 
-local commands = {
-    move_to_panel_up = { "<cmd>wincmd k<CR>", "which_key_ignore" },
-    move_to_panel_down = { "<cmd>wincmd j<CR>", "which_key_ignore" },
-    move_to_panel_left = { "<cmd>wincmd h<CR>", "which_key_ignore" },
-    move_to_panel_right = { "<cmd>wincmd l<CR>", "which_key_ignore" },
-    window_previous = { "<cmd>bprevious<CR>", "Window Previous" },
-    window_next = { "<cmd>bnext<CR>", "Window Next" },
-    window_vertical_split = { "<cmd>vsplit<CR>", "Window Vertical Split" },
-    window_horizontal_split ={ "<cmd>split<CR>", "Window Horizontal Split" }
-}
-
 local plenary_ok, scandir = pcall(require, "plenary.scandir")
 if not plenary_ok then
     vim.notify("[mappings] Error loading plenary.scandir!", vim.log.levels.ERROR)
@@ -27,20 +16,33 @@ local paths = scandir.scan_dir(plugins_path, {
     add_dirs = true
 })
 
+local keymaps = require("config.which_key")
+local keymaps_commands = {}
+
+local vim_commands = require("user.mappings.vim_which_key")
+for key, keymap in pairs(keymaps.vim) do
+    keymaps_commands[keymap] = vim_commands[key]
+end
+
 for _, path in ipairs(paths) do
     local plugin_name = string.gsub(path, plugins_path .. package.config:sub(1, 1), "")
     plugin_name = plugin_name:match("([^/]*).lua$") or plugin_name:match("([^/]*)$")
     local has_commands, plugin_commands = pcall(require, "plugins." .. plugin_name .. ".which_key")
-    if has_commands then
-        commands = vim.tbl_deep_extend("force", commands, plugin_commands)
-    end
-end
-
-local keymaps = require("config.which_key")
-local keymaps_commands = {}
-for _, plugin_keymaps in pairs(keymaps) do
-    for key, keymap in pairs(plugin_keymaps) do
-        keymaps_commands[keymap] = commands[key]
+    if has_commands and keymaps[plugin_name] then
+        local plugin_keymaps = keymaps[plugin_name]
+        if plugin_keymaps["config"] and plugin_keymaps["mappings"] then
+            local aux = {
+                name = plugin_keymaps.config.name
+            }
+            for key, keymap in pairs(plugin_keymaps.mappings) do
+                aux[keymap] = plugin_commands[key]
+            end
+            keymaps_commands[plugin_keymaps.config.keymap] = aux
+        else
+            for key, keymap in pairs(plugin_keymaps) do
+                keymaps_commands[keymap] = plugin_commands[key]
+            end
+        end
     end
 end
 

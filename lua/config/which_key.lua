@@ -15,4 +15,16 @@ W.neo_tree = {
     toggle_explorer = "e"
 }
 
+W.telescope = {
+    config = {
+        name = "Telescope",
+        keymap = "f"
+    },
+    mappings = {
+        find_files = "f",
+        live_grep = "t",
+        buffers = "b"
+    }
+}
+
 return W

@@ -26,6 +26,8 @@ return {
     git_unstaged = "",
     git_staged = "",
     git_conflict = "",
+    prompt_prefix = ">",
+    selection = "",
     cmp_kind_icons = {
         Text = "",
         Method = "",
