@@ -17,3 +17,12 @@ My config of neovim for windows and linux.
     - Linux: TODO
 
 * For **Windows** you need to Enable Developer Mode.
+
+### Telescope:
+
+* Install ripgrep
+    - Windows [Scoop](https://scoop.sh/):
+        
+            scoop install ripgrep
+
+    - Linux: TODO

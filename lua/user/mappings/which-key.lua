@@ -16,32 +16,57 @@ local paths = scandir.scan_dir(plugins_path, {
     add_dirs = true
 })
 
-local keymaps = require("config.which_key")
-local keymaps_commands = {}
+local function table_is_array(table)
+    for k, _ in pairs(table) do
+        if type(k) == "number" then
+            return true
+        else
+            return false
+        end
+    end
+end
 
-local vim_commands = require("user.mappings.vim_which_key")
-for key, keymap in pairs(keymaps.vim) do
-    keymaps_commands[keymap] = vim_commands[key]
+local keymaps_commands = {}
+local keymaps = require("config.which_key")
+for k, v in pairs(require("user.mappings.vim_which_key")) do
+    keymaps_commands[keymaps.vim[k]] = v
+end
+
+local function define_array_keymaps(key, plugin_commands)
+    if keymaps_commands[key.keymap] then
+        if not keymaps_commands[key.keymap].name then
+            vim.notify("[mappings] Trying to assing which-key keymap already in use! [" .. key.keymap "] for: '" .. key.name "'")
+        else
+            for k, v in pairs(key.mappings) do
+                keymaps_commands[key.keymap][v] = plugin_commands[k]
+            end
+        end
+    else
+        local aux = { name = key.name }
+        for k, v in pairs(key.mappings) do
+            aux[v] = plugin_commands[k]
+        end
+        keymaps_commands[key.keymap] = aux
+    end
 end
 
 for _, path in ipairs(paths) do
     local plugin_name = string.gsub(path, plugins_path .. package.config:sub(1, 1), "")
     plugin_name = plugin_name:match("([^/]*).lua$") or plugin_name:match("([^/]*)$")
     local has_commands, plugin_commands = pcall(require, "plugins." .. plugin_name .. ".which_key")
-    if has_commands and keymaps[plugin_name] then
-        local plugin_keymaps = keymaps[plugin_name]
-        if plugin_keymaps["config"] and plugin_keymaps["mappings"] then
-            local aux = {
-                name = plugin_keymaps.config.name
-            }
-            for key, keymap in pairs(plugin_keymaps.mappings) do
-                aux[keymap] = plugin_commands[key]
+    if has_commands then
+        if keymaps[plugin_name] then
+            if table_is_array(keymaps[plugin_name]) then
+                for _, v in ipairs(keymaps[plugin_name]) do
+                    define_array_keymaps(v, plugin_commands)
+                end
+            else
+                for k, v in pairs(keymaps[plugin_name]) do
+                    keymaps_commands[v] = plugin_commands[k]
+                end
             end
-            keymaps_commands[plugin_keymaps.config.keymap] = aux
         else
-            for key, keymap in pairs(plugin_keymaps) do
-                keymaps_commands[keymap] = plugin_commands[key]
-            end
+            vim.notify("[mappings] Keymaps for " .. plugin_name .. "which-key configuration not found!", vim.log.levels.WARN)
         end
     end
 end

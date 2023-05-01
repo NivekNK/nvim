@@ -4,5 +4,5 @@ return {
         "Find Files"
     },
     live_grep = { "<cmd>Telescope live_grep theme=ivy<CR>", "Find Text" },
-    buffers = { "<cmd>Telescope buffers<CR>", "Buffers" }
+    buffers = { "<cmd>Telescope buffers<CR>", "Find Buffers" }
 }
