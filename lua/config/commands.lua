@@ -6,3 +6,13 @@ end, { desc = "Format the current buffer." })
 vim.api.nvim_create_user_command("NKs", function()
     vim.cmd("set list!")
 end, { desc = "Toggle between showing space characters or not." })
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = {"*"},
+    callback = function(ev)
+        local save_cursor = vim.fn.getpos(".")
+        vim.cmd([[%s/\s\+$//e]])
+        vim.cmd([[noh]])
+        vim.fn.setpos(".", save_cursor)
+    end,
+})

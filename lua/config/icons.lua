@@ -28,6 +28,7 @@ return {
     git_conflict = "",
     prompt_prefix = ">",
     selection = "",
+    done = "✓",
     gitsigns = {
         change = "▎",
         deleted = "契"

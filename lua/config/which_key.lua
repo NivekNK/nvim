@@ -21,7 +21,7 @@ W.telescope = {
         keymap = "f",
         mappings = {
             find_files = "f",
-            live_grep = "g",
+            live_grep = "t",
             buffers = "b"
         }
     },

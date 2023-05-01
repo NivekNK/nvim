@@ -81,7 +81,7 @@ return {
         config = function()
             local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
             if not gitsigns_ok then
-                vim.notify("Error loading gitsigns!", vim.log.levels.ERROR)
+                vim.notify("[git] Error loading gitsigns!", vim.log.levels.ERROR)
                 return
             end
             gitsigns.setup(gitsigns_config)

@@ -79,13 +79,13 @@ local config = {
         -- this is mostly relevant for keymaps that start with a native binding
         i = { "j", "k" },
         v = { "j", "k" }
-    }
+    },
     -- disable the WhichKey popup for certain buf types and file types.
     -- Disabled by deafult for Telescope
-    -- disable = {
-    --   buftypes = {},
-    --   filetypes = {}
-    -- }
+    disable = {
+        buftypes = {},
+        filetypes = {}
+    }
 }
 
 return {
