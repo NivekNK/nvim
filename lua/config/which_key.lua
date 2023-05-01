@@ -24,6 +24,31 @@ W.telescope = {
             live_grep = "g",
             buffers = "b"
         }
+    },
+    {
+        name = "Git",
+        keymap = "g",
+        mappings = {
+            changed_files = "f",
+            commit_history = "h"
+        }
+    }
+}
+
+W.git = {
+    {
+        name = "Git",
+        keymap = "g",
+        mappings = {
+            next_hunk = "j",
+            prev_hunk = "k",
+            blame = "b",
+            preview_hunk = "p",
+            reset_hunk = "r",
+            reset_buffer = "R",
+            stage_hunk = "s",
+            undo_stage_hunk = "u"
+        }
     }
 }
 

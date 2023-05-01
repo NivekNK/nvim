@@ -28,6 +28,10 @@ return {
     git_conflict = "",
     prompt_prefix = ">",
     selection = "",
+    gitsigns = {
+        change = "▎",
+        deleted = "契"
+    },
     cmp_kind_icons = {
         Text = "",
         Method = "",
