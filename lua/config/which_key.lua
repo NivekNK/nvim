@@ -30,7 +30,8 @@ W.telescope = {
         keymap = "g",
         mappings = {
             changed_files = "f",
-            commit_history = "h"
+            commit_history = "h",
+            branches = "b"
         }
     }
 }
@@ -42,12 +43,13 @@ W.git = {
         mappings = {
             next_hunk = "j",
             prev_hunk = "k",
-            blame = "b",
+            blame = "e",
             preview_hunk = "p",
             reset_hunk = "r",
             reset_buffer = "R",
             stage_hunk = "s",
-            undo_stage_hunk = "u"
+            undo_stage_hunk = "u",
+            diff = "d"
         }
     }
 }
