@@ -54,4 +54,24 @@ W.git = {
     }
 }
 
+W.cokeline = {
+    {
+        name = "Buffer",
+        keymap = "b",
+        mappings = {
+            pick_focus = "f",
+            pick_close = "c",
+            pick_focus_at_1 = "1",
+            pick_focus_at_2 = "2",
+            pick_focus_at_3 = "3",
+            pick_focus_at_4 = "4",
+            pick_focus_at_5 = "5",
+            pick_focus_at_6 = "6",
+            pick_focus_at_7 = "7",
+            pick_focus_at_8 = "8",
+            pick_focus_at_9 = "9"
+        }
+    }
+}
+
 return W
