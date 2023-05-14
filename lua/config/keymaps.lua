@@ -154,4 +154,14 @@ K.comment = {
     }
 }
 
+K.toggleterm = {
+    open_terminal = [[<c-\>]],
+    exit_terminal = "jk",
+    exit_terminal_2 = "<ESC>",
+    select_left_panel = "<C-h>",
+    select_right_panel = "<C-l>",
+    select_up_panel = "<C-k>",
+    select_down_panel = "<C-j>",
+}
+
 return K

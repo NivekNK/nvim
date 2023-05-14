@@ -8,8 +8,8 @@ vim.api.nvim_create_user_command("NKs", function()
 end, { desc = "Toggle between showing space characters or not." })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    pattern = {"*"},
-    callback = function(ev)
+    pattern = { "*" },
+    callback = function(_)
         local save_cursor = vim.fn.getpos(".")
         vim.cmd([[%s/\s\+$//e]])
         vim.cmd([[noh]])
