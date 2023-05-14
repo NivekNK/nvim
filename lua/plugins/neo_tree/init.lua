@@ -265,7 +265,7 @@ local neotree_config = {
             },
             [keymaps.open] = "open",
             [keymaps.open_secondary] = "open",
-            [keymaps.open_with_window_picker] = "open_with_window_picker",
+            -- [keymaps.open_with_window_picker] = "open_with_window_picker",
             [keymaps.open_horizontal_split] = "open_split",
             [keymaps.open_vertical_split] = "open_vsplit",
             [keymaps.open_on_new_tab] = "open_tabnew",
