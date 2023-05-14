@@ -194,8 +194,8 @@ local neotree_config = {
             highlight = "NeoTreeIndentMarker",
             -- expander config, needed for nesting files
             with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-            expander_collapsed = icons.file_tree_collapsed,
-            expander_expanded = icons.file_tree_expanded,
+            expander_collapsed = icons.tree_collapsed,
+            expander_expanded = icons.tree_expanded,
             expander_highlight = "NeoTreeExpander",
         },
         icon = {

@@ -74,4 +74,16 @@ W.cokeline = {
     },
 }
 
+W.ufo = {
+    {
+        name = "Fold",
+        keymap = "z",
+        mappings = {
+            open_all_folds = "o",
+            close_all_folds = "c",
+            peek_fold = "p",
+        },
+    },
+}
+
 return W

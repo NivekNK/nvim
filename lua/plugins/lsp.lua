@@ -106,6 +106,12 @@ return {
             vim.notify("[lspconfig] Error loading cmp_nvim_lsp!", vim.log.levels.WARN)
         end
 
+        -- To make folding available
+        capabilities.textDocument.foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+        }
+
         for _, server in pairs(require("config.servers")) do
             local opts = {
                 on_attach = on_attach,

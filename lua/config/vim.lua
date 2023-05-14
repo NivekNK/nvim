@@ -43,11 +43,22 @@ vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the p
 vim.opt.iskeyword:append("-")                   -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 -- Set Leader keymap
 vim.keymap.set("", "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- For folding
+vim.o.foldcolumn = "1" -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.o.fillchars = [[eob: ,fold: ,foldsep: ,foldopen:]] .. icons.tree_expanded .. [[,foldclose:]] .. icons.tree_collapsed
 
 local signs = {
     { name = "DiagnosticSignError", text = icons.error .. " " },

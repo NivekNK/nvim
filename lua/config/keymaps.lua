@@ -98,7 +98,7 @@ K.lsp = {
     open_float = "gl",
     goto_prev = "[d",
     goto_next = "]d",
-    setloclist = "<leader>q",
+    setloclist = "<A-q>",
 }
 
 K.cmp = {
@@ -165,8 +165,15 @@ K.toggleterm = {
 }
 
 K.which_key = {
-    scroll_down = "<C-d>", -- binding to scroll down inside the popup
-    scroll_up = "<C-u>", -- binding to scroll up inside the popup
+    scroll_down = "<C-j>", -- binding to scroll down inside the popup
+    scroll_up = "<C-k>", -- binding to scroll up inside the popup
+}
+
+K.ufo = {
+    scroll_up = "<C-k>",
+    scroll_down = "<C-j>",
+    jump_top = "[",
+    jump_bottom = "]",
 }
 
 return K
