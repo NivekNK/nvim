@@ -1,7 +1,7 @@
 local plenary_ok, scandir = pcall(require, "plenary.scandir")
 if not plenary_ok then
     vim.notify("[servers] Error loading plenary.scandir!", vim.log.levels.ERROR)
-    return M
+    return {}
 end
 
 local servers_path = vim.fn.stdpath("config") .. "/lua/config/servers"

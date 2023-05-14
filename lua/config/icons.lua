@@ -31,7 +31,7 @@ return {
     done = "✓",
     gitsigns = {
         change = "▎",
-        deleted = "契"
+        deleted = "契",
     },
     cmp_kind_icons = {
         Text = "",
@@ -58,6 +58,6 @@ return {
         Struct = "",
         Event = "",
         Operator = "",
-        TypeParameter = ""
-    }
+        TypeParameter = "",
+    },
 }

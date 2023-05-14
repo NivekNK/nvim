@@ -19,14 +19,14 @@ return {
     should_attach = nil,
     sources = {},
     temp_dir = nil,
-    update_in_insert = false
+    update_in_insert = false,
 }
 end
 
 return {
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = {
-        "nvim-lua/plenary.nvim"
+        "nvim-lua/plenary.nvim",
     },
     config = function()
         local null_ls_ok, null_ls = pcall(require, "null-ls")
@@ -37,5 +37,5 @@ return {
 
         local config = get_config(null_ls.builtins.formatting, null_ls.builtins.diagnostics)
         null_ls.setup(config)
-    end
+    end,
 }

@@ -4,7 +4,7 @@ local autopairs_config = {
     ts_config = {
         lua = { "string", "source" },
         javascript = { "string", "template_string" },
-        java = false
+        java = false,
     },
     fast_wrap = {
         map = require("config.keymaps").treesitter.autopairs_fast_wrap,
@@ -15,8 +15,8 @@ local autopairs_config = {
         keys = "qwertyuiopzxcvbnmasdfghjkl",
         check_comma = true,
         highlight = "PmenuSel",
-        highlight_grey = "LineNr"
-    }
+        highlight_grey = "LineNr",
+    },
 }
 
 local indent_blankline_config = {
@@ -30,8 +30,8 @@ local indent_blankline_config = {
     filetype_exclude = {
         "help",
         "packer",
-        "neo-tree"
-    }
+        "neo-tree",
+    },
 }
 
 local function get_treesitter_config(languages)
@@ -73,21 +73,21 @@ return {
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false
+        additional_vim_regex_highlighting = false,
     },
 
     context_commentstring = {
         enable = true,
-        enable_autocmd = false
+        enable_autocmd = false,
     },
 
     autopairs = {
-        enable = true
+        enable = true,
     },
 
     indent = {
-        enable = true
-    }
+        enable = true,
+    },
 }
 end
 
@@ -112,7 +112,7 @@ return {
                 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
                 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
             end
-        end
+        end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -123,7 +123,7 @@ return {
                 return
             end
             indent_blankline.setup(indent_blankline_config)
-        end
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -131,12 +131,12 @@ return {
         dependencies = {
             {
                 "JoosepAlviste/nvim-ts-context-commentstring",
-                event = "VeryLazy"
+                event = "VeryLazy",
             },
             {
                 "nvim-tree/nvim-web-devicons",
-                event = "VeryLazy"
-            }
+                event = "VeryLazy",
+            },
         },
         config = function()
             local treesitter_ok, _ = pcall(require, "nvim-treesitter")
@@ -145,9 +145,8 @@ return {
                 return
             end
 
-            local treesitter_install = require("nvim-treesitter.install")
-            treesitter_install.compilers = { "clang" }
-            treesitter_install.prefer_git = false
+            require("nvim-treesitter.install").compilers = { "clang" }
+            require("nvim-treesitter.install").prefer_git = false
 
             local languages = {}
             for lang, _ in pairs(require("config.servers")) do
@@ -156,6 +155,6 @@ return {
 
             local treesitter_config = get_treesitter_config(languages)
             require("nvim-treesitter.configs").setup(treesitter_config)
-        end
+        end,
     }
 }

@@ -13,7 +13,7 @@ local mason_lspconfig_config = {
     --   - true: All servers set up via lspconfig are automatically installed.
     --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
     --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
-    automatic_installation = true
+    automatic_installation = true,
 }
 
 local mason_config = {
@@ -40,7 +40,7 @@ local mason_config = {
     -- multiple registries, the registry listed first will be used.
     registries = {
         "lua:mason-registry.index",
-        "github:mason-org/mason-registry"
+        "github:mason-org/mason-registry",
     },
 
     -- The provider implementations to use for resolving supplementary package metadata (e.g., all available versions).
@@ -50,7 +50,7 @@ local mason_config = {
     --   - mason.providers.client        - uses only client-side tooling to resolve metadata
     providers = {
         "mason.providers.registry-api",
-        "mason.providers.client"
+        "mason.providers.client",
     },
 
     github = {
@@ -59,7 +59,7 @@ local mason_config = {
         -- 1. The repository (e.g. "rust-lang/rust-analyzer")
         -- 2. The release version (e.g. "v0.3.0")
         -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
-        download_url_template = "https://github.com/%s/releases/download/%s/%s"
+        download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
 
     pip = {
@@ -70,7 +70,7 @@ local mason_config = {
         -- and is not recommended.
         --
         -- Example: { "--proxy", "https://proxyserver" }
-        install_args = {}
+        install_args = {},
     },
 
     ui = {
@@ -96,11 +96,11 @@ local mason_config = {
             -- The list icon to use for packages that are installing, or queued for installation.
             package_pending = icons.git_unstaged,
             -- The list icon to use for packages that are not installed.
-            package_uninstalled = icons.item_deleted
+            package_uninstalled = icons.item_deleted,
         },
 
-        keymaps = keymaps.mason
-    }
+        keymaps = keymaps.mason,
+    },
 }
 
 return {
@@ -114,8 +114,8 @@ return {
             cond = function()
                 local lspconfig_ok, _ = pcall(require, "lspconfig")
                 return lspconfig_ok
-            end
-        }
+            end,
+        },
     },
     config = function()
         local mason_ok, mason = pcall(require, "mason")
@@ -131,5 +131,5 @@ return {
             return
         end
         mason_lspconfig.setup(mason_lspconfig_config)
-    end
+    end,
 }

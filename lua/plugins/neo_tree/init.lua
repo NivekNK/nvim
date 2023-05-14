@@ -1,7 +1,7 @@
 local icons = require("config.icons")
 local keymaps = require("config.keymaps").neo_tree
 
-local config = {
+local neotree_config = {
     -- If a user has a sources list it will replace this one.
     -- Only sources listed here will be loaded.
     -- You can also add an external source by adding it's name to this list.
@@ -9,7 +9,7 @@ local config = {
     sources = {
         "filesystem",
         "buffers",
-        "git_status"
+        "git_status",
     },
     add_blank_line_at_top = false, -- Add a blank line at the top of the tree.
     auto_clean_after_session_restore = false, -- Automatically clean up broken neo-tree buffers saved in sessions.
@@ -24,11 +24,11 @@ local config = {
     git_status_async_options = {
         batch_size = 1000, -- how many lines of git status results to process at a time
         batch_delay = 10,  -- delay in ms between batches. Spreads out the workload to let other processes run.
-        max_lines = 10000  -- How many lines of git status results to process. Anything after this will be dropped.
+        max_lines = 10000, -- How many lines of git status results to process. Anything after this will be dropped.
                            -- Anything before this will be used. The last items to be processed are the untracked files.
     },
     hide_root_node = false, -- Hide the root node.
-    retain_hidden_root_indent = false, -- IF the root node is hidden, keep the indentation anyhow. 
+    retain_hidden_root_indent = false, -- IF the root node is hidden, keep the indentation anyhow.
                                        -- This is needed if you use expanders because they render in the indent.
     log_level = "info", -- "trace", "debug", "info", "warn", "error", "fatal"
     log_to_file = false, -- true, false, "/path/to/file.log", use :NeoTreeLogs to show the file
@@ -38,7 +38,7 @@ local config = {
                                  -- set to -1 to disable the resize timer entirely
                                  -- NOTE: this will speed up to 50 ms for 1 second following a resize
     sort_case_insensitive = false, -- used when sorting files and directories in the tree
-    sort_function = nil , -- use a custom function for sorting files and directories in the tree 
+    sort_function = nil , -- use a custom function for sorting files and directories in the tree
     -- sort_function = function (a,b)
     --       if a.type == b.type then
     --           return a.path > b.path
@@ -57,7 +57,7 @@ local config = {
             filesystem = " " .. icons.folder_group .. " Files ",
             buffers = " " .. icons.files .. " Buffers ",
             git_status = " " .. icons.git .. " Git ",
-            diagnostics = " " .. icons.diagnostic .. " Diagnostics "
+            diagnostics = " " .. icons.diagnostic .. " Diagnostics ",
         },
         content_layout = "start", -- only with `tabs_layout` = "equal", "focus"
         --                start  : |/ 裡 bufname     \/...
@@ -89,7 +89,7 @@ local config = {
         highlight_tab_active = "NeoTreeTabActive",
         highlight_background = "NeoTreeTabInactive",
         highlight_separator = "NeoTreeTabSeparatorInactive",
-        highlight_separator_active = "NeoTreeTabSeparatorActive"
+        highlight_separator_active = "NeoTreeTabSeparatorActive",
     },
     --
     --event_handlers = {
@@ -168,7 +168,7 @@ local config = {
         container = {
             enable_character_fade = true,
             width = "100%",
-            right_padding = 0
+            right_padding = 0,
         },
         --diagnostics = {
         --    symbols = {
@@ -196,7 +196,7 @@ local config = {
             with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
             expander_collapsed = icons.file_tree_collapsed,
             expander_expanded = icons.file_tree_expanded,
-            expander_highlight = "NeoTreeExpander"
+            expander_highlight = "NeoTreeExpander",
         },
         icon = {
             folder_closed = icons.folder_closed,
@@ -206,16 +206,16 @@ local config = {
             -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
             -- then these will never be used.
             default = "*",
-            highlight = "NeoTreeFileIcon"
+            highlight = "NeoTreeFileIcon",
         },
         modified = {
             symbol = icons.item_modified,
-            highlight = "NeoTreeModified"
+            highlight = "NeoTreeModified",
         },
         name = {
             trailing_slash = false,
             use_git_status_colors = true,
-            highlight = "NeoTreeFileName"
+            highlight = "NeoTreeFileName",
         },
         git_status = {
             symbols = {
@@ -229,10 +229,10 @@ local config = {
                 ignored   = icons.git_ignored,
                 unstaged  = icons.git_unstaged,
                 staged    = icons.git_staged,
-                conflict  = icons.git_conflict
+                conflict  = icons.git_conflict,
             },
-            align = "right"
-        }
+            align = "right",
+        },
     },
     window = {
         position = "left", -- left, right, top, bottom, float, current
@@ -242,9 +242,9 @@ local config = {
         popup = { -- settings that apply to float position only
             size = {
                 height = "80%",
-                width = "50%"
+                width = "50%",
             },
-            position = "50%" -- 50% means center it
+            position = "50%", -- 50% means center it
             -- you can also specify border here, if you want a different setting from
             -- the global popup_border_style.
         },
@@ -256,12 +256,12 @@ local config = {
         -- You can also create your own commands by providing a function instead of a string.
         mapping_options = {
             noremap = true,
-            nowait = true
+            nowait = true,
         },
         mappings = {
             [keymaps.toggle_node] = {
                 "toggle_node",
-                nowait = false -- disable `nowait` if you have existing combos starting with this char that you want to use 
+                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
             [keymaps.open] = "open",
             [keymaps.open_secondary] = "open",
@@ -273,8 +273,8 @@ local config = {
             [keymaps.toggle_preview] = {
                 "toggle_preview",
                 config = {
-                    use_float = true
-                }
+                    use_float = true,
+                },
             },
             [keymaps.focus_preview] = "focus_preview",
             -- ["S"] = "split_with_window_picker",
@@ -291,8 +291,8 @@ local config = {
                 -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
                 -- some commands may take optional config options, see `:h neo-tree-mappings` for details
                 config = {
-                    show_path = "none" -- "none", "relative", "absolute"
-                }
+                    show_path = "none", -- "none", "relative", "absolute"
+                },
             },
             [keymaps.add_directory] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
             [keymaps.delete] = "delete",
@@ -312,8 +312,8 @@ local config = {
             [keymaps.refresh] = "refresh",
             [keymaps.show_help] = "show_help",
             [keymaps.prev_source] = "prev_source",
-            [keymaps.next_source] = "next_source"
-        }
+            [keymaps.next_source] = "next_source",
+        },
     },
     filesystem = {
         window = {
@@ -328,8 +328,8 @@ local config = {
                 -- ["f"] = "filter_on_submit",
                 -- ["<c-x>"] = "clear_filter",
                 [keymaps.git_prev_modified] = "prev_git_modified",
-                [keymaps.git_next_modified] = "next_git_modified"
-            }
+                [keymaps.git_next_modified] = "next_git_modified",
+            },
         },
         async_directory_scan = "auto", -- "auto"   means refreshes are async, but it's synchronous when called from the Neotree commands.
                                        -- "always" means directory scans are always async.
@@ -338,8 +338,8 @@ local config = {
                                -- "deep": Scan into directories to detect empty or grouped empty directories a priori.
         bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
         cwd_target = {
-            sidebar = "tab",   -- sidebar is when position = left or right
-            current = "window" -- current is when position = current
+            sidebar = "tab",    -- sidebar is when position = left or right
+            current = "window", -- current is when position = current
         },
         -- The renderer section provides the renderers that will be used to render the tree.
         --   The first level is the node type.
@@ -370,7 +370,7 @@ local config = {
             },
             never_show_by_pattern = { -- uses glob style patterns
               --".null-ls_*",
-            }
+            },
         },
         find_by_full_path_words = false,  -- `false` means it only searches the tail of a path.
                                           -- `true` will change the filter into a full path
@@ -386,7 +386,7 @@ local config = {
                             -- "open_current",  -- netrw disabled, opening a directory opens within the
                                               -- window like netrw would, regardless of window.position
                             -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-        use_libuv_file_watcher = true -- This will use the OS level file watchers to detect changes
+        use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
                                        -- instead of relying on nvim autocmd events.
     },
     buffers = {
@@ -394,13 +394,13 @@ local config = {
             mappings = {
                 [keymaps.buffer_delete] = "buffer_delete",
                 [keymaps.navigate_up] = "navigate_up",
-                [keymaps.set_as_root] = "set_root"
-            }
+                [keymaps.set_as_root] = "set_root",
+            },
         },
         bind_to_cwd = true,
         follow_current_file = true, -- This will find and focus the file in the active buffer every
                                     -- time the current file is changed while the tree is open.
-        group_empty_dirs = true -- when true, empty folders will be grouped together
+        group_empty_dirs = true, -- when true, empty folders will be grouped together
     },
     git_status = {
         window = {
@@ -412,9 +412,9 @@ local config = {
                 -- ["gc"] = "git_commit",
                 -- ["gp"] = "git_push",
                 -- ["gg"] = "git_commit_and_push",
-            }
-        }
-    }
+            },
+        },
+    },
 }
 
 return {
@@ -424,8 +424,8 @@ return {
         "MunifTanjim/nui.nvim",
         {
             "nvim-tree/nvim-web-devicons",
-            event = "VeryLazy"
-        }
+            event = "VeryLazy",
+        },
         -- "s1n7ax/nvim-window-picker" TODO: Configure later
     },
     config = function()
@@ -437,6 +437,6 @@ return {
 
         -- Remove the deprecated commands from v1.x
         vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-        neo_tree.setup(config)
-    end
+        neo_tree.setup(neotree_config)
+    end,
 }

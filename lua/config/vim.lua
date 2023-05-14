@@ -53,13 +53,13 @@ local signs = {
     { name = "DiagnosticSignError", text = icons.error .. " " },
     { name = "DiagnosticSignWarn", text = icons.warning .. " " },
     { name = "DiagnosticSignInfo", text = icons.info .. " " },
-    { name = "DiagnosticSignHint", text = icons.hint }
+    { name = "DiagnosticSignHint", text = icons.hint },
 }
 
 local diagnostic = {
     virtual_text = false, -- disable virtual text
     signs = {
-        active = signs -- show signs
+        active = signs, -- show signs
     },
     update_in_insert = true,
     underline = true,
@@ -70,8 +70,8 @@ local diagnostic = {
         border = "rounded",
         source = "always",
         header = "",
-        prefix = ""
-    }
+        prefix = "",
+    },
 }
 
 -- NOTE: From here, code should not be modified.

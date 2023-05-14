@@ -8,14 +8,14 @@ local config = {
         ERROR = icons.error,
         INFO = icons.info,
         TRACE = icons.trace,
-        WARN = icons.warning
+        WARN = icons.warning,
     },
     level = 2,
     minimum_width = 50,
     render = "compact",
     stages = "fade",
     timeout = 5000,
-    top_down = true
+    top_down = true,
 }
 
 return {
@@ -31,5 +31,5 @@ return {
 
         notify.setup(config)
         vim.notify = notify
-    end
+    end,
 }

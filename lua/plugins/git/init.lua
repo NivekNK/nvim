@@ -5,38 +5,38 @@ local gitsigns_config = {
             hl = "GitSignsAdd",
             text = icons.gitsigns.change,
             numhl = "GitSignsAddNr",
-            linehl = "GitSignsAddLn"
+            linehl = "GitSignsAddLn",
         },
         change = {
             hl = "GitSignsChange",
             text = icons.gitsigns.change,
             numhl = "GitSignsChangeNr",
-            linehl = "GitSignsChangeLn"
+            linehl = "GitSignsChangeLn",
         },
         delete = {
             hl = "GitSignsDelete",
             text = icons.gitsigns.deleted,
             numhl = "GitSignsDeleteNr",
-            linehl = "GitSignsDeleteLn"
+            linehl = "GitSignsDeleteLn",
         },
         topdelete = {
             hl = "GitSignsDelete",
             text = icons.gitsigns.deleted,
             numhl = "GitSignsDeleteNr",
-            linehl = "GitSignsDeleteLn"
+            linehl = "GitSignsDeleteLn",
         },
         changedelete = {
             hl = "GitSignsChange",
             text = icons.gitsigns.change,
             numhl = "GitSignsChangeNr",
-            linehl = "GitSignsChangeLn"
+            linehl = "GitSignsChangeLn",
         },
         untracked = {
             hl = "GitSignsUntracked",
             text = icons.gitsigns.change,
             numhl = "GitSignsUntrackedNr",
-            linehl = "GitSignsUntrackedLn"
-        }
+            linehl = "GitSignsUntrackedLn",
+        },
     },
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
     numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -44,7 +44,7 @@ local gitsigns_config = {
     word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
     watch_gitdir = {
         interval = 1000,
-        follow_files = true
+        follow_files = true,
     },
     attach_to_untracked = true,
     current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
@@ -52,10 +52,10 @@ local gitsigns_config = {
         virt_text = true,
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
         delay = 1000,
-        ignore_whitespace = false
+        ignore_whitespace = false,
     },
     current_line_blame_formatter_opts = {
-        relative_time = false
+        relative_time = false,
     },
     sign_priority = 6,
     update_debounce = 100,
@@ -67,11 +67,11 @@ local gitsigns_config = {
         style = "minimal",
         relative = "cursor",
         row = 0,
-        col = 1
+        col = 1,
     },
     yadm = {
-        enable = false
-    }
+        enable = false,
+    },
 }
 
 return {
@@ -85,6 +85,6 @@ return {
                 return
             end
             gitsigns.setup(gitsigns_config)
-        end
-    }
+        end,
+    },
 }

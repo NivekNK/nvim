@@ -8,11 +8,11 @@ W.vim = {
     window_previous = ",",
     window_next = ".",
     window_vertical_split = "L",
-    window_horizontal_split = "J"
+    window_horizontal_split = "J",
 }
 
 W.neo_tree = {
-    toggle_explorer = "e"
+    toggle_explorer = "e",
 }
 
 W.telescope = {
@@ -22,8 +22,8 @@ W.telescope = {
         mappings = {
             find_files = "f",
             live_grep = "t",
-            buffers = "b"
-        }
+            buffers = "b",
+        },
     },
     {
         name = "Git",
@@ -31,9 +31,9 @@ W.telescope = {
         mappings = {
             changed_files = "f",
             commit_history = "h",
-            branches = "b"
-        }
-    }
+            branches = "b",
+        },
+    },
 }
 
 W.git = {
@@ -49,9 +49,9 @@ W.git = {
             reset_buffer = "R",
             stage_hunk = "s",
             undo_stage_hunk = "u",
-            diff = "d"
-        }
-    }
+            diff = "d",
+        },
+    },
 }
 
 W.cokeline = {
@@ -69,9 +69,9 @@ W.cokeline = {
             pick_focus_at_6 = "6",
             pick_focus_at_7 = "7",
             pick_focus_at_8 = "8",
-            pick_focus_at_9 = "9"
-        }
-    }
+            pick_focus_at_9 = "9",
+        },
+    },
 }
 
 return W

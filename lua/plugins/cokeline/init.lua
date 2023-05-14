@@ -36,7 +36,7 @@ return {
         -- If true, right clicking a buffer will close it
         -- The close button will still work normally
         -- Default: true
-        delete_on_right_click = true
+        delete_on_right_click = true,
     },
 
     mappings = {
@@ -44,7 +44,7 @@ return {
         -- try to focus/switch the previous (next) buffer. If `true` the last
         -- (first) buffers gets focused/switched, if `false` nothing happens.
         -- default: `true`.
-        cycle_prev_next = true
+        cycle_prev_next = true,
     },
 
     rendering = {
@@ -52,7 +52,7 @@ return {
         -- up. The buffer will be truncated if its width is bigger than this
         -- value.
         -- default: `999`.
-        max_buffer_width = 999
+        max_buffer_width = 999,
     },
 
     pick = {
@@ -65,7 +65,7 @@ return {
         -- keyboard reachability by default, but may require tweaking for
         -- non-QWERTY keyboard layouts.
         -- default: `'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERTYQP'`
-        letters = "asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERTYQP"
+        letters = "asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERTYQP",
     },
 
     -- The default highlight group values.
@@ -85,7 +85,7 @@ return {
         bg = "Normal",
 
         -- default: `'NONE'`.
-        style = "NONE"
+        style = "NONE",
     },
 
     -- A list of components to be rendered for each buffer. Check out the section
@@ -101,7 +101,7 @@ return {
             fg = utils.get_hex("CursorLine", "bg"),
             bg = function(buffer)
                 return buffer.is_focused and utils.get_hex("CursorLine", "bg") or utils.get_hex("TabLine", "bg")
-            end
+            end,
         },
         {
             text = function(buffer)
@@ -121,7 +121,7 @@ return {
             end,
             style = function(_)
                 return (is_picking_focus() or is_picking_close()) and "italic,bold" or nil
-            end
+            end,
         },
         {
             text = function(buffer)
@@ -133,7 +133,7 @@ return {
             end,
             style = function(buffer)
                 return buffer.is_focused and "bold" or nil
-            end
+            end,
         },
         {
             text = function(buffer)
@@ -142,7 +142,7 @@ return {
             fg = utils.get_hex("NeoTreeNormal", "fg"),
             bg = function(buffer)
                 return buffer.is_focused and utils.get_hex("CursorLine", "bg") or utils.get_hex("TabLine", "bg")
-            end
+            end,
         },
         {
             text = function(buffer)
@@ -161,21 +161,21 @@ return {
             end,
             bg = function(buffer)
                 return buffer.is_focused and utils.get_hex("CursorLine", "bg") or utils.get_hex("TabLine", "bg")
-            end
+            end,
         },
         {
             text = "",
             fg = function(buffer)
                 return buffer.is_focused and utils.get_hex("CursorLine", "bg") or utils.get_hex("TabLine", "bg")
             end,
-            bg = utils.get_hex("CursorLine", "bg")
+            bg = utils.get_hex("CursorLine", "bg"),
         },
         {
             text = function(buffer)
                 return buffer.is_last and "" or ""
             end,
             fg = utils.get_hex("CursorLine", "bg"),
-            bg = utils.get_hex("TabLine", "bg")
+            bg = utils.get_hex("TabLine", "bg"),
         }
     },
 
@@ -191,9 +191,9 @@ return {
                 text = " EXPLORER",
                 fg = utils.get_hex("Comment", "fg"),
                 bg = utils.get_hex("TabLine", "bg"),
-                style = "italic"
-            }
-        }
+                style = "italic",
+            },
+        },
     }
 }
 end
@@ -202,7 +202,7 @@ return {
     "willothy/nvim-cokeline",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
-        event = "VeryLazy"
+        event = "VeryLazy",
     },
     config = function()
         local cokeline_ok, cokeline = pcall(require, "cokeline")
@@ -212,5 +212,5 @@ return {
         end
         local cokeline_config = get_cokeline_config(require("cokeline.utils"))
         cokeline.setup(cokeline_config)
-    end
+    end,
 }

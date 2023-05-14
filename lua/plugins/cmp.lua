@@ -1,8 +1,6 @@
-local function get_config(cmp, luasnip, check_backspace)
-
+local function get_cmp_config(cmp, luasnip, check_backspace)
 local keymaps = require("config.keymaps").cmp
 local icons = require("config.icons")
-
 return {
     enabled = function() -- Disable cmp if writing a comment or using a Prompt
         if vim.bo.buftype == 'prompt' then
@@ -20,7 +18,7 @@ return {
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
-        end
+        end,
     },
     mapping = cmp.mapping.preset.insert {
         [keymaps.select_prev_item] = cmp.mapping.select_prev_item(),
@@ -30,7 +28,7 @@ return {
         [keymaps.insert_mode_complete] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         [keymaps.abort_and_close] = cmp.mapping {
             i = cmp.mapping.abort(),
-            c = cmp.mapping.close()
+            c = cmp.mapping.close(),
         },
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
@@ -56,7 +54,7 @@ return {
             else
                 fallback()
             end
-        end, { "i", "s" })
+        end, { "i", "s" }),
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -72,25 +70,25 @@ return {
                 emoji = "",
             })[entry.source.name]
             return vim_item
-        end
+        end,
     },
     sources = {
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
         { name = "luasnip" },
         { name = "buffer" },
-        { name = "path" }
+        { name = "path" },
     },
     confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
-        select = false
+        select = false,
     },
     window = {
         completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered()
+        documentation = cmp.config.window.bordered(),
     },
     experimental = {
-        ghost_text = true
+        ghost_text = true,
     },
     sorting = {
         priority_weight = 2,
@@ -104,9 +102,9 @@ return {
             cmp.config.compare.kind,
             -- compare.sort_text,
             cmp.config.compare.length,
-            cmp.config.compare.order
-        }
-    }
+            cmp.config.compare.order,
+        },
+    },
 }
 end
 
@@ -121,14 +119,14 @@ return {
             "L3MON4D3/LuaSnip",
             event = "InsertEnter",
             dependencies = {
-                "rafamadriz/friendly-snippets"
+                "rafamadriz/friendly-snippets",
             }
         },
-        "hrsh7th/cmp-nvim-lua"
+        "hrsh7th/cmp-nvim-lua",
     },
     event = {
         "InsertEnter",
-        "CmdlineEnter"
+        "CmdlineEnter",
     },
     config = function()
         local cmp_ok, cmp = pcall(require, "cmp")
@@ -149,7 +147,7 @@ return {
             return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
         end
 
-        local config = get_config(cmp, luasnip, check_backspace)
+        local config = get_cmp_config(cmp, luasnip, check_backspace)
         cmp.setup(config)
-    end
+    end,
 }

@@ -10,14 +10,14 @@ commands.n = {
     move_text_down = "<ESC>: m .+1<CR>",
     select_all_text = "ggvG",
     -- TODO: Not sure if it is working, need to be checked, maybe move to which key.
-    open_link = ":silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>"
+    open_link = ":silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>",
 }
 
 commands.i = {
     escape_alternative = "<ESC>",
     save_file = "<ESC>:w<CR><i>",
     move_text_up = "<ESC>:m .-2<CR><a>",
-    move_text_down = "<ESC>:m .+1<CR><a>"
+    move_text_down = "<ESC>:m .+1<CR><a>",
 }
 
 commands.v = {
@@ -25,12 +25,12 @@ commands.v = {
     indent_right = ">gv",
     move_text_up = ":m .-1<CR>==",
     move_text_down = ":m .+1<CR>==",
-    better_paste = '"_dP'
+    better_paste = '"_dP',
 }
 
 commands.x = {
     move_text_up = ":move '<-2<CR>gv-gv",
-    move_text_down = ":move '>+1<CR>gv-gv"
+    move_text_down = ":move '>+1<CR>gv-gv",
 }
 
 return commands

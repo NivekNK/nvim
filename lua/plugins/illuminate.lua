@@ -1,9 +1,9 @@
-local config = {
+local illuminate_config = {
     -- providers: provider used to get references in the buffer, ordered by priority
     providers = {
         "lsp",
         "treesitter",
-        "regex"
+        "regex",
     },
     -- delay: delay in milliseconds
     delay = 100,
@@ -26,7 +26,7 @@ local config = {
         "toggleterm",
         "DressingSelect",
         "TelescopePrompt",
-        "neo-tree"
+        "neo-tree",
     },
     -- filetypes_allowlist: filetypes to illuminate, this is overriden by filetypes_denylist
     filetypes_allowlist = {},
@@ -54,7 +54,7 @@ local config = {
     -- If nil, vim-illuminate will be disabled for large files.
     large_file_overrides = nil,
     -- min_count_to_highlight: minimum number of matches required to perform highlighting
-    min_count_to_highlight = 1
+    min_count_to_highlight = 1,
 }
 
 return {
@@ -77,6 +77,6 @@ return {
             require("illuminate").next_reference({ reverse = true, wrap = true })
         end)
 
-        illuminate.configure(config)
-    end
+        illuminate.configure(illuminate_config)
+    end,
 }

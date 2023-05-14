@@ -9,14 +9,14 @@ K.n = {
     move_text_up = "<A-k>",
     move_text_down = "<A-j>",
     select_all_text = "<C-a>",
-    open_link = "gx"
+    open_link = "gx",
 }
 
 K.i = {
     escape_alternative = "jk",
     save_file = "<C-s>",
     move_text_up = "<A-k>",
-    move_text_down = "<A-j>"
+    move_text_down = "<A-j>",
 }
 
 K.v = {
@@ -24,12 +24,12 @@ K.v = {
     indent_right = ">",
     move_text_up = "<A-k>",
     move_text_down = "<A-j>",
-    better_paste = "p"
+    better_paste = "p",
 }
 
 K.x = {
     move_text_up = "<A-k>",
-    move_text_down = "<A-j>"
+    move_text_down = "<A-j>",
 }
 
 K.neo_tree = {
@@ -64,7 +64,7 @@ K.neo_tree = {
     set_as_root = ".",
     toggle_hidden = "H",
     git_prev_modified = "[g",
-    git_next_modified = "]g"
+    git_next_modified = "]g",
 }
 
 K.mason = {
@@ -85,7 +85,7 @@ K.mason = {
     -- Keymap to cancel a package installation
     cancel_installation = "<C-c>",
     -- Keymap to apply language filter
-    apply_language_filter = "<C-f>"
+    apply_language_filter = "<C-f>",
 }
 
 K.lsp = {
@@ -98,7 +98,7 @@ K.lsp = {
     open_float = "gl",
     goto_prev = "[d",
     goto_next = "]d",
-    setloclist = "<leader>q"
+    setloclist = "<leader>q",
 }
 
 K.cmp = {
@@ -110,23 +110,23 @@ K.cmp = {
     abort_and_close = "<C-e>",
     confirm = "<CR>",
     super_autocomplete = "<Tab>",
-    prev_super_autocomplete = "<S-Tab>"
+    prev_super_autocomplete = "<S-Tab>",
 }
 
 K.illuminate = {
     next_reference = "<A-n>",
-    prev_reference = "<A-p>"
+    prev_reference = "<A-p>",
 }
 
 K.treesitter = {
-    autopairs_fast_wrap = "<A-e>"
+    autopairs_fast_wrap = "<A-e>",
 }
 
 K.telescope = {
     move_selection_next = "<Down>",
     move_selection_next_2 = "<C-j>",
     move_selection_prev = "<Up>",
-    move_selection_prev_2 = "<C-k>"
+    move_selection_prev_2 = "<C-k>",
 }
 
 K.comment = {
@@ -134,14 +134,14 @@ K.comment = {
         ---Line-comment toggle keymap
         line = "gcc",
         ---Block-comment toggle keymap
-        block = "gbc"
+        block = "gbc",
     },
     ---LHS of operator-pending mappings in NORMAL and VISUAL mode
     opleader = {
         ---Line-comment keymap
         line = "gc",
         ---Block-comment keymap
-        block = "gb"
+        block = "gb",
     },
     ---LHS of extra mappings
     extra = {
@@ -150,8 +150,8 @@ K.comment = {
         ---Add comment on the line below
         below = "gco",
         ---Add comment at the end of line
-        eol = "gcA"
-    }
+        eol = "gcA",
+    },
 }
 
 K.toggleterm = {
@@ -162,6 +162,11 @@ K.toggleterm = {
     select_right_panel = "<C-l>",
     select_up_panel = "<C-k>",
     select_down_panel = "<C-j>",
+}
+
+K.which_key = {
+    scroll_down = "<C-d>", -- binding to scroll down inside the popup
+    scroll_up = "<C-u>", -- binding to scroll up inside the popup
 }
 
 return K

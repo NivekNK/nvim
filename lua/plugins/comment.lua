@@ -18,7 +18,7 @@ local comment_config = {
         ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
         basic = true,
         ---Extra mapping; `gco`, `gcO`, `gcA`
-        extra = true
+        extra = true,
     },
     ---Function to call before (un)comment
     pre_hook = function(ctx)
@@ -39,11 +39,11 @@ local comment_config = {
 
             return require("ts_context_commentstring.internal").calculate_commentstring({
                 key = type,
-                location = location
+                location = location,
             })
         end
     end,    ---Function to call after (un)comment
-    post_hook = nil
+    post_hook = nil,
 }
 
 return {
@@ -52,8 +52,8 @@ return {
     dependencies = {
         {
             "JoosepAlviste/nvim-ts-context-commentstring",
-            event = "VeryLazy"
-        }
+            event = "VeryLazy",
+        },
     },
     config = function()
         local comment_ok, comment = pcall(require, "Comment")
@@ -62,5 +62,5 @@ return {
             return
         end
         comment.setup(comment_config)
-    end
+    end,
 }
