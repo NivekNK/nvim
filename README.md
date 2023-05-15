@@ -3,6 +3,15 @@ My config of neovim for windows and linux.
 
 ## Requirements:
 
+### LSP:
+
+* Install lua-language-server:
+    - Windows [Scoop](https://scoop.sh/)
+
+            scoop install lua-language-server
+
+    - Linux: TODO
+
 ### treesitter:
 
 * Install gcc and clang:
@@ -14,9 +23,9 @@ My config of neovim for windows and linux.
             scoop bucket add main
             scoop install llvm
 
-    - Linux: TODO
+        For **Windows** you need to Enable Developer Mode.
 
-* For **Windows** you need to Enable Developer Mode.
+    - Linux: TODO
 
 ### Telescope:
 

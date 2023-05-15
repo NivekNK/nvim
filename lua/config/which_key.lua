@@ -86,4 +86,8 @@ W.ufo = {
     },
 }
 
+W.hlslens = {
+    hide_highlights = "H"
+}
+
 return W
