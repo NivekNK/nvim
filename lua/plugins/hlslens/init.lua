@@ -29,6 +29,12 @@ local hlslens_config = {
     --     @param idx number nearest index in the plist
     --     @param relIdx number relative index, negative means before current position, positive means after
     override_lens  = nil,
+    build_position_cb = function(plist, _, _, _)
+        local scrollbar_ok, _ = pcall(require, "scrollbar")
+        if scrollbar_ok then
+            require("scrollbar.handlers.search").handler.show(plist.start_pos)
+        end
+    end,
 }
 
 return {
@@ -59,6 +65,16 @@ return {
 
             vim.keymap.set({"n", "x"}, "n", function() nN("n") end)
             vim.keymap.set({"n", "x"}, "N", function() nN("N") end)
+        end
+
+        local scrollbar_ok, _ = pcall(require, "scrollbar")
+        if scrollbar_ok then
+            vim.cmd([[
+                augroup scrollbar_search_hide
+                    autocmd!
+                    autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
+                augroup END
+            ]])
         end
     end,
 }
