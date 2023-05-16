@@ -42,7 +42,7 @@ local lualine_config = {
                 fmt = function(str, _)
                     return string.sub(str, 1, 1)
                 end
-            }
+            },
         },
         lualine_b = {
             "branch"
@@ -58,7 +58,7 @@ local lualine_config = {
                 },
                 colored = false,
                 always_visible = true
-            }
+            },
         },
         lualine_x = {
             "encoding",
@@ -71,7 +71,7 @@ local lualine_config = {
             {
                 "location",
                 padding = 0,
-            }
+            },
         },
         lualine_z = {
             "progress",

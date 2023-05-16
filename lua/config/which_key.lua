@@ -87,7 +87,20 @@ W.ufo = {
 }
 
 W.hlslens = {
-    hide_highlights = "H"
+    hide_highlights = "H",
+}
+
+W.core = {
+    {
+        name = "Case",
+        keymap = "c",
+        mappings = {
+            snake_case = "s",
+            pascal_case = "p",
+            camel_case = "c",
+            kebab_case = "k",
+        },
+    },
 }
 
 return W
