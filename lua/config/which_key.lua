@@ -103,4 +103,14 @@ W.core = {
     },
 }
 
+W.yanky = {
+    {
+        name = "Search",
+        keymap = "s",
+        mappings = {
+            yank_history = "y",
+        },
+    },
+}
+
 return W
