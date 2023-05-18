@@ -137,6 +137,7 @@ return {
                 "nvim-tree/nvim-web-devicons",
                 event = "VeryLazy",
             },
+            "nvim-treesitter/nvim-treesitter-textobjects",
         },
         config = function()
             local treesitter_ok, _ = pcall(require, "nvim-treesitter")
