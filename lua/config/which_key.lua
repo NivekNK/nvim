@@ -113,4 +113,8 @@ W.yanky = {
     },
 }
 
+W.trouble = {
+    open_trouble = "t"
+}
+
 return W

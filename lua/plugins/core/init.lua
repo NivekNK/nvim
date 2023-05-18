@@ -9,6 +9,7 @@ return {
         end,
     },
     {
+        -- https://github.com/mg979/vim-visual-multi
         -- select words with Ctrl-N (like Ctrl-d in Sublime Text/VS Code)
         -- create cursors vertically with Ctrl-Down/Ctrl-Up
         -- select one character at a time with Shift-Arrows

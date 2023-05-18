@@ -426,7 +426,6 @@ return {
             "nvim-tree/nvim-web-devicons",
             event = "VeryLazy",
         },
-        -- "s1n7ax/nvim-window-picker" TODO: Configure later
     },
     config = function()
         local status_ok, neo_tree = pcall(require, "neo-tree")

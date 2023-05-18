@@ -80,7 +80,7 @@ local ufo_config = {
 return {
     {
         "kevinhwang91/nvim-ufo",
-        event = "VeryLazy",
+        event = "BufEnter",
         dependencies = {
             "kevinhwang91/promise-async",
         },

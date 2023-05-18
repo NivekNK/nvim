@@ -1,0 +1,3 @@
+return {
+    open_trouble = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
+}
