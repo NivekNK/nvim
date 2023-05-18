@@ -92,8 +92,8 @@ W.hlslens = {
 
 W.core = {
     {
-        name = "Case",
-        keymap = "c",
+        name = "Write Case",
+        keymap = "w",
         mappings = {
             snake_case = "s",
             pascal_case = "p",
@@ -115,6 +115,24 @@ W.yanky = {
 
 W.trouble = {
     open_trouble = "t"
+}
+
+W.todo_comments = {
+    {
+        name = "Comments",
+        keymap = "c",
+        mappings = {
+            comments = "c",
+            all_comments = "a",
+            fix = "f",
+            todo = "t",
+            hack = "h",
+            warn = "w",
+            perf = "p",
+            note = "n",
+            test = "e",
+        },
+    },
 }
 
 return W

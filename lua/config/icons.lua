@@ -1,7 +1,7 @@
 return {
     debug = "",
     info = "",
-    trace = "✎",
+    trace = "",
     warning = "",
     error = "",
     hint = "",
@@ -28,7 +28,10 @@ return {
     git_conflict = "",
     prompt_prefix = ">",
     selection = "",
-    done = "✓",
+    done = "",
+    hack = "",
+    right_up = "󱦴",
+    test = "",
     gitsigns = {
         change = "▎",
         deleted = "契",
