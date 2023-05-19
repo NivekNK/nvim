@@ -176,22 +176,22 @@ K.ufo = {
 }
 
 K.yanky = {
-    paste_indent_right_after = ">p",
-    paste_indent_left_after = "<p",
-    paste_at_indent_after = "=p",
-    paste_indent_right_before = ">P",
-    paste_indent_left_before = "<P",
-    paste_at_indent_before = "=P",
+    paste_indent_right_after = ">P",
+    paste_indent_left_after = "<P",
+    paste_at_indent_after = "=P",
+    paste_indent_right_before = ">p",
+    paste_indent_left_before = "<p",
+    paste_at_indent_before = "=p",
     telescope = {
         i = {
-            paste_after = "<C-p>",
-            paste_before = "<C-P>",
+            paste_after = "<C-P>",
+            paste_before = "<C-p>",
             delete = "<C-x>",
             register = "<C-r>",
         },
         n = {
-            paste_after = "p",
-            paste_before = "P",
+            paste_after = "P",
+            paste_before = "p",
             delete = "d",
             register = "r",
         },
