@@ -1,0 +1,21 @@
+vim.keymap.set({ "n","x" }, "p", '"_d<Plug>(YankyPutAfter)')
+vim.keymap.set({ "n","x" }, "P", '"_d<Plug>(YankyPutBefore)')
+vim.keymap.set({ "n","x" }, "gp", '"_d<Plug>(YankyGPutAfter)')
+vim.keymap.set({ "n","x" }, "gP", '"_d<Plug>(YankyGPutBefore)')
+
+vim.keymap.set("n", keymaps.paste_indent_right_after, '"_d<Plug>(YankyPutIndentAfterShiftRight)')
+vim.keymap.set("n", keymaps.paste_indent_left_after, '"_d<Plug>(YankyPutIndentAfterShiftLeft)')
+vim.keymap.set("n", keymaps.paste_at_indent_after, '"_d<Plug>(YankyPutAfterFilter)')
+vim.keymap.set("n", keymaps.paste_indent_right_before, '"_d<Plug>(YankyPutIndentBeforeShiftRight)')
+vim.keymap.set("n", keymaps.paste_indent_left_before, '"_d<Plug>(YankyPutIndentBeforeShiftLeft)')
+vim.keymap.set("n", keymaps.paste_at_indent_before, '"_d<plug>(yankyputbeforefilter)')
+
+test 1
+
+test 2
+
+test 3
+
+test 4
+
+test 5

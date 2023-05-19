@@ -32,7 +32,7 @@ return {
         sync_with_ring = true,
     },
     highlight = {
-        on_put = true,
+        on_put = false,
         on_yank = true,
         timer = 500,
     },
@@ -52,21 +52,30 @@ return {
             return
         end
 
+        -- Create the command "NKForceVisualMode"
+        vim.api.nvim_create_user_command("YankyForceVisualMode", function()
+            local mode = vim.api.nvim_get_mode().mode
+            if mode ~= "v" and mode ~= "V" then
+                vim.cmd("normal! v")
+            end
+        end, { desc = "Force to be on visual mode for Yanky." })
+
         local keymaps = require("config.keymaps").yanky
         local config = get_yanky_config(keymaps.telescope, require("yanky.telescope.mapping"), require("yanky.utils"))
         yanky.setup(config)
 
-        vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
-        vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
-        vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
-        vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+        vim.keymap.set({ "n","x" }, "y", "<Plug>(YankyYank)")
+        vim.keymap.set({ "n","x" }, "p", '<cmd>YankyForceVisualMode<CR>"_d<Plug>(YankyPutBefore)')
+        vim.keymap.set({ "n","x" }, "P", '<cmd>YankyForceVisualMode<CR>"_d<Plug>(YankyPutAfter)')
+        vim.keymap.set({ "n","x" }, "gp", '<Plug>(YankyGPutAfter)')
+        vim.keymap.set({ "n","x" }, "gP", '<Plug>(YankyGPutBefore)')
 
-        vim.keymap.set("n", keymaps.paste_indent_right_after, "<Plug>(YankyPutIndentAfterShiftRight)")
-        vim.keymap.set("n", keymaps.paste_indent_left_after, "<Plug>(YankyPutIndentAfterShiftLeft)")
-        vim.keymap.set("n", keymaps.paste_at_indent_after, "<Plug>(YankyPutAfterFilter)")
-        vim.keymap.set("n", keymaps.paste_indent_right_before, "<Plug>(YankyPutIndentBeforeShiftRight)")
-        vim.keymap.set("n", keymaps.paste_indent_left_before, "<Plug>(YankyPutIndentBeforeShiftLeft)")
-        vim.keymap.set("n", keymaps.paste_at_indent_before, "<Plug>(YankyPutBeforeFilter)")
+        vim.keymap.set("n", keymaps.paste_indent_right_after, '<Plug>(YankyPutIndentAfterShiftRight)')
+        vim.keymap.set("n", keymaps.paste_indent_left_after, '<Plug>(YankyPutIndentAfterShiftLeft)')
+        vim.keymap.set("n", keymaps.paste_at_indent_after, '<Plug>(YankyPutAfterFilter)')
+        vim.keymap.set("n", keymaps.paste_indent_right_before, '<Plug>(YankyPutIndentBeforeShiftRight)')
+        vim.keymap.set("n", keymaps.paste_indent_left_before, '<Plug>(YankyPutIndentBeforeShiftLeft)')
+        vim.keymap.set("n", keymaps.paste_at_indent_before, '<Plug>(YankyPutBeforeFilter)')
 
         local telescope_ok, telescope = pcall(require, "telescope")
         if telescope_ok then

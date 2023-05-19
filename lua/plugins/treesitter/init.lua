@@ -34,6 +34,47 @@ local indent_blankline_config = {
     },
 }
 
+local treesj_config = {
+    -- Use default keymaps
+    -- (<space>m - toggle, <space>j - join, <space>s - split)
+    use_default_keymaps = false,
+
+    -- Node with syntax error will not be formatted
+    check_syntax_error = true,
+
+    -- If line after join will be longer than max value,
+    -- node will not be formatted
+    max_join_length = 120,
+
+    -- hold|start|end:
+    -- hold - cursor follows the node/place on which it was called
+    -- start - cursor jumps to the first symbol of the node being formatted
+    -- end - cursor jumps to the last symbol of the node being formatted
+    cursor_behavior = "hold",
+
+    -- Notify about possible problems or not
+    notify = true,
+    langs = {},
+
+    -- Use `dot` for repeat action
+    dot_repeat = true,
+}
+
+local treesitter_context_config = {
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+    line_numbers = true,
+    multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
+    trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+    mode = "cursor",  -- Line used to calculate context. Choices: 'cursor', 'topline'
+    -- Separator between context and content. Should be a single character string, like '-'.
+    -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+    separator = nil,
+    zindex = 20, -- The Z-index of the context window
+    on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+}
+
 local function get_treesitter_config(languages)
 return {
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -138,6 +179,29 @@ return {
                 event = "VeryLazy",
             },
             "nvim-treesitter/nvim-treesitter-textobjects",
+            {
+                "Wansmer/treesj",
+                config = function()
+                    local treesj_ok, treesj = pcall(require, "treesj")
+                    if not treesj_ok then
+                        vim.notify("[treesitter] Error loading treesj!", vim.log.levels.ERROR)
+                        return
+                    end
+                    treesj.setup(treesj_config)
+                end,
+            },
+            {
+                "nvim-treesitter/nvim-treesitter-context",
+                config = function()
+                    local treesitter_context_ok, treesitter_context = pcall(require, "treesitter-context")
+                    if not treesitter_context_ok then
+                        vim.notify("[treesitter] Error loading treesitter-context!", vim.log.levels.ERROR)
+                        return
+                    end
+                    treesitter_context.setup(treesitter_context_config)
+                    vim.cmd("highlight! TreesitterContext guibg=Normal")
+                end
+            },
         },
         config = function()
             local treesitter_ok, _ = pcall(require, "nvim-treesitter")

@@ -135,4 +135,9 @@ W.todo_comments = {
     },
 }
 
+W.treesitter = {
+    split_toggle = "S",
+    go_to_context = "[",
+}
+
 return W
