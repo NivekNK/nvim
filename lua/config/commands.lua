@@ -9,6 +9,9 @@ vim.api.nvim_create_user_command("NKToggleSpace", function()
     vim.cmd("set list!")
 end, { desc = "Toggle between showing space characters or not." })
 
+-- Create the command "Q"
+vim.api.nvim_create_user_command("Q", "q", { desc = "Quit for dummies."} )
+
 -- Clear all white space before a save file
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },
