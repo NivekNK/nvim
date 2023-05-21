@@ -10,12 +10,12 @@ local paths = scandir.scan_dir(servers_path, {
     add_dirs = false
 })
 
-local servers = {}
+local servers = require("config.servers.langs")
 
 for _, path in ipairs(paths) do
     local server_name = string.gsub(path, servers_path .. package.config:sub(1, 1), "")
     server_name = server_name:match("([^/]*).lua$")
-    if server_name ~= "init" then
+    if server_name ~= "init" and server_name ~= "langs" then
         local lang = require("config.servers." .. server_name).lang
         servers[lang] = server_name
     end

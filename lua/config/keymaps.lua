@@ -98,6 +98,7 @@ K.lsp = {
     goto_prev = "[d",
     goto_next = "]d",
     setloclist = "<A-q>",
+    format = "fo",
 }
 
 K.cmp = {

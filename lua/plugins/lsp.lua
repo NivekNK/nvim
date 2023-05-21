@@ -59,6 +59,7 @@ return {
             return
         end
 
+        local keymaps = require("config.keymaps").lsp
         local on_attach = function(client, buffer)
             -- Format filter
             local null_ls_ok, null_ls = pcall(require, "null-ls")
@@ -79,7 +80,6 @@ return {
             end
 
             -- Buffer keymaps
-            local keymaps = require("config.keymaps").lsp
             vim.keymap.set("n", keymaps.declaration, vim.lsp.buf.declaration, { buffer = buffer })
             vim.keymap.set("n", keymaps.definition, vim.lsp.buf.definition, { buffer = buffer })
             vim.keymap.set("n", keymaps.hover, vim.lsp.buf.hover, { buffer = buffer })
@@ -146,5 +146,7 @@ return {
             border = "rounded",
             width = 60,
         })
+
+        vim.keymap.set("n", keymaps.format, "<cmd>NKFormat<CR>")
     end,
 }
