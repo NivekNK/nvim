@@ -60,7 +60,7 @@ return {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
             local icon_kind = vim_item.kind
-            vim_item.kind = icons.cmp_kind_icons[icon_kind]
+            vim_item.kind = icons.kinds[icon_kind]
             vim_item.menu = ({
                 nvim_lsp = "",
                 nvim_lua = "",

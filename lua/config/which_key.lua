@@ -154,4 +154,8 @@ W.color = {
     },
 }
 
+W.barbecue = {
+    prev_entry = "E",
+}
+
 return W

@@ -36,7 +36,7 @@ return {
         change = "▎",
         deleted = "契",
     },
-    cmp_kind_icons = {
+    kinds = {
         Text = "",
         Method = "",
         Function = "",
@@ -61,6 +61,14 @@ return {
         Struct = "",
         Event = "",
         Operator = "",
+        Package = "",
+        Number = "",
+        Boolean = "",
+        Array = "",
+        Object = "",
+        Key = "",
+        Null = "",
+        String = "",
         TypeParameter = "",
     },
 }

@@ -71,6 +71,13 @@ return {
                 vim.notify("[lspconfig] Error loading null-ls!", vim.log.levels.WARN)
             end
 
+            local navic_ok, navic = pcall(require, "nvim-navic")
+            if navic_ok and client.server_capabilities["documentSymbolProvider"] then
+                navic.attach(client, buffer)
+            else
+                vim.notify("[lspconfig] Error loading navic!", vim.log.levels.WARN)
+            end
+
             -- Buffer keymaps
             local keymaps = require("config.keymaps").lsp
             vim.keymap.set("n", keymaps.declaration, vim.lsp.buf.declaration, { buffer = buffer })
