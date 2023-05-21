@@ -224,14 +224,44 @@ K.color = {
     close = "q",
     accept = "<CR>",
     toggle_alpha = "a",
-    increase_by_1 = ".",
-    increase_by_5 = ":",
-    decrease_by_1 = ",",
-    decrease_by_5 = ";",
+    increase = ".",
+    big_increase = ">",
+    decrease = ",",
+    big_decrease = "<",
     set_to_zero = "0",
     set_to_max = "=",
     toggle_output_mode = "o",
     toggle_input_mode = "i",
 }
+
+-- -- increment values
+-- increment = ".",
+-- -- decrement values
+-- decrement = ",",
+-- -- increment values with bigger steps
+-- increment_big = ">",
+-- -- decrement values with bigger steps
+-- decrement_big = "<",
+-- -- set values to the minimum
+-- min_value = "0",
+-- -- set values to the maximum
+-- max_value = "=",
+-- -- save the current color in the register specified above with the format specified above
+-- set_register_default_format = "<cr>",
+-- -- save the current color in the register specified above with a format you can choose
+-- set_register_cjoose_format = "g<cr>",
+-- -- replace the color under the cursor with the current color in the format specified above
+-- replace_default_format = "<m-cr>",
+-- -- replace the color under the cursor with the current color in a format you can choose
+-- replace_choose_format = "g<m-cr>",
+-- -- export the current color to a different tool
+-- export = "E",
+-- -- set the value to a certain number (done by just entering numbers)
+-- set_value = "c",
+-- -- toggle transparency
+-- transparency = "a",
+-- -- choose the background (for transparent colors)
+-- choose_background = "B",
+
 
 return K

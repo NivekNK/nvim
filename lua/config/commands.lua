@@ -12,6 +12,9 @@ end, { desc = "Toggle between showing space characters or not." })
 -- Create the command "Q"
 vim.api.nvim_create_user_command("Q", "q", { desc = "Quit for dummies."} )
 
+-- Create the command "qb"
+vim.api.nvim_create_user_command("qb", "bd", { desc = "Quit from current buffer." })
+
 -- Clear all white space before a save file
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },

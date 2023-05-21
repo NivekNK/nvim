@@ -147,6 +147,9 @@ W.color = {
         mappings = {
             color_picker = "p",
             toggle_color = "c",
+            lighten_color = "l",
+            darken_color = "d",
+            gradient_color = "g",
         },
     },
 }

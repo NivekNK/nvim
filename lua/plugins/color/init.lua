@@ -1,5 +1,6 @@
-local function get_ccc_config(mapping)
 local keymaps = require("config.keymaps").color
+
+local function get_ccc_config(mapping)
 return {
     default_color = "#000000",
     point_char = "◊",
@@ -31,10 +32,10 @@ return {
         [keymaps.close] = mapping.quit,
         [keymaps.accept] = mapping.complete,
         [keymaps.toggle_alpha] = mapping.toggle_alpha,
-        [keymaps.increase_by_1] = mapping.increase1,
-        [keymaps.increase_by_5] = mapping.increase5,
-        [keymaps.decrease_by_1] = mapping.decrease1,
-        [keymaps.decrease_by_5] = mapping.decrease5,
+        [keymaps.increase] = mapping.increase1,
+        [keymaps.big_increase] = mapping.increase5,
+        [keymaps.decrease] = mapping.decrease1,
+        [keymaps.big_decrease] = mapping.decrease5,
         [keymaps.set_to_zero] = mapping.set0,
         [keymaps.set_to_max] = mapping.set100,
         [keymaps.toggle_output_mode] = mapping.toggle_output_mode,
@@ -42,6 +43,49 @@ return {
     },
 }
 end
+
+local colortils_config = {
+    -- Register in which color codes will be copied
+    register = "+",
+    -- Preview for colors, if it contains `%s` this will be replaced with a hex color code of the color
+    color_preview =  "█ %s",
+    -- The default in which colors should be saved
+    -- This can be hex, hsl or rgb
+    default_format = "hex",
+    -- Border for the float
+    border = "rounded",
+    -- Some mappings which are used inside the tools
+    mappings = {
+        -- increment values
+        increment = keymaps.increase,
+        -- decrement values
+        decrement = keymaps.decrease,
+        -- increment values with bigger steps
+        increment_big = keymaps.big_increase,
+        -- decrement values with bigger steps
+        decrement_big = keymaps.big_decrease,
+        -- set values to the minimum
+        min_value = keymaps.set_to_zero,
+        -- set values to the maximum
+        max_value = keymaps.set_to_max,
+        -- save the current color in the register specified above with the format specified above
+        set_register_default_format = "r<CR>", -- should not use
+        -- save the current color in the register specified above with a format you can choose
+        set_register_cjoose_format = "rf<CR>", -- should not use
+        -- replace the color under the cursor with the current color in the format specified above
+        replace_default_format = "f<CR>", -- should not use
+        -- replace the color under the cursor with the current color in a format you can choose
+        replace_choose_format = keymaps.accept,
+        -- export the current color to a different tool
+        export = "E", -- should not use
+        -- set the value to a certain number (done by just entering numbers)
+        set_value = "c", -- should not use
+        -- toggle transparency
+        transparency = keymaps.toggle_alpha,
+        -- choose the background (for transparent colors)
+        choose_background = "B", -- should not use
+    },
+}
 
 return {
     {
@@ -52,6 +96,23 @@ return {
             if not ccc_ok then
                 vim.notify("[color] Error loading ccc!", vim.log.levels.ERROR)
                 return
+            end
+
+            -- HACK: The default format doesn't use comma's for rgb or rgba
+            require("ccc.output.css_rgb").str = function(RGB, A)
+                local utils = require("ccc.utils")
+                local convert = require("ccc.utils.convert")
+
+                local R, G, B = convert.rgb_format(RGB)
+                R = utils.round(R)
+                G = utils.round(G)
+                B = utils.round(B)
+                if A then
+                    A = utils.round(A * 255)
+                    return ("rgba(%d, %d, %d, %d)"):format(R, G, B, A)
+                else
+                    return ("rgb(%d, %d, %d)"):format(R, G, B)
+                end
             end
 
             local config = get_ccc_config(ccc.mapping)
@@ -84,7 +145,25 @@ return {
                     ccc.set_percent(i)
                 end
             end
+
+            -- config["convert"] = {
+            --     { ccc.picker.hex,     fix_rgb },
+            --     { fix_rgb, ccc.output.css_hsl },
+            -- }
+
             ccc.setup(config)
+        end,
+    },
+    {
+        "nvim-colortils/colortils.nvim",
+        event = "BufEnter",
+        config = function()
+            local colortils_ok, colortils = pcall(require, "colortils")
+            if not colortils_ok then
+                vim.notify("[color] Error loading colortils!", vim.log.levels.ERROR)
+                return
+            end
+            colortils.setup(colortils_config)
         end,
     },
 }
