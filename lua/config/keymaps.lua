@@ -220,4 +220,18 @@ K.trouble = {
     next = "j", -- next item
 }
 
+K.color = {
+    close = "q",
+    accept = "<CR>",
+    toggle_alpha = "a",
+    increase_by_1 = ".",
+    increase_by_5 = ":",
+    decrease_by_1 = ",",
+    decrease_by_5 = ";",
+    set_to_zero = "0",
+    set_to_max = "=",
+    toggle_output_mode = "o",
+    toggle_input_mode = "i",
+}
+
 return K

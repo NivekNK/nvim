@@ -140,4 +140,15 @@ W.treesitter = {
     go_to_context = "[",
 }
 
+W.color = {
+    {
+        name = "Color",
+        keymap = "C",
+        mappings = {
+            color_picker = "p",
+            toggle_color = "c",
+        },
+    },
+}
+
 return W
