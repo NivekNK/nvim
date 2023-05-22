@@ -1,3 +1,6 @@
+local keymaps = require("config.keymaps").lsp
+local icons = require("config.icons")
+
 local neodev_config = {
     library = {
         enabled = true, -- when not enabled, neodev will not change any settings to the LSP server
@@ -23,6 +26,106 @@ local neodev_config = {
     pathStrict = true,
 }
 
+local lspsaga_config = {
+    preview = {
+        lines_above = 0,
+        lines_below = 10,
+    },
+    scroll_preview = {
+        scroll_down = keymaps.saga.scroll_down,
+        scroll_up = keymaps.saga.scroll_up,
+    },
+    request_timeout = 2000,
+    ui = {
+        -- This option only works in Neovim 0.9
+        title = true,
+        -- Border type can be single, double, rounded, solid, shadow.
+        border = "rounded",
+        winblend = 0,
+        expand = icons.tree_expanded,
+        collapse = icons.tree_collapsed,
+        code_action = icons.action,
+        -- incoming = " ",
+        -- outgoing = " ",
+        hover = icons.hover .. " ",
+        kind = {},
+    },
+    lightbulb = {
+        enable = true,
+        enable_in_insert = true,
+        sign = false,
+        sign_priority = 40,
+        virtual_text = true,
+    },
+    beacon = { -- after jump from float window there will show beacon to remind you where the cursor is.
+        enable = true,
+        frequency = 7,
+    },
+    finder = {
+        max_height = 0.5,
+        min_width = 30,
+        force_max_height = false,
+        keys = {
+            jump_to = 'p',
+            expand_or_jump = 'o',
+            vsplit = 's',
+            split = 'i',
+            tabe = 't',
+            tabnew = 'r',
+            quit = { 'q', '<ESC>' },
+            close_in_preview = '<ESC>',
+        },
+    },
+    definition = {
+        edit = "<C-c>o",
+        vsplit = "<C-c>v",
+        split = "<C-c>i",
+        tabe = "<C-c>t",
+        quit = "q",
+    },
+    code_action = {
+        num_shortcut = true,
+        show_server_name = false,
+        extend_gitsigns = true,
+        keys = {
+            -- string | table type https://github.com/nvimdev/lspsaga.nvim#example-configuration
+            quit = "q",
+            exec = "<CR>",
+        },
+    },
+    hover = {
+        max_width = 0.6,
+    },
+    diagnostic = {
+        on_insert = false,
+        on_insert_follow = false,
+        insert_winblend = 0,
+        show_code_action = true,
+        show_source = true,
+        jump_num_shortcut = true,
+        max_width = 0.7,
+        max_height = 0.6,
+        max_show_width = 0.9,
+        max_show_height = 0.6,
+        text_hl_follow = true,
+        border_follow = true,
+        extend_relatedInformation = false,
+        keys = {
+            exec_action = 'o',
+            quit = 'q',
+            expand_or_jump = '<CR>',
+            quit_in_show = { 'q', '<ESC>' },
+        },
+    },
+    rename = {
+        quit = "<C-c>",
+        exec = "<CR>",
+        mark = "x",
+        confirm = "<CR>",
+        in_select = true,
+    },
+}
+
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -44,6 +147,17 @@ return {
                 return cmp_ok
             end,
         },
+        {
+            "glepnir/lspsaga.nvim",
+            event = "LspAttach",
+            dependencies = {
+                {
+                    "nvim-tree/nvim-web-devicons",
+                    event = "VeryLazy",
+                },
+                "nvim-treesitter/nvim-treesitter",
+            }
+        }
     },
     config = function()
         local neodev_ok, neodev = pcall(require, "neodev")
@@ -59,7 +173,6 @@ return {
             return
         end
 
-        local keymaps = require("config.keymaps").lsp
         local on_attach = function(client, buffer)
             -- Format filter
             local null_ls_ok, null_ls = pcall(require, "null-ls")
@@ -79,23 +192,27 @@ return {
                 vim.notify("[lspconfig] Error loading navic!", vim.log.levels.WARN)
             end
 
-            -- Buffer keymaps
             vim.keymap.set("n", keymaps.declaration, vim.lsp.buf.declaration, { buffer = buffer })
-            vim.keymap.set("n", keymaps.definition, vim.lsp.buf.definition, { buffer = buffer })
-            vim.keymap.set("n", keymaps.hover, vim.lsp.buf.hover, { buffer = buffer })
             vim.keymap.set("n", keymaps.implementation, vim.lsp.buf.implementation, { buffer = buffer })
             vim.keymap.set("n", keymaps.signature_help, vim.lsp.buf.signature_help, { buffer = buffer })
             vim.keymap.set("n", keymaps.references, vim.lsp.buf.references, { buffer = buffer })
-            vim.keymap.set("n", keymaps.open_float, function()
-                vim.diagnostic.open_float({ border = "rounded" })
-            end, { buffer = buffer })
-            vim.keymap.set("n", keymaps.goto_prev, function()
-                vim.diagnostic.goto_next({ border = "rounded" })
-            end, { buffer = buffer })
-            vim.keymap.set("n", keymaps.goto_next, function()
-                vim.diagnostic.goto_next({ border = "rounded" })
-            end, { buffer = buffer })
             vim.keymap.set("n", keymaps.setloclist, vim.diagnostic.setloclist, { buffer = buffer })
+
+            local lspsaga_ok, _ = pcall(require, "lspsaga")
+            if not lspsaga_ok then
+            -- Buffer keymaps
+                vim.keymap.set("n", keymaps.definition, vim.lsp.buf.definition, { buffer = buffer })
+                vim.keymap.set("n", keymaps.hover, vim.lsp.buf.hover, { buffer = buffer })
+                vim.keymap.set("n", keymaps.diagnostics, function()
+                    vim.diagnostic.open_float({ border = "rounded" })
+                end, { buffer = buffer })
+                vim.keymap.set("n", keymaps.goto_prev_diagnostic, function()
+                    vim.diagnostic.goto_next({ border = "rounded" })
+                end, { buffer = buffer })
+                vim.keymap.set("n", keymaps.goto_next_diagnostic, function()
+                    vim.diagnostic.goto_next({ border = "rounded" })
+                end, { buffer = buffer })
+            end
 
             local illuminate_ok, illuminate = pcall(require, "illuminate")
             if illuminate_ok then
@@ -120,20 +237,22 @@ return {
         }
 
         for _, server in pairs(require("config.servers")) do
-            local opts = {
-                on_attach = on_attach,
-                capabilities = capabilities
-            }
+            if server ~= "ignore" then
+                local opts = {
+                    on_attach = on_attach,
+                    capabilities = capabilities
+                }
 
-            local has_custom, custom = pcall(require, "config.servers." .. server)
-            if has_custom then
-                opts = vim.tbl_deep_extend("force", opts, custom.opts)
-            end
+                local has_custom, custom = pcall(require, "config.servers." .. server)
+                if has_custom then
+                    opts = vim.tbl_deep_extend("force", opts, custom.opts)
+                end
 
-            if custom.setup then
-                custom.setup(opts)
-            else
-                lspconfig[server].setup(opts)
+                if custom.setup then
+                    custom.setup(opts)
+                else
+                    lspconfig[server].setup(opts)
+                end
             end
         end
 
@@ -148,5 +267,22 @@ return {
         })
 
         vim.keymap.set("n", keymaps.format, "<cmd>NKFormat<CR>")
+
+        local lspsaga_ok, lspsaga = pcall(require, "lspsaga")
+        if lspsaga_ok then
+            lspsaga.setup(lspsaga_config)
+
+            vim.keymap.set("n", keymaps.finder, "<cmd>Lspsaga lsp_finder<CR>")
+            vim.keymap.set("n", keymaps.code_action, "<cmd>Lspsaga code_action<CR>")
+            vim.keymap.set("n", keymaps.definition, "<cmd>Lspsaga goto_definition<CR>")
+            vim.keymap.set("n", keymaps.peek_definition, "<cmd>Lspsaga peek_definition<CR>")
+            vim.keymap.set("n", keymaps.type_definition, "<cmd>Lspsaga peek_type_definition<CR>")
+            vim.keymap.set("n", keymaps.hover, "<cmd>Lspsaga hover_doc<CR>")
+            vim.keymap.set("n", keymaps.diagnostics, "<cmd>Lspsaga show_line_diagnostics<CR>")
+            vim.keymap.set("n", keymaps.goto_prev_diagnostic, "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+            vim.keymap.set("n", keymaps.goto_next_diagnostic, "<cmd>Lspsaga diagnostic_jump_next<CR>")
+        else
+            vim.notify("[lsp] Error loading lspsaga!", vim.log.levels.WARN)
+        end
     end,
 }

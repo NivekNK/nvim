@@ -88,17 +88,26 @@ K.mason = {
 }
 
 K.lsp = {
+    finder = "gh",
+    code_action = "»",
+    rename = "gR",
     declaration = "gD",
+    peek_definition = "gp",
     definition = "gd",
+    type_definition = "gt",
     hover = "K",
     implementation = "gi",
     signature_help = "<C-k>",
     references = "gr",
-    open_float = "gl",
-    goto_prev = "[d",
-    goto_next = "]d",
+    diagnostics = "gl",
+    goto_prev_diagnostic = "[d",
+    goto_next_diagnostic = "]d",
     setloclist = "<A-q>",
     format = "fo",
+    saga = {
+        scroll_down = "<C-f>",
+        scroll_up = "<C-b>",
+    },
 }
 
 K.cmp = {

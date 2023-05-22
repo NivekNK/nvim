@@ -14,6 +14,10 @@ My config of neovim for windows and linux.
 
 ### treesitter:
 
+* Install tree-sitter-cli
+
+        npm install tree-sitter-cli
+
 * Install gcc and clang:
     - Windows [Scoop](https://scoop.sh/):
 
