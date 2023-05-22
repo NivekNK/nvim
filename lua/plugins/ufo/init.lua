@@ -1,4 +1,5 @@
 local keymaps = require("config.keymaps").ufo
+local icons = require("config.icons")
 local ufo_config = {
     -- Time in millisecond between the range to be highlgihted and to be cleared
     -- while opening the folded line, `0` value will disable the highlight
@@ -18,7 +19,7 @@ local ufo_config = {
     -- example from: https://github.com/kevinhwang91/nvim-ufo
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
-        local suffix = ('  %d '):format(endLnum - lnum)
+        local suffix = (" %s %d "):format(icons.bottom_left, endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
@@ -40,7 +41,7 @@ local ufo_config = {
             end
             curWidth = curWidth + chunkWidth
         end
-        table.insert(newVirtText, {suffix, 'MoreMsg'})
+        table.insert(newVirtText, {suffix, "MoreMsg"})
         return newVirtText
     end,
 

@@ -32,8 +32,12 @@ return {
     done = "",
     hack = "",
     right_up = "󱦴",
+    bottom_left = "󱦶",
     test = "",
     hover = "",
+    search = "",
+    gear = "",
+    no_text = "󰐓",
     gitsigns = {
         change = "▎",
         deleted = "󰐊",

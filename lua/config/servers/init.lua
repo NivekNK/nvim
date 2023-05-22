@@ -17,7 +17,13 @@ for _, path in ipairs(paths) do
     server_name = server_name:match("([^/]*).lua$")
     if server_name ~= "init" and server_name ~= "langs" then
         local server = require("config.servers." .. server_name)
-        servers[server.lang] = server.opts == "ignore" and "ignore" or server_name
+        if type(server.lang) == "string" then
+            servers[server.lang] = server.opts == "ignore" and "ignore" or server_name
+        else
+            for _, lang in ipairs(server.lang) do
+                servers[lang] = server.opts == "ignore" and "ignore" or server_name
+            end
+        end
     end
 end
 

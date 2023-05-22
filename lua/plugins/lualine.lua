@@ -63,18 +63,21 @@ local lualine_config = {
         lualine_x = {
             "encoding",
             {
+                "filesize",
+                separator = { left = " " },
+            }
+        },
+        lualine_y = {
+            {
                 "filetype",
                 colored = false
             },
         },
-        lualine_y = {
+        lualine_z = {
             {
                 "location",
                 padding = 0,
             },
-        },
-        lualine_z = {
-            "progress",
         },
     },
 }
@@ -91,6 +94,17 @@ return {
             vim.notify("Error loading lualine!", vim.log.levels.ERROR)
             return
         end
+
+        local cmake_tools_ok, _ = pcall(require, "cmake-tools")
+        if cmake_tools_ok then
+            local cpp_lualine_ok, cpp_lualine = pcall(require, "plugins.cpp.lualine")
+            if cpp_lualine_ok then
+                for _, value in ipairs(cpp_lualine.lualine_c) do
+                    table.insert(lualine_config.sections.lualine_c, value)
+                end
+            end
+        end
+
         lualine.setup(lualine_config)
     end,
 }
