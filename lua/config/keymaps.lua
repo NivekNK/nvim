@@ -107,6 +107,26 @@ K.lsp = {
     saga = {
         scroll_down = "<C-f>",
         scroll_up = "<C-b>",
+        quit = { "q", "<ESC>" },
+        accept = "<CR>",
+        finder = {
+            edit = "e",
+            definition = "d",
+            vertical_split = "s",
+            horizontal_split = "S",
+            tab = "t",
+            new_tab = "r",
+        },
+        definition = {
+            edit = "<C-c>e",
+            vertical_split = "<C-c>s",
+            horizontal_split = "<C-c>S",
+            tab = "<C-c>t",
+        },
+        rename = {
+            quit = "<C-c>",
+            mark = "x",
+        },
     },
 }
 
@@ -243,35 +263,5 @@ K.color = {
     toggle_output_mode = "o",
     toggle_input_mode = "i",
 }
-
--- -- increment values
--- increment = ".",
--- -- decrement values
--- decrement = ",",
--- -- increment values with bigger steps
--- increment_big = ">",
--- -- decrement values with bigger steps
--- decrement_big = "<",
--- -- set values to the minimum
--- min_value = "0",
--- -- set values to the maximum
--- max_value = "=",
--- -- save the current color in the register specified above with the format specified above
--- set_register_default_format = "<cr>",
--- -- save the current color in the register specified above with a format you can choose
--- set_register_cjoose_format = "g<cr>",
--- -- replace the color under the cursor with the current color in the format specified above
--- replace_default_format = "<m-cr>",
--- -- replace the color under the cursor with the current color in a format you can choose
--- replace_choose_format = "g<m-cr>",
--- -- export the current color to a different tool
--- export = "E",
--- -- set the value to a certain number (done by just entering numbers)
--- set_value = "c",
--- -- toggle transparency
--- transparency = "a",
--- -- choose the background (for transparent colors)
--- choose_background = "B",
-
 
 return K

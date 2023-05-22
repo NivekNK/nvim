@@ -66,22 +66,22 @@ local lspsaga_config = {
         min_width = 30,
         force_max_height = false,
         keys = {
-            jump_to = 'p',
-            expand_or_jump = 'o',
-            vsplit = 's',
-            split = 'i',
-            tabe = 't',
-            tabnew = 'r',
-            quit = { 'q', '<ESC>' },
-            close_in_preview = '<ESC>',
+            jump_to = keymaps.saga.finder.edit,
+            expand_or_jump = keymaps.saga.finder.definition,
+            vsplit = keymaps.saga.finder.vertical_split,
+            split = keymaps.saga.finder.horizontal_split,
+            tabe = keymaps.saga.finder.tab,
+            tabnew = keymaps.saga.finder.new_tab,
+            quit = keymaps.saga.quit,
+            close_in_preview = keymaps.saga.quit,
         },
     },
     definition = {
-        edit = "<C-c>o",
-        vsplit = "<C-c>v",
-        split = "<C-c>i",
-        tabe = "<C-c>t",
-        quit = "q",
+        edit = keymaps.saga.definition.edit,
+        vsplit = keymaps.saga.definition.vertical_split,
+        split = keymaps.saga.definition.horizontal_split,
+        tabe = keymaps.saga.definition.tab,
+        quit = keymaps.saga.quit,
     },
     code_action = {
         num_shortcut = true,
@@ -89,8 +89,8 @@ local lspsaga_config = {
         extend_gitsigns = true,
         keys = {
             -- string | table type https://github.com/nvimdev/lspsaga.nvim#example-configuration
-            quit = "q",
-            exec = "<CR>",
+            quit = keymaps.saga.quit,
+            exec = keymaps.saga.accept,
         },
     },
     hover = {
@@ -111,17 +111,17 @@ local lspsaga_config = {
         border_follow = true,
         extend_relatedInformation = false,
         keys = {
-            exec_action = 'o',
-            quit = 'q',
-            expand_or_jump = '<CR>',
-            quit_in_show = { 'q', '<ESC>' },
+            -- exec_action = 'o',
+            quit = keymaps.saga.quit,
+            expand_or_jump = keymaps.saga.accept,
+            quit_in_show = keymaps.saga.quit,
         },
     },
     rename = {
-        quit = "<C-c>",
-        exec = "<CR>",
-        mark = "x",
-        confirm = "<CR>",
+        quit = keymaps.saga.rename.quit,
+        exec = keymaps.saga.accept,
+        mark = keymaps.saga.rename.mark,
+        confirm = keymaps.saga.accept,
         in_select = true,
     },
 }
@@ -274,6 +274,7 @@ return {
 
             vim.keymap.set("n", keymaps.finder, "<cmd>Lspsaga lsp_finder<CR>")
             vim.keymap.set("n", keymaps.code_action, "<cmd>Lspsaga code_action<CR>")
+            vim.keymap.set("n", keymaps.rename, "<cmd>Lspsaga rename<CR>")
             vim.keymap.set("n", keymaps.definition, "<cmd>Lspsaga goto_definition<CR>")
             vim.keymap.set("n", keymaps.peek_definition, "<cmd>Lspsaga peek_definition<CR>")
             vim.keymap.set("n", keymaps.type_definition, "<cmd>Lspsaga peek_type_definition<CR>")
