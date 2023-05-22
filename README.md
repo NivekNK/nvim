@@ -46,3 +46,10 @@ My config of neovim for windows and linux.
             scoop install fd
 
     - Linux: TODO
+
+### Copilot:
+
+* On a fresh install run the following command inside neovim
+
+        :Copilot auth
+
