@@ -175,6 +175,7 @@ return {
                     treesj.setup(treesj_config)
                 end,
             },
+            "b0o/schemastore.nvim",
         },
         config = function()
             local treesitter_ok, _ = pcall(require, "nvim-treesitter")

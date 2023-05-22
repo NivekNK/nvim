@@ -133,6 +133,7 @@ return {
         "nvim-lua/plenary.nvim",
         "RRethy/vim-illuminate",
         "jose-elias-alvarez/null-ls.nvim",
+        "b0o/schemastore.nvim",
         {
             "hrsh7th/cmp-nvim-lsp",
             cond = function()
