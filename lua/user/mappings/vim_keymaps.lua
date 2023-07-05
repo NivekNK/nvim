@@ -59,7 +59,6 @@ commands.n = {
         end
         vim.notify("Link not found!", vim.log.levels.INFO)
     end,
-    -- open_link = ":silent execute '!Opera ' . shellescape(expand('<cfile>'), 1)<CR>",
 }
 -- https://www.reddit.com/r/neovim/comments/ro6oye/open_link_from_neovim/
 commands.i = {

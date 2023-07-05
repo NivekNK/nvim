@@ -52,6 +52,7 @@ local fidget_config = {
 
 return {
     "j-hui/fidget.nvim",
+    tag = "legacy",
     config = function()
         local fidget_ok, fidget = pcall(require, "fidget")
         if not fidget_ok then

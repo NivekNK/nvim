@@ -95,15 +95,41 @@ return {
             return
         end
 
-        local cmake_tools_ok, _ = pcall(require, "cmake-tools")
-        if cmake_tools_ok then
-            local cpp_lualine_ok, cpp_lualine = pcall(require, "plugins.cpp.lualine")
-            if cpp_lualine_ok then
-                for _, value in ipairs(cpp_lualine.lualine_c) do
-                    table.insert(lualine_config.sections.lualine_c, value)
-                end
-            end
-        end
+        -- local plenary_ok, scandir = pcall(require, "plenary.scandir")
+        -- if plenary_ok then
+        --     local plugins_path = vim.fn.stdpath("config") .. "/lua/plugins"
+        --     local paths = scandir.scan_dir(plugins_path, {
+        --         depth = 1,
+        --         add_dirs = true,
+        --     })
+        --
+        --     local servers = require("config.servers.langs")
+        --
+        --     for _, path in ipairs(paths) do
+        --         local server_name = string.gsub(path, servers_path .. package.config:sub(1, 1), "")
+        --         server_name = server_name:match("([^/]*).lua$")
+        --         if server_name ~= "init" and server_name ~= "langs" then
+        --             local server = require("config.servers." .. server_name)
+        --             if type(server.lang) == "string" then
+        --                 servers[server.lang] = server.opts == "ignore" and "ignore" or server_name
+        --             else
+        --                 for _, lang in ipairs(server.lang) do
+        --                     servers[lang] = server.opts == "ignore" and "ignore" or server_name
+        --                 end
+        --             end
+        --         end
+        --     end
+        -- end
+        --
+        -- local cmake_tools_ok, _ = pcall(require, "cmake-tools")
+        -- if cmake_tools_ok then
+        --     local cpp_lualine_ok, cpp_lualine = pcall(require, "plugins.cpp.lualine")
+        --     if cpp_lualine_ok then
+        --         for _, value in ipairs(cpp_lualine.lualine_c) do
+        --             table.insert(lualine_config.sections.lualine_c, value)
+        --         end
+        --     end
+        -- end
 
         lualine.setup(lualine_config)
     end,
