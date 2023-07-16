@@ -1,4 +1,12 @@
 require("config.vim")
+
+-- Set diagnostics
+local diagnostic = require("config.diagnostic")
+for _, sign in ipairs(diagnostic.signs.active) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+vim.diagnostic.config(diagnostic)
+
 require("config.commands")
 
 -- Automatically install lazy

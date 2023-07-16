@@ -59,34 +59,3 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.fillchars = [[eob: ,fold: ,foldsep: ,foldopen:]] .. icons.tree_expanded .. [[,foldclose:]] .. icons.tree_collapsed
-
-local signs = {
-    { name = "DiagnosticSignError", text = icons.error .. " " },
-    { name = "DiagnosticSignWarn", text = icons.warning .. " " },
-    { name = "DiagnosticSignInfo", text = icons.info .. " " },
-    { name = "DiagnosticSignHint", text = icons.hint },
-}
-
-local diagnostic = {
-    virtual_text = true, -- disable virtual text
-    signs = {
-        active = signs, -- show signs
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-        focusable = true,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-    },
-}
-
--- NOTE: From here, code should not be modified.
-for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
-vim.diagnostic.config(diagnostic)
