@@ -6,7 +6,7 @@ local barbecue_state = require("barbecue.ui.state")
 local barbecue_ui = require("barbecue.ui")
 function CurrentEntry:select_previous_entry()
     if CurrentEntry == -1 then
-        vim.notify("[barbecue.barbecue] Entry should not be -1!", vim.log.levels.ERROR)
+        vim.notify("[plugins.barbecue.barbecue] Error >> Entry should not be -1!", vim.log.levels.ERROR)
         return
     end
 

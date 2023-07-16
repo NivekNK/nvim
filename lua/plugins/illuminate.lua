@@ -1,3 +1,5 @@
+local Utils = require("user.utils")
+
 local illuminate_config = {
     -- providers: provider used to get references in the buffer, ordered by priority
     providers = {
@@ -61,22 +63,18 @@ return {
     "RRethy/vim-illuminate",
     event = "VeryLazy",
     config = function()
-        local illuminate_ok, illuminate = pcall(require, "illuminate")
-        if not illuminate_ok then
-            vim.notify("Error loading illiminate!", vim.log.levels.ERROR)
-            return
-        end
+        Utils.callback_if_ok_msg("illuminate", function(illuminate)
+            vim.g.Illuminate_ftblacklist = { "alpha", "NvimTree", "neo-tree" }
 
-        vim.g.Illuminate_ftblacklist = { "alpha", "NvimTree", "neo-tree" }
+            local keymaps = require("config.keymaps").illuminate
+            vim.keymap.set("n", keymaps.next_reference, function()
+                require("illuminate").next_reference({ wrap = true })
+            end)
+            vim.keymap.set("n", keymaps.prev_reference, function()
+                require("illuminate").next_reference({ reverse = true, wrap = true })
+            end)
 
-        local keymaps = require("config.keymaps").illuminate
-        vim.keymap.set("n", keymaps.next_reference, function()
-            require("illuminate").next_reference({ wrap = true })
+            illuminate.configure(illuminate_config)
         end)
-        vim.keymap.set("n", keymaps.prev_reference, function()
-            require("illuminate").next_reference({ reverse = true, wrap = true })
-        end)
-
-        illuminate.configure(illuminate_config)
     end,
 }

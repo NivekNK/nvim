@@ -1,5 +1,6 @@
 local icons = require("config.icons")
 local keymaps = require("config.keymaps")
+local Utils = require("user.utils")
 
 local mason_lspconfig_config = {
     -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
@@ -112,24 +113,17 @@ return {
         {
             "williamboman/mason-lspconfig.nvim",
             cond = function()
-                local lspconfig_ok, _ = pcall(require, "lspconfig")
-                return lspconfig_ok
+                return Utils.require_check("lspconfig")
             end,
         },
     },
     config = function()
-        local mason_ok, mason = pcall(require, "mason")
-        if not mason_ok then
-            vim.notify("Error loading mason!", vim.log.levels.ERROR)
-            return
-        end
-        mason.setup(mason_config)
+        Utils.callback_if_ok_msg("mason", function(mason)
+            mason.setup(mason_config)
+        end)
 
-        local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
-        if not mason_lspconfig_ok then
-            vim.notify("[mason] Error loading mason-lspconfig!")
-            return
-        end
-        mason_lspconfig.setup(mason_lspconfig_config)
+        Utils.callback_if_ok_msg("mason-lspconfig", function(mason_lspconfig)
+            mason_lspconfig.setup(mason_lspconfig_config)
+        end)
     end,
 }

@@ -1,4 +1,6 @@
 local keymaps = require("config.keymaps").toggleterm
+local Utils = require("user.utils")
+
 local toggleterm_config = {
     -- size can be a number or function which is passed the current terminal
     size = function(term)
@@ -25,7 +27,7 @@ local toggleterm_config = {
     on_exit = nil,
     hide_numbers = true, -- hide the number column in toggleterm buffers
     shade_filetypes = {},
-    autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
+    autochdir = false,   -- when neovim changes it current directory the terminal will change it's own when next it's opened
     highlights = {
         -- highlights which map to a highlight group name and a table of it's values
         -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
@@ -40,15 +42,15 @@ local toggleterm_config = {
         --     guibg = "<VALUE-HERE>",
         -- },
     },
-    shade_terminals = true, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
-    shading_factor = 2, -- the percentage by which to lighten terminal background, default: -30 (gets multiplied by -3 if background is light)
+    shade_terminals = true,   -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
+    shading_factor = 2,       -- the percentage by which to lighten terminal background, default: -30 (gets multiplied by -3 if background is light)
     start_in_insert = true,
-    insert_mappings = true, -- whether or not the open mapping applies in insert mode
+    insert_mappings = true,   -- whether or not the open mapping applies in insert mode
     terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
     persist_size = true,
-    persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
+    persist_mode = true,      -- if set to true (default) the previous terminal mode will be remembered
     direction = "vertical", --[[ 'vertical' | 'horizontal' | 'tab' | 'float' ]]
-    close_on_exit = true, -- close the terminal window when the process exits
+    close_on_exit = true,     -- close the terminal window when the process exits
     -- Change the default shell. Can be a string or a function returning a string
     shell = function()
         if string.find(vim.loop.os_uname().sysname, "Windows") then
@@ -82,25 +84,21 @@ return {
     "akinsho/toggleterm.nvim",
     event = "VeryLazy",
     config = function()
-        local toggleterm_ok, toggleterm = pcall(require, "toggleterm")
-        if not toggleterm_ok then
-            vim.notify("Error loading toggleterm!", vim.log.levels.ERROR)
-            return
-        end
+        Utils.callback_if_ok_msg("toggleterm", function(toggleterm)
+            toggleterm.setup(toggleterm_config)
 
-        toggleterm.setup(toggleterm_config)
-
-        vim.api.nvim_create_autocmd({ "TermOpen" }, {
-            pattern = { "term://*" },
-            callback = function(_)
-                local opts = { buffer = 0 }
-                vim.keymap.set("t", keymaps.exit_terminal, [[<C-\><C-n>]], opts)
-                vim.keymap.set("t", keymaps.exit_terminal_2, [[<C-\><C-n>]], opts)
-                vim.keymap.set("t", keymaps.select_left_panel, [[<Cmd>wincmd h<CR>]], opts)
-                vim.keymap.set("t", keymaps.select_down_panel, [[<Cmd>wincmd j<CR>]], opts)
-                vim.keymap.set("t", keymaps.select_up_panel, [[<Cmd>wincmd k<CR>]], opts)
-                vim.keymap.set("t", keymaps.select_right_panel, [[<Cmd>wincmd l<CR>]], opts)
-            end,
-        })
+            vim.api.nvim_create_autocmd({ "TermOpen" }, {
+                pattern = { "term://*" },
+                callback = function(_)
+                    local opts = { buffer = 0 }
+                    vim.keymap.set("t", keymaps.exit_terminal, [[<C-\><C-n>]], opts)
+                    vim.keymap.set("t", keymaps.exit_terminal_2, [[<C-\><C-n>]], opts)
+                    vim.keymap.set("t", keymaps.select_left_panel, [[<Cmd>wincmd h<CR>]], opts)
+                    vim.keymap.set("t", keymaps.select_down_panel, [[<Cmd>wincmd j<CR>]], opts)
+                    vim.keymap.set("t", keymaps.select_up_panel, [[<Cmd>wincmd k<CR>]], opts)
+                    vim.keymap.set("t", keymaps.select_right_panel, [[<Cmd>wincmd l<CR>]], opts)
+                end,
+            })
+        end)
     end,
 }

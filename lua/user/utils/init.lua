@@ -76,11 +76,33 @@ function Utils.callback_if_ok_msg(required_name, callback, message, error_level)
     return required
 end
 
+function Utils.callback_if_ok_msg_mult(required_names, callback, message, error_level)
+    local required = {}
+    for _, v in ipairs(required_names) do
+        local ok, aux_required = pcall(require, v)
+        if not ok then
+            local caller = get_caller_file()
+            caller = caller and "[" .. caller .. "] " or ""
+            vim.notify(caller .. (message or ("Error >> " .. v .. " not found!")),
+                error_level or vim.log.levels.ERROR)
+            return {}
+        end
+        required[v] = aux_required
+    end
+    callback(required)
+    return required
+end
+
+function Utils.require_check(required)
+    local ok, _ = pcall(require, required)
+    return ok
+end
+
 function Utils.slash()
     return package.config:sub(1, 1)
 end
 
-function Utils.foreach_filename(files_path, callback, add_dirs)
+function Utils.foreach_filename(files_path, callback, add_dirs, only_dirs)
     Utils.callback_if_ok_msg("plenary.scandir", function(scandir)
         if files_path:sub(1, 1) ~= "/" and files_path:sub(1, 1) ~= "\\" then
             files_path = "/" .. files_path
@@ -93,8 +115,15 @@ function Utils.foreach_filename(files_path, callback, add_dirs)
 
         for _, path in ipairs(paths) do
             local name = string.gsub(path, files_path .. Utils.slash(), "")
-            name = name:gsub("%.lua$", "") -- Remove ".lua" at the end
-            callback(name)
+            local extension = path:match("%.([^%.]+)$")
+            if only_dirs then
+                if extension ~= "lua" then
+                    callback(name)
+                end
+            else
+                name = name:gsub("%.lua$", "") -- Remove ".lua" at the end
+                callback(name)
+            end
         end
     end)
 end

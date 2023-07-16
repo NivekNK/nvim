@@ -17,7 +17,8 @@ end
 
 local function comments(config)
     if not config then
-        vim.notify("[todo-comments which-key] Error opts for which-key command not set!", vim.log.levels.ERROR)
+        vim.notify("[plugins.todo-comments.which-key] Error >> opts for which-key command not set!", vim.log.levels
+            .ERROR)
     end
 
     local opts = config and config.theme or {}
@@ -32,7 +33,8 @@ local function comments(config)
     opts.entry_maker = function(line)
         local ret = entry_maker(line)
         ret.display = function(entry)
-            local display = config.opts.display and string.format("%s:%s:%s ", entry.filename, entry.lnum, entry.col) or ""
+            local display = config.opts.display and string.format("%s:%s:%s ", entry.filename, entry.lnum, entry.col) or
+                ""
             local text = entry.text
             local start, finish, kw = Highlight.match(text)
 

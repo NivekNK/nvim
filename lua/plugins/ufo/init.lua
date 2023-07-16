@@ -1,5 +1,7 @@
 local keymaps = require("config.keymaps").ufo
 local icons = require("config.icons")
+local Utils = require("user.utils")
+
 local ufo_config = {
     -- Time in millisecond between the range to be highlgihted and to be cleared
     -- while opening the folded line, `0` value will disable the highlight
@@ -86,12 +88,9 @@ return {
             "kevinhwang91/promise-async",
         },
         config = function()
-            local ufo_ok, ufo = pcall(require, "ufo")
-            if not ufo_ok then
-                vim.notify("Error loading ufo!", vim.log.levels.ERROR)
-                return
-            end
-            ufo.setup(ufo_config)
+            Utils.callback_if_ok_msg("ufo", function(ufo)
+                ufo.setup(ufo_config)
+            end)
         end
     },
 }

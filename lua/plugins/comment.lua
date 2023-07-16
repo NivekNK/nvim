@@ -1,4 +1,6 @@
 local keymaps = require("config.keymaps").comment
+local Utils = require("user.utils")
+
 local comment_config = {
     ---Add a space b/w comment and the line
     padding = true,
@@ -42,7 +44,7 @@ local comment_config = {
                 location = location,
             })
         end
-    end,    ---Function to call after (un)comment
+    end, ---Function to call after (un)comment
     post_hook = nil,
 }
 
@@ -56,11 +58,8 @@ return {
         },
     },
     config = function()
-        local comment_ok, comment = pcall(require, "Comment")
-        if not comment_ok then
-            vim.notify("Error loading Comment!", vim.log.levels.ERROR)
-            return
-        end
-        comment.setup(comment_config)
+        Utils.callback_if_ok_msg("Comment", function(comment)
+            comment.setup(comment_config)
+        end)
     end,
 }

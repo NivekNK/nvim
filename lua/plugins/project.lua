@@ -1,3 +1,5 @@
+local Utils = require("user.utils")
+
 local project_config = {
     -- Manual mode doesn't automatically change your root directory, so you have
     -- the option to manually do so using `:ProjectRoot` command.
@@ -42,18 +44,14 @@ local project_config = {
 return {
     "ahmedkhalf/project.nvim",
     cond = function()
-        local ok, _ = pcall(require, "telescope")
-        return ok
+        return Utils.require_check("telescope")
     end,
     config = function()
-        local project_ok, project = pcall(require, "project_nvim")
-        if not project_ok then
-            vim.notify("Error loading project!")
-            return
-        end
-        project.setup(project_config)
+        Utils.callback_if_ok_msg("project_nvim", function(project)
+            project.setup(project_config)
 
-        local telescope = require("telescope")
-        telescope.load_extension("projects")
+            local telescope = require("telescope")
+            telescope.load_extension("projects")
+        end)
     end
 }

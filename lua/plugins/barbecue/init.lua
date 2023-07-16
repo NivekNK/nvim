@@ -1,4 +1,6 @@
 local icons = require("config.icons")
+local Utils = require("user.utils")
+
 local barbecue_config = {
     ---Whether to attach navic to language servers automatically.
     ---
@@ -60,7 +62,7 @@ local barbecue_config = {
     ---
     ---@type fun(bufnr: number, winnr: number): barbecue.Config.custom_section
     lead_custom_section = function() return " " end,
-    ---@alias barbecue.Config.custom_section
+    ---@alias barbecue_Config.custom_section
     ---|string # Literal string.
     ---|{ [1]: string, [2]: string? }[] # List-like table of `[text, highlight?]` tuples in which `highlight` is optional.
     ---
@@ -74,7 +76,7 @@ local barbecue_config = {
         require("plugins.barbecue.barbecue").winnr = winnr
         return " "
     end,
-    ---@alias barbecue.Config.theme
+    ---@alias barbecue_Config.theme
     ---|'"auto"' # Use your current colorscheme's theme or generate a theme based on it.
     ---|string # Theme located under `barbecue.theme` module.
     ---|barbecue.Theme # Same as '"auto"' but override it with the given table.
@@ -101,7 +103,7 @@ local barbecue_config = {
         ---@type string
         separator = "",
     },
-    ---@alias barbecue.Config.kinds
+    ---@alias barbecue_Config.kinds
     ---|false # Disable kind icons.
     ---|table<string, string> # Type to icon mapping.
     ---
@@ -149,11 +151,8 @@ return {
         }
     },
     config = function()
-        local barbecue_ok, barbecue = pcall(require, "barbecue")
-        if not barbecue_ok then
-            vim.notify("Error loading barbecue!", vim.log.levels.ERROR)
-            return
-        end
-        barbecue.setup(barbecue_config)
+        Utils.callback_if_ok_msg("barbecue", function(barbecue)
+            barbecue.setup(barbecue_config)
+        end)
     end,
 }

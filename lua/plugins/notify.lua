@@ -1,4 +1,5 @@
 local icons = require("config.icons")
+local Utils = require("user.utils")
 
 local config = {
     background_colour = "Normal",
@@ -23,13 +24,9 @@ return {
     lazy = false,
     priority = 900,
     config = function()
-        local status_ok, notify = pcall(require, "notify")
-        if not status_ok then
-            vim.notify("Error loading notify!", vim.log.levels.ERROR)
-            return
-        end
-
-        notify.setup(config)
-        vim.notify = notify
+        Utils.callback_if_ok_msg("notify", function(notify)
+            notify.setup(config)
+            vim.notify = notify
+        end)
     end,
 }

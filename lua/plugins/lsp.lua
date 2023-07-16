@@ -59,7 +59,7 @@ local lspsaga_config = {
         virtual_text = true,
     },
     beacon = {
-               -- after jump from float window there will show beacon to remind you where the cursor is.
+        -- after jump from float window there will show beacon to remind you where the cursor is.
         enable = true,
         frequency = 7,
     },
@@ -139,15 +139,13 @@ return {
         {
             "hrsh7th/cmp-nvim-lsp",
             cond = function()
-                local cmp_ok, _ = pcall(require, "cmp")
-                return cmp_ok
+                return Utils.require_check("cmp")
             end,
         },
         {
             "folke/neodev.nvim",
             cond = function()
-                local cmp_ok, _ = pcall(require, "cmp")
-                return cmp_ok
+                return Utils.require_check("cmp")
             end,
         },
         {
@@ -163,37 +161,30 @@ return {
         }
     },
     config = function()
-        local neodev_ok, neodev = pcall(require, "neodev")
-        if neodev_ok then
+        Utils.callback_if_ok_msg("neodev", function(neodev)
             neodev.setup(neodev_config)
-        else
-            vim.notify("[lspconfig] Error loading neodev!", vim.log.levels.WARN)
-        end
+        end)
 
         local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
         if not lspconfig_ok then
-            vim.notify("Error loading lspconfig!", vim.log.levels.ERROR)
+            vim.notify("[plugins.lsp] Error >> lspconfig not found!", vim.log.levels.ERROR)
             return
         end
 
         local on_attach = function(client, buffer)
             -- Format filter
-            local null_ls_ok, null_ls = pcall(require, "null-ls")
-            if null_ls_ok then
+            Utils.callback_if_ok_msg("null-ls", function(null_ls)
                 local sources = require("null-ls.sources").get_available(vim.bo.filetype, null_ls.methods.FORMATTING)
                 if #sources > 0 then
                     client.server_capabilities.document_formatting = false
                 end
-            else
-                vim.notify("[lspconfig] Error loading null-ls!", vim.log.levels.WARN)
-            end
+            end)
 
-            local navic_ok, navic = pcall(require, "nvim-navic")
-            if navic_ok and client.server_capabilities["documentSymbolProvider"] then
-                navic.attach(client, buffer)
-            else
-                vim.notify("[lspconfig] Error loading navic!", vim.log.levels.WARN)
-            end
+            Utils.callback_if_ok_msg("nvim-navic", function(navic)
+                if client.server_capabilities["documentSymbolProvider"] then
+                    navic.attach(client, buffer)
+                end
+            end)
 
             vim.keymap.set("n", keymaps.declaration, vim.lsp.buf.declaration, { buffer = buffer })
             vim.keymap.set("n", keymaps.implementation, vim.lsp.buf.implementation, { buffer = buffer })
@@ -201,8 +192,7 @@ return {
             vim.keymap.set("n", keymaps.references, vim.lsp.buf.references, { buffer = buffer })
             vim.keymap.set("n", keymaps.setloclist, vim.diagnostic.setloclist, { buffer = buffer })
 
-            local lspsaga_ok, _ = pcall(require, "lspsaga")
-            if not lspsaga_ok then
+            if not Utils.require_check("lspsaga") then
                 -- Buffer keymaps
                 vim.keymap.set("n", keymaps.definition, vim.lsp.buf.definition, { buffer = buffer })
                 vim.keymap.set("n", keymaps.hover, vim.lsp.buf.hover, { buffer = buffer })
@@ -217,21 +207,15 @@ return {
                 end, { buffer = buffer })
             end
 
-            local illuminate_ok, illuminate = pcall(require, "illuminate")
-            if illuminate_ok then
+            Utils.callback_if_ok_msg("illuminate", function(illuminate)
                 illuminate.on_attach(client)
-            else
-                vim.notify("[lspconfig] Error loading illuminate!", vim.log.levels.WARN)
-            end
+            end)
         end
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()
-        local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-        if cmp_nvim_lsp_ok then
+        Utils.callback_if_ok_msg("cmp_nvim_lsp", function(cmp_nvim_lsp)
             capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-        else
-            vim.notify("[lspconfig] Error loading cmp_nvim_lsp!", vim.log.levels.WARN)
-        end
+        end)
 
         -- To make folding available
         capabilities.textDocument.foldingRange = {
@@ -253,8 +237,8 @@ return {
                         opts = vim.tbl_deep_extend("force", opts, custom.opts())
                     elseif custom.opts ~= "ignore" then
                         vim.notify(
-                        "[lspconfig] Error >> server.opts should be a table, a function that returns a table or 'ignore' for: " ..
-                        server .. "!", vim.log.levels.ERROR)
+                            "[lspconfig] Error >> server.opts should be a table, a function that returns a table or 'ignore' for: " ..
+                            server .. "!", vim.log.levels.ERROR)
                     end
                 end)
 
@@ -278,8 +262,7 @@ return {
 
         vim.keymap.set("n", keymaps.format, "<cmd>NKFormat<CR>")
 
-        local lspsaga_ok, lspsaga = pcall(require, "lspsaga")
-        if lspsaga_ok then
+        Utils.callback_if_ok_msg("lspsaga", function(lspsaga)
             lspsaga.setup(lspsaga_config)
 
             vim.keymap.set("n", keymaps.finder, "<cmd>Lspsaga lsp_finder<CR>")
@@ -292,8 +275,6 @@ return {
             vim.keymap.set("n", keymaps.diagnostics, "<cmd>Lspsaga show_line_diagnostics<CR>")
             vim.keymap.set("n", keymaps.goto_prev_diagnostic, "<cmd>Lspsaga diagnostic_jump_prev<CR>")
             vim.keymap.set("n", keymaps.goto_next_diagnostic, "<cmd>Lspsaga diagnostic_jump_next<CR>")
-        else
-            vim.notify("[lsp] Error loading lspsaga!", vim.log.levels.WARN)
-        end
+        end)
     end,
 }

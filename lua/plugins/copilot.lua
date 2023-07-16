@@ -1,3 +1,5 @@
+local Utils = require("user.utils")
+
 local copilot_config = {
     filetypes = {
         yaml = false,
@@ -20,27 +22,24 @@ return {
         cmd = "Copilot",
         event = "InsertEnter",
         config = function()
-            local copilot_ok, copilot = pcall(require, "copilot")
-            if not copilot_ok then
-                vim.notify("[copilot] Error loading copilot!", vim.log.levels.ERROR)
-                return
-            end
-            copilot_config = vim.tbl_deep_extend("force", copilot_config, {
-                panel = { enabled = false },
-                suggestion = { enabled = false },
-            })
-            copilot.setup(copilot_config)
+            Utils.callback_if_ok_msg("copilot", function(copilot)
+                copilot_config = vim.tbl_deep_extend("force", copilot_config, {
+                    panel = { enabled = false },
+                    suggestion = { enabled = false },
+                })
+                copilot.setup(copilot_config)
+            end)
         end,
     },
     {
         "zbirenbaum/copilot-cmp",
+        cond = function()
+            return Utils.require_check("cmp")
+        end,
         config = function ()
-            local copilot_cmp_ok, copilot_cmp = pcall(require, "copilot_cmp")
-            if not copilot_cmp_ok then
-                vim.notify("[copilot] Error loading copilot_cmp!", vim.log.levels.ERROR)
-                return
-            end
-            copilot_cmp.setup()
+            Utils.callback_if_ok_msg("copilot_cmp", function (copilot_cmp)
+                copilot_cmp.setup()
+            end)
         end,
     },
 }

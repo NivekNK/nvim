@@ -1,4 +1,6 @@
 local icons = require("config.icons")
+local Utils = require("user.utils")
+
 local gitsigns_config = {
     signs = {
         add = {
@@ -39,8 +41,8 @@ local gitsigns_config = {
         },
     },
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-    numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-    linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+    numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
+    linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
     word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
     watch_gitdir = {
         interval = 1000,
@@ -79,12 +81,9 @@ return {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
         config = function()
-            local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
-            if not gitsigns_ok then
-                vim.notify("[git] Error loading gitsigns!", vim.log.levels.ERROR)
-                return
-            end
-            gitsigns.setup(gitsigns_config)
+            Utils.callback_if_ok_msg("gitsigns", function(gitsigns)
+                gitsigns.setup(gitsigns_config)
+            end)
         end,
     },
 }
