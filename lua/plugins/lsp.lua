@@ -28,15 +28,6 @@ local neodev_config = {
 }
 
 local lspsaga_config = {
-    preview = {
-        lines_above = 0,
-        lines_below = 10,
-    },
-    scroll_preview = {
-        scroll_down = keymaps.saga.scroll_down,
-        scroll_up = keymaps.saga.scroll_up,
-    },
-    request_timeout = 2000,
     ui = {
         -- This option only works in Neovim 0.9
         title = true,
@@ -51,6 +42,27 @@ local lspsaga_config = {
         hover = icons.hover .. " ",
         kind = {},
     },
+    -- ui = {
+    --     border = "rounded",                  -- Border type, see :help nvim_open_win
+    --     devicon = true,                      -- Whether to use nvim-web-devicons
+    --     title = true,                        -- Show title in some float window
+    --     expand = icons.tree_expanded,        -- Expand icon
+    --     collapse = icons.tree_collapsed,     -- Collapse icon
+    --     code_action = icons.action,          -- Code action icon
+    --     actionfix = icons.action_fix .. " ", -- Action fix icon
+    --     lines = { '┗', '┣', '┃', '━', '┏' }, -- Symbols used in virtual text connect
+    --     kind = nil,                          -- LSP kind custom table
+    --     imp_sign = icons.implement .. " ",   -- Implement icon
+    -- },
+    preview = {
+        lines_above = 0,
+        lines_below = 10,
+    },
+    scroll_preview = {
+        scroll_down = keymaps.saga.scroll_down,
+        scroll_up = keymaps.saga.scroll_up,
+    },
+    request_timeout = 2000,
     lightbulb = {
         enable = true,
         enable_in_insert = true,

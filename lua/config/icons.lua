@@ -6,6 +6,8 @@ return {
     error = "",
     hint = "",
     action = "󰌵",
+    action_fix = "",
+    implement = "󰘦",
     diagnostic = "󰋠",
     breadcrumb = "»",
     separator = "➜",

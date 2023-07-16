@@ -53,7 +53,7 @@ local toggleterm_config = {
     close_on_exit = true,     -- close the terminal window when the process exits
     -- Change the default shell. Can be a string or a function returning a string
     shell = function()
-        if string.find(vim.loop.os_uname().sysname, "Windows") then
+        if Utils.is_windows() then
             return "pwsh -NoLogo"
         end
         return "zsh"

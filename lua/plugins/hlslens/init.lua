@@ -32,8 +32,7 @@ local hlslens_config = {
     --     @param relIdx number relative index, negative means before current position, positive means after
     override_lens      = nil,
     build_position_cb  = function(plist, _, _, _)
-        local scrollbar_ok, _ = pcall(require, "scrollbar")
-        if scrollbar_ok then
+        if Utils.require_check("scrollbar") then
             require("scrollbar.handlers.search").handler.show(plist.start_pos)
         end
     end,

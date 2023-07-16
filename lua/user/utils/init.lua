@@ -128,4 +128,8 @@ function Utils.foreach_filename(files_path, callback, add_dirs, only_dirs)
     end)
 end
 
+function Utils.is_windows()
+    return string.find(vim.loop.os_uname().sysname, "Windows")
+end
+
 return Utils
