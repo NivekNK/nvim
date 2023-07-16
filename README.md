@@ -66,17 +66,6 @@ My config of neovim for windows and linux.
 
         :Copilot auth
 
-### LSP:
-
-* Install ripgrep: Already installed with Telescope.
-
-* Install lua-language-server:
-    - Windows [Scoop](https://scoop.sh/)
-
-            scoop install lua-language-server
-
-    - Linux **TODO**
-
 ### Mason:
 
 * Install 7zip:
@@ -91,4 +80,26 @@ My config of neovim for windows and linux.
 
 Using **PowerShell** on Windows and **zsh** on Linux.
 
+### LSP:
+
+* Install ripgrep: Already installed with Telescope.
+
+* Install lua-language-server:
+    - Windows [Scoop](https://scoop.sh/)
+
+            scoop install lua-language-server
+
+    - Linux **TODO**
+
+* Install vscode-json-language-server:
+    - Using Node.js
+
+            npm i -g vscode-langservers-extracted
+
+* Install clang: Already installed with treesitter.
+
+* Install typescript and typescript-language-server:
+    - Using Node.js
+
+            npm install -g typescript typescript-language-server
 
