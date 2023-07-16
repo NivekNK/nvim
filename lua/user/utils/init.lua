@@ -132,4 +132,24 @@ function Utils.is_windows()
     return string.find(vim.loop.os_uname().sysname, "Windows")
 end
 
+function Utils.root_pattern(...)
+    local patterns = vim.tbl_flatten { ... }
+    local rp = require("user.utils.@root_pattern")
+
+    local function matcher(path)
+        for _, pattern in ipairs(patterns) do
+            for _, p in ipairs(vim.fn.glob(rp.path_join(rp.escape_wildcards(path), pattern), true, true)) do
+                if rp.exists(p) then
+                    return path
+                end
+            end
+        end
+    end
+
+    return function(startpath)
+        startpath = rp.strip_archive_subpath(startpath)
+        return rp.search_ancestors(startpath, matcher)
+    end
+end
+
 return Utils
