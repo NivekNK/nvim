@@ -57,10 +57,10 @@ local treesj_config = {
     dot_repeat = true,
 }
 
-local function get_treesitter_config(languages)
+local function get_treesitter_config()
     return {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = languages,
+        ensure_installed = require("user.utils.servers").lang(),
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
         -- Automatically install missing parsers when entering buffer
@@ -110,10 +110,9 @@ return {
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
-        cond = function()
-            local cmp_ok, _ = pcall(require, "cmp")
-            return cmp_ok
-        end,
+        dependencies = {
+            "hrsh7th/nvim-cmp",
+        },
         config = function()
             Utils.callback_if_ok_msg("nvim-autopairs", function(autopairs)
                 autopairs.setup(autopairs_config)
@@ -164,13 +163,7 @@ return {
             require("nvim-treesitter.install").compilers = { "clang" }
             require("nvim-treesitter.install").prefer_git = false
 
-            local languages = {}
-            for lang, _ in pairs(require("user.utils.servers")) do
-                table.insert(languages, lang)
-            end
-
-            local treesitter_config = get_treesitter_config(languages)
-            require("nvim-treesitter.configs").setup(treesitter_config)
+            require("nvim-treesitter.configs").setup(get_treesitter_config())
             vim.cmd("TSUpdateSync")
         end,
     }

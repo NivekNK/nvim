@@ -43,9 +43,9 @@ local project_config = {
 
 return {
     "ahmedkhalf/project.nvim",
-    cond = function()
-        return Utils.require_check("telescope")
-    end,
+    dependencies = {
+        "nvim-telescope/telescope.nvim",
+    },
     config = function()
         Utils.callback_if_ok_msg("project_nvim", function(project)
             project.setup(project_config)

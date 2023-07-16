@@ -68,6 +68,8 @@ My config of neovim for windows and linux.
 
 ### LSP:
 
+* Install ripgrep: Already installed with Telescope.
+
 * Install lua-language-server:
     - Windows [Scoop](https://scoop.sh/)
 

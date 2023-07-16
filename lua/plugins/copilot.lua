@@ -33,11 +33,11 @@ return {
     },
     {
         "zbirenbaum/copilot-cmp",
-        cond = function()
-            return Utils.require_check("cmp")
-        end,
-        config = function ()
-            Utils.callback_if_ok_msg("copilot_cmp", function (copilot_cmp)
+        dependencies = {
+            "hrsh7th/nvim-cmp"
+        },
+        config = function()
+            Utils.callback_if_ok_msg("copilot_cmp", function(copilot_cmp)
                 copilot_cmp.setup()
             end)
         end,

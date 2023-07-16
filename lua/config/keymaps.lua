@@ -89,7 +89,7 @@ K.mason = {
 
 K.lsp = {
     finder = "gh",
-    code_action = "»",
+    code_action = "<Tab-e>",
     rename = "gR",
     declaration = "gD",
     peek_definition = "gp",
@@ -108,6 +108,7 @@ K.lsp = {
         scroll_down = "<C-f>",
         scroll_up = "<C-b>",
         quit = { "q", "<ESC>" },
+        close = "<C-c>k",
         accept = "<CR>",
         finder = {
             edit = "e",
@@ -124,8 +125,7 @@ K.lsp = {
             tab = "<C-c>t",
         },
         rename = {
-            quit = "<C-c>",
-            mark = "x",
+            select = "x",
         },
     },
 }

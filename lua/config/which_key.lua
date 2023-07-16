@@ -154,10 +154,6 @@ W.color = {
     },
 }
 
-W.barbecue = {
-    prev_entry = "E",
-}
-
 W.markdown = {
     preview = "o",
 }

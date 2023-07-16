@@ -9,7 +9,7 @@ return {
     action_fix = "",
     implement = "󰘦",
     diagnostic = "󰋠",
-    breadcrumb = "»",
+    breadcrumb = "›",
     separator = "➜",
     group = "+",
     truncation = "…",
