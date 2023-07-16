@@ -1,7 +1,7 @@
 -- Format: language_name = "server_name"
-local langs = {
+local detail = {
     markdown = "ignore",
     markdown_inline = "ignore",
 }
 
-return langs
+return detail

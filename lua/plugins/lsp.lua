@@ -1,13 +1,14 @@
 local keymaps = require("config.keymaps").lsp
 local icons = require("config.icons")
+local Utils = require("user.utils")
 
 local neodev_config = {
     library = {
         enabled = true, -- when not enabled, neodev will not change any settings to the LSP server
         -- these settings will be used for your Neovim config directory
         runtime = true, -- runtime path
-        types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-        plugins = true -- installed opt or start plugins in packpath
+        types = true,   -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+        plugins = true  -- installed opt or start plugins in packpath
         -- you can also specify the list of plugins to make available as a workspace library
         -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
     },
@@ -57,7 +58,8 @@ local lspsaga_config = {
         sign_priority = 40,
         virtual_text = true,
     },
-    beacon = { -- after jump from float window there will show beacon to remind you where the cursor is.
+    beacon = {
+               -- after jump from float window there will show beacon to remind you where the cursor is.
         enable = true,
         frequency = 7,
     },
@@ -201,7 +203,7 @@ return {
 
             local lspsaga_ok, _ = pcall(require, "lspsaga")
             if not lspsaga_ok then
-            -- Buffer keymaps
+                -- Buffer keymaps
                 vim.keymap.set("n", keymaps.definition, vim.lsp.buf.definition, { buffer = buffer })
                 vim.keymap.set("n", keymaps.hover, vim.lsp.buf.hover, { buffer = buffer })
                 vim.keymap.set("n", keymaps.diagnostics, function()
@@ -237,17 +239,24 @@ return {
             lineFoldingOnly = true,
         }
 
-        for _, server in pairs(require("config.servers")) do
+        for _, server in pairs(require("user.utils.servers")) do
             if server ~= "ignore" then
                 local opts = {
                     on_attach = on_attach,
                     capabilities = capabilities
                 }
 
-                local has_custom, custom = pcall(require, "config.servers." .. server)
-                if has_custom then
-                    opts = vim.tbl_deep_extend("force", opts, custom.opts)
-                end
+                local custom = Utils.callback_if_ok("config.servers." .. server, function(custom)
+                    if type(custom.opts) == "table" then
+                        opts = vim.tbl_deep_extend("force", opts, custom.opts)
+                    elseif type(custom.opts) == "function" then
+                        opts = vim.tbl_deep_extend("force", opts, custom.opts())
+                    elseif custom.opts ~= "ignore" then
+                        vim.notify(
+                        "[lspconfig] Error >> server.opts should be a table, a function that returns a table or 'ignore' for: " ..
+                        server .. "!", vim.log.levels.ERROR)
+                    end
+                end)
 
                 if custom.setup then
                     custom.setup(opts)

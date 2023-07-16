@@ -188,7 +188,7 @@ return {
             require("nvim-treesitter.install").prefer_git = false
 
             local languages = {}
-            for lang, _ in pairs(require("config.servers")) do
+            for lang, _ in pairs(require("user.utils.servers")) do
                 table.insert(languages, lang)
             end
 
