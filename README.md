@@ -88,6 +88,11 @@ Using **PowerShell** on Windows and **zsh** on Linux.
             scoop bucket add main
             scoop install main/sed
 
+* Install prettierd:
+    - Using Node.js
+
+            npm install -g @fsouza/prettierd
+
 ### LSP:
 
 * Install ripgrep: Already installed with Telescope.

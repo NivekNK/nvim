@@ -24,5 +24,8 @@ return {
                 },
             },
         }
+    end,
+    formatter = function(formatters, _)
+        return { formatters.prettierd }
     end
 }

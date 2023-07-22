@@ -20,8 +20,6 @@ return {
         },
     },
     formatter = function(formatters, _)
-        return {
-            formatters.stylua,
-        }
+        return { formatters.stylua }
     end
 }
