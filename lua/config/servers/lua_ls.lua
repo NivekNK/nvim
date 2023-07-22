@@ -19,4 +19,9 @@ return {
             },
         },
     },
+    formatter = function(formatters, _)
+        return {
+            formatters.stylua,
+        }
+    end
 }

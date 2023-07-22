@@ -58,7 +58,7 @@ Utils.foreach_filename("plugins", function(plugin_name)
             vim.log.levels.WARN)
         end
     end)
-end, true)
+end, {}, true)
 
 local opts = {
     mode = "n",  -- NORMAL mode

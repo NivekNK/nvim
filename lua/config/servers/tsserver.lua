@@ -2,8 +2,6 @@ return {
     lang = {
         "typescript",
         "javascript",
-        "html",
-        "css"
     },
     opts = {
         cmd = { "typescript-language-server", "--stdio" },

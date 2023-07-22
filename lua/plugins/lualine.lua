@@ -127,7 +127,7 @@ return {
                         end
                     end
                 end)
-            end, true, true)
+            end, {}, true, true)
 
             lualine.setup(lualine_config)
         end)

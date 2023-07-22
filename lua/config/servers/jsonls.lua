@@ -1,6 +1,6 @@
 return {
     lang = "json",
-    opts = function ()
+    opts = function()
         local schemastore_ok, schemastore = pcall(require, "schemastore")
         if not schemastore_ok then
             vim.notify("[config.servers.jsonls] Error >> schemastore not found!", vim.log.levels.WARN)

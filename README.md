@@ -80,9 +80,19 @@ My config of neovim for windows and linux.
 
 Using **PowerShell** on Windows and **zsh** on Linux.
 
+### formattter:
+
+* Install sed:
+    - Windows [Scoop](https://scoop.sh/)
+
+            scoop bucket add main
+            scoop install main/sed
+
 ### LSP:
 
 * Install ripgrep: Already installed with Telescope.
+
+* Install clang: Already installed with treesitter.
 
 * Install lua-language-server:
     - Windows [Scoop](https://scoop.sh/)
@@ -96,10 +106,12 @@ Using **PowerShell** on Windows and **zsh** on Linux.
 
             npm i -g vscode-langservers-extracted
 
-* Install clang: Already installed with treesitter.
-
 * Install typescript and typescript-language-server:
     - Using Node.js
 
             npm install -g typescript typescript-language-server
 
+* Install astro:
+    - Using Node.js
+
+            npm install -g @astrojs/language-server

@@ -9,6 +9,8 @@ W.vim = {
     window_next = ".",
     window_vertical_split = "L",
     window_horizontal_split = "J",
+    format = "f",
+    format_and_save = "F",
 }
 
 W.neo_tree = {
@@ -17,8 +19,8 @@ W.neo_tree = {
 
 W.telescope = {
     {
-        name = "Find",
-        keymap = "f",
+        name = "Search",
+        keymap = "s",
         mappings = {
             find_files = "f",
             live_grep = "t",
