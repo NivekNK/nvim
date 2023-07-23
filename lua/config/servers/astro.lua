@@ -16,11 +16,4 @@ return {
 			root_dir = require("user.utils").root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
 		}
 	end,
-	formatter = function(_, _)
-		return {
-			exe = "prettierd",
-			args = { vim.api.nvim_buf_get_name(0) },
-			stdin = true,
-		}
-	end,
 }

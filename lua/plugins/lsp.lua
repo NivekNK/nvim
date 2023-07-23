@@ -207,7 +207,6 @@ return {
 				"nvim-treesitter/nvim-treesitter",
 			},
 		},
-		"mhartington/formatter.nvim",
 	},
 	config = function()
 		Utils.callback_if_ok_msg("neodev", function(neodev)
@@ -222,30 +221,30 @@ return {
 
 		local on_attach = function(client, buffer)
 			-- Format filter
-			if Utils.formatter.configured(client.name) then
-				client.server_capabilities.document_formatting = false
+			-- if Utils.formatter.configured(client.name) then
+			-- 	client.server_capabilities.document_formatting = false
+			--
+			-- 	vim.api.nvim_buf_create_user_command(buffer, "NKFormat", function()
+			-- 		vim.cmd("Format")
+			-- 		print("File formated!")
+			-- 	end, { desc = "Format the current buffer." })
+			--
+			-- 	vim.api.nvim_buf_create_user_command(buffer, "NKFormatWrite", function()
+			-- 		vim.cmd("FormatWrite")
+			-- 		print("File formated!")
+			-- 	end, { desc = "Format the current buffer and save." })
+			-- else
+			vim.api.nvim_buf_create_user_command(buffer, "NKFormat", function()
+				vim.lsp.buf.format({ async = true })
+				print("File formated!")
+			end, { desc = "Format the current buffer." })
 
-				vim.api.nvim_buf_create_user_command(buffer, "NKFormat", function()
-					vim.cmd("Format")
-					print("File formated!")
-				end, { desc = "Format the current buffer." })
-
-				vim.api.nvim_buf_create_user_command(buffer, "NKFormatWrite", function()
-					vim.cmd("FormatWrite")
-					print("File formated!")
-				end, { desc = "Format the current buffer and save." })
-			else
-				vim.api.nvim_buf_create_user_command(buffer, "NKFormat", function()
-					vim.lsp.buf.format({ async = true })
-					print("File formated!")
-				end, { desc = "Format the current buffer." })
-
-				vim.api.nvim_buf_create_user_command(buffer, "NKFormatWrite", function()
-					vim.lsp.buf.format({ async = true })
-					vim.cmd("w")
-					print("File formated!")
-				end, { desc = "Format the current buffer and save." })
-			end
+			vim.api.nvim_buf_create_user_command(buffer, "NKFormatWrite", function()
+				vim.lsp.buf.format({ async = true })
+				vim.cmd("w")
+				print("File formated!")
+			end, { desc = "Format the current buffer and save." })
+			-- end
 
 			vim.keymap.set("n", keymaps.declaration, vim.lsp.buf.declaration, { buffer = buffer })
 			vim.keymap.set("n", keymaps.signature_help, vim.lsp.buf.signature_help, { buffer = buffer })

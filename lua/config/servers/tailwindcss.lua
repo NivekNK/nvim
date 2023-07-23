@@ -86,12 +86,4 @@ return {
 			},
 		},
 	},
-	formatter = {
-		css = function(formatters, _)
-			return { formatters.prettierd }
-		end,
-		html = function(formatters, _)
-			return { formatters.prettierd }
-		end,
-	},
 }

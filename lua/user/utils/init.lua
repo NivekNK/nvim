@@ -1,6 +1,4 @@
-local Utils = {
-	formatter = {},
-}
+local Utils = {}
 
 function Utils.print_table(table)
 	print(vim.inspect(table))
@@ -178,31 +176,6 @@ function Utils.root_pattern(...)
 		startpath = rp.strip_archive_subpath(startpath)
 		return rp.search_ancestors(startpath, matcher)
 	end
-end
-
-function Utils.formatter.get_filetype_formatters(filetype)
-	local filetypes = {}
-	Utils.callback_if_ok("formatter.filetypes." .. filetype, function(formatters)
-		filetypes = formatters
-	end)
-	return filetypes
-end
-
-function Utils.formatter.get_filetype_formatters_count(filetype)
-	local filetypes = Utils.formatter.get_filetype_formatters(filetype)
-	local count = 0
-	for _ in pairs(filetypes) do
-		count = count + 1
-	end
-	return count
-end
-
-function Utils.formatter.configured(server_name)
-	local configured = false
-	Utils.callback_if_ok("config.servers." .. server_name, function(server)
-		configured = server.formatter and true or false
-	end)
-	return configured
 end
 
 return Utils
