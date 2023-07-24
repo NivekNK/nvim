@@ -26,7 +26,7 @@ M.lsp = function()
 		else
 			Utils.notify_error("Error >> server.lang doesn't exists for: " .. server_name .. "!")
 		end
-	end, { "@detail" })
+	end, { "@detail", "@efm" })
 	return servers_lsp
 end
 
@@ -51,7 +51,7 @@ M.lang = function()
 		else
 			Utils.notify_error("Error >> server.lang doesn't exists for: " .. server_name .. "!")
 		end
-	end, { "@detail" })
+	end, { "@detail", "@efm" })
 	return servers_lang
 end
 

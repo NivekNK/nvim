@@ -80,18 +80,25 @@ My config of neovim for windows and linux.
 
 Using **PowerShell** on Windows and **zsh** on Linux.
 
-### formattter:
+### efm-langserver:
 
-* Install sed:
-    - Windows [Scoop](https://scoop.sh/)
+* Install go and then the efm-langserver:
+    - Windows Winget
 
-            scoop bucket add main
-            scoop install main/sed
+            winget install GoLang.Go
+            go install github.com/mattn/efm-langserver@latest
+
+    - Linux **TODO**
 
 * Install prettierd:
     - Using Node.js
 
             npm install -g @fsouza/prettierd
+
+* Install eslint_d:
+    - Using Node.js
+
+            npm install -g eslint_d
 
 ### LSP:
 
