@@ -1,2 +1,2 @@
-require "user.lazy"
-require "user.mappings"
+require("user.lazy")
+require("user.mappings")

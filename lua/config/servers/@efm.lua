@@ -6,7 +6,7 @@ return {
 	},
 	astro = {
         efm.eslint_d,
-		efm.prettierd,
+        efm.prettierd,
 	},
 	json = {
 		efm.prettierd,
