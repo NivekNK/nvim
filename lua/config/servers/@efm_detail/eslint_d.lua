@@ -7,4 +7,3 @@ return {
 		"%rror %m | %f(%l,%c)",
 	},
 }
-

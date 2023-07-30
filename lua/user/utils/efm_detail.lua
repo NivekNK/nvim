@@ -7,4 +7,3 @@ Utils.foreach_filename("/config/servers/@efm_detail", function(detail)
 end)
 
 return details
-

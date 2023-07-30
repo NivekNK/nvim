@@ -5,4 +5,3 @@ return {
 	formatCommand = "cat ${INPUT} | prettierd ${INPUT}",
 	formatStdin = false,
 }
-
