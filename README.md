@@ -5,7 +5,7 @@ My config of neovim for windows and linux.
 
 ### markdown-preview:
 
-* Install node.js:
+* Install Node.js:
 
     - Windows [Scoop](https://scoop.sh/)
 
@@ -21,9 +21,10 @@ My config of neovim for windows and linux.
 
 ### treesitter:
 
-* Install tree-sitter-cli
+* Install tree-sitter-cli:
+    - Using Node.js
 
-        npm install tree-sitter-cli
+            npm install tree-sitter-cli
 
 * Install gcc and clang:
     - Windows [Scoop](https://scoop.sh/):
@@ -76,10 +77,6 @@ My config of neovim for windows and linux.
 
     - Linux **TODO**
 
-### toggleterm:
-
-Using **PowerShell** on Windows and **zsh** on Linux.
-
 ### efm-langserver:
 
 * Install go and then the efm-langserver:
@@ -127,3 +124,13 @@ Using **PowerShell** on Windows and **zsh** on Linux.
     - Using Node.js
 
             npm install -g @astrojs/language-server
+
+* Install cmake-language-server:
+    - Windows [Scoop](https://scoop.sh/)
+
+            scoop bucket add main
+            scoop install main/python
+
+            pip install cmake-language-server
+
+    - Linux **TODO**

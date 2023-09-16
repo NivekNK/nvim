@@ -183,16 +183,6 @@ K.comment = {
     },
 }
 
-K.toggleterm = {
-    open_terminal = [[<c-\>]],
-    exit_terminal = "jk",
-    exit_terminal_2 = "<ESC>",
-    select_left_panel = "<C-h>",
-    select_right_panel = "<C-l>",
-    select_up_panel = "<C-k>",
-    select_down_panel = "<C-j>",
-}
-
 K.which_key = {
     scroll_down = "<C-j>", -- binding to scroll down inside the popup
     scroll_up = "<C-k>", -- binding to scroll up inside the popup

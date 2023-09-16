@@ -28,6 +28,7 @@ return {
 					suggestion = { enabled = false },
 				})
 				copilot.setup(copilot_config)
+                vim.cmd("Copilot disable")
 			end)
 		end,
 	},

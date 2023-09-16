@@ -36,6 +36,13 @@ W.telescope = {
             branches = "b",
         },
     },
+    {
+        name = "LSP",
+        keymap = "p",
+        mappings = {
+            lsp_references = "e",
+        }
+    }
 }
 
 W.git = {
@@ -52,26 +59,6 @@ W.git = {
             stage_hunk = "s",
             undo_stage_hunk = "u",
             diff = "d",
-        },
-    },
-}
-
-W.cokeline = {
-    {
-        name = "Buffer",
-        keymap = "b",
-        mappings = {
-            pick_focus = "f",
-            pick_close = "c",
-            pick_focus_at_1 = "1",
-            pick_focus_at_2 = "2",
-            pick_focus_at_3 = "3",
-            pick_focus_at_4 = "4",
-            pick_focus_at_5 = "5",
-            pick_focus_at_6 = "6",
-            pick_focus_at_7 = "7",
-            pick_focus_at_8 = "8",
-            pick_focus_at_9 = "9",
         },
     },
 }
@@ -103,6 +90,25 @@ W.core = {
             kebab_case = "k",
         },
     },
+    {
+        name = "Surround Text",
+        keymap = "t",
+        mappings = {
+            -- surr*ound_words             ysiw)           (surround_words)
+            surround_word = "w",
+            -- *make strings               ys$"            "make strings"
+            surround_to_end = "e",
+            -- [delete ar*ound me!]        ds]             delete around me!
+            surround_delete_arround = "d",
+            -- remove <b>HTML t*ags</b>    dst             remove HTML tags
+            surround_delete_html_tags = "h",
+            -- 'change quot*es'            cs'"            "change quotes"
+            -- <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+            surround_change_arround = "c",
+            -- delete(functi*on calls)     dsf             function calls
+            surround_delete_function_call = "f",
+        }
+    }
 }
 
 W.yanky = {
@@ -116,7 +122,7 @@ W.yanky = {
 }
 
 W.trouble = {
-    open_trouble = "t"
+    open_trouble = "1"
 }
 
 W.todo_comments = {
@@ -157,7 +163,24 @@ W.color = {
 }
 
 W.markdown = {
-    preview = "o",
+    preview = "m",
+}
+
+W.lsp = {
+    {
+        name = "LSP",
+        keymap = "p",
+        mappings = {
+            declaration = "d",
+            peek_definition = "p",
+            code_action = "a",
+            rename = "r",
+        },
+    }
+}
+
+W.copilot = {
+    toggle_copilot = "o",
 }
 
 return W

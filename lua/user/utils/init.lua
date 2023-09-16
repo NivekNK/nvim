@@ -8,16 +8,37 @@ function Utils.notify_table(table)
 	vim.notify(vim.inspect(table))
 end
 
-function Utils.path_combine(first, second)
-	if vim.fn.has("win32") == 1 then
-		first = first:gsub("/", "\\")
-		second = second:gsub("/", "\\")
-		return first .. second
-	else
-		first = first:gsub("\\", "/")
-		second = second:gsub("\\", "/")
-		return first .. second
-	end
+function Utils.is_windows()
+	return string.find(vim.loop.os_uname().sysname, "Windows")
+end
+
+function Utils.path_combine(first, second, sep)
+    if sep then
+        first = first:gsub("[/\\]", sep)
+        second = second:gsub("[/\\]", sep)
+    else
+        if Utils.is_windows() then
+            first = first:gsub("/", "\\")
+            second = second:gsub("/", "\\")
+        else
+            first = first:gsub("\\", "/")
+            second = second:gsub("\\", "/")
+        end
+    end
+    return first .. second
+end
+
+function Utils.path_create(path, sep)
+    if sep then
+        path = path:gsub("[/\\]", sep)
+    else
+        if Utils.is_windows() then
+            path = path:gsub("/", "\\")
+        else
+            path = path:gsub("\\", "/")
+        end
+    end
+    return path
 end
 
 local function get_caller_file()
@@ -152,10 +173,6 @@ function Utils.foreach_filename(files_path, callback, ignore, add_dirs, only_dir
 			end
 		end
 	end)
-end
-
-function Utils.is_windows()
-	return string.find(vim.loop.os_uname().sysname, "Windows")
 end
 
 function Utils.root_pattern(...)
