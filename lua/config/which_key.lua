@@ -5,12 +5,13 @@ W.vim = {
     move_to_panel_down = "j",
     move_to_panel_left = "h",
     move_to_panel_right = "l",
-    window_previous = ",",
-    window_next = ".",
+    -- window_previous = ",",
+    -- window_next = ".",
     window_vertical_split = "L",
     window_horizontal_split = "J",
     format = "f",
-    format_and_save = "F",
+    -- format_and_save = "F",
+    back_to_buffer = "b",
 }
 
 W.neo_tree = {
@@ -163,7 +164,7 @@ W.color = {
 }
 
 W.markdown = {
-    preview = "m",
+    preview = "v",
 }
 
 W.lsp = {
@@ -181,6 +182,13 @@ W.lsp = {
 
 W.copilot = {
     toggle_copilot = "o",
+}
+
+W.harpoon = {
+    toggle_marks = "m",
+    add_mark = "M",
+    marks_prev = ",",
+    marks_next = ".",
 }
 
 return W

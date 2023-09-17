@@ -66,10 +66,9 @@ return {
             vim.keymap.set("n", keymaps.paste_indent_left_before, '<Plug>(YankyPutIndentBeforeShiftLeft)')
             vim.keymap.set("n", keymaps.paste_at_indent_before, '<Plug>(YankyPutBeforeFilter)')
 
-            local telescope_ok, telescope = pcall(require, "telescope")
-            if telescope_ok then
+            Utils.callback_if_ok("telescope", function(telescope)
                 telescope.load_extension("yank_history")
-            end
+            end)
         end)
     end,
 }
