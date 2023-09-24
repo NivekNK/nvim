@@ -8,7 +8,7 @@ return {
         end
 
         return {
-            filetypes = { "json" },
+            filetypes = { "json", "jsonc" },
             settings = {
                 json = {
                     schemas = schemastore.json.schemas(),
