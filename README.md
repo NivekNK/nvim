@@ -7,7 +7,7 @@ My config of neovim for windows and linux.
 
 * Install Node.js:
 
-    - Windows [Scoop](https://scoop.sh/)
+    - Windows [Scoop](https://scoop.sh/):
 
             // LTS version (Recommended):
             scoop bucket add main
@@ -17,25 +17,22 @@ My config of neovim for windows and linux.
             scoop bucket add main
             scoop install main/nodejs
 
-    - Linux **TODO**
+    - Linux: **TODO**
 
 ### treesitter:
 
 * Install tree-sitter-cli:
-    - Using Node.js
 
-            npm install tree-sitter-cli
+        npm install tree-sitter-cli
 
-* Install gcc and clang:
-    - Windows [Scoop](https://scoop.sh/):
+* Install zig:
+    - Windows:
 
-            scoop bucket add versions
-            scoop install tdm-gcc
+            winget install -e --id zig.zig
 
-            scoop bucket add main
-            scoop install llvm
+        or [Scoop](https://scoop.sh/):
 
-        For **Windows** you need to Enable Developer Mode.
+            scoop install zig
 
     - Linux: TODO
 
@@ -46,16 +43,22 @@ My config of neovim for windows and linux.
 
             scoop install ripgrep
 
-    - Linux **TODO**
+    - Linux: **TODO**
 
-* Install gcc and clang: Already installed with treesitter.
+* Install gcc:
+    - Windows [Scoop](https://scoop.sh/):
+
+            scoop bucket add versions
+            scoop install tdm-gcc
+
+    - Linux: **TODO*+
 
 * Install fd
     - Windows [Scoop](https://scoop.sh/):
 
             scoop install fd
 
-    - Linux **TODO**
+    - Linux: **TODO**
 
 ### todo-comments:
 
@@ -70,67 +73,75 @@ My config of neovim for windows and linux.
 ### Mason:
 
 * Install 7zip:
-    - Windows [Scoop](https://scoop.sh/)
+    - Windows [Scoop](https://scoop.sh/):
 
             scoop bucket add main
             scoop install main/7zip
 
-    - Linux **TODO**
+    - Linux: **TODO**
 
 ### efm-langserver:
 
 * Install go and then the efm-langserver:
-    - Windows Winget
+    - Windows:
 
             winget install GoLang.Go
             go install github.com/mattn/efm-langserver@latest
 
-    - Linux **TODO**
+    - Linux: **TODO**
 
 * Install prettierd:
-    - Using Node.js
 
-            npm install -g @fsouza/prettierd
+        npm install -g @fsouza/prettierd
 
 * Install eslint_d:
-    - Using Node.js
 
-            npm install -g eslint_d
+        npm install -g eslint_d
 
 ### LSP:
 
 * Install ripgrep: Already installed with Telescope.
 
-* Install clang: Already installed with treesitter.
+* Install clang:
+
+    - Windows [Scoop](https://scoop.sh/):
+
+            scoop bucket add main
+            scoop install llvm
+
+        For Windows you need to Enable Developer Mode.
+
+    - Linux: **TODO**
 
 * Install lua-language-server:
-    - Windows [Scoop](https://scoop.sh/)
+    - Windows [Scoop](https://scoop.sh/):
 
             scoop install lua-language-server
 
-    - Linux **TODO**
+    - Linux: **TODO**
 
 * Install vscode-json-language-server:
-    - Using Node.js
 
-            npm i -g vscode-langservers-extracted
+        npm i -g vscode-langservers-extracted
 
 * Install typescript and typescript-language-server:
-    - Using Node.js
 
-            npm install -g typescript typescript-language-server
+        npm install -g typescript typescript-language-server
 
 * Install astro:
-    - Using Node.js
 
-            npm install -g @astrojs/language-server
+        npm install -g @astrojs/language-server
+
+* Install tailwind-language-server:
+
+        npm install -g @tailwindcss/language-server
 
 * Install cmake-language-server:
-    - Windows [Scoop](https://scoop.sh/)
+    - Windows [Scoop](https://scoop.sh/):
 
             scoop bucket add main
             scoop install main/python
 
             pip install cmake-language-server
 
-    - Linux **TODO**
+    - Linux: **TODO**

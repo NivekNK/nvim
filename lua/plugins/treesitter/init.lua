@@ -217,10 +217,7 @@ return {
                 return
             end
 
-            require("nvim-treesitter.install").compilers = { "clang" }
-            if Utils.is_windows() then
-                require("nvim-treesitter.install").command_extra_args = { clang = { "--target=x86_64-pc-windows-gnu" } }
-            end
+            require("nvim-treesitter.install").compilers = { "zig" }
             require("nvim-treesitter.install").prefer_git = false
 
             require("nvim-treesitter.configs").setup(get_treesitter_config())
