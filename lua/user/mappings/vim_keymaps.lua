@@ -9,6 +9,7 @@ commands.n = {
 	move_text_up = "<ESC>:m .-2<CR>",
 	move_text_down = "<ESC>: m .+1<CR>",
 	select_all_text = "ggvG",
+    black_hole = '"_',
 	-- NOTE: Stoled from https://github.com/xiyaowong/link-visitor.nvim
 	open_link = function()
 		local pattern =

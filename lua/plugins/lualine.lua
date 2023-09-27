@@ -51,6 +51,29 @@ local lualine_config = {
 			"branch",
 		},
 		lualine_c = {
+            {
+                function()
+                    return vim.fn.expand("%:t")
+                end,
+                separator = { right = " " },
+                cond = function()
+                    local buffer = vim.fn.expand("%:t")
+                    local disabled_filenames = {
+                        "neo-tree",
+                    }
+
+                    if type(buffer) == "string" then
+                        for _, str in ipairs(disabled_filenames) do
+                            if string.find(buffer, str, 1, true) then
+                                return false
+                            end
+                        end
+                        return true
+                    else
+                        return false
+                    end
+                end,
+            },
 			{
 				"diagnostics",
 				sources = { "nvim_diagnostic" },

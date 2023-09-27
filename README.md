@@ -25,16 +25,14 @@ My config of neovim for windows and linux.
 
         npm install tree-sitter-cli
 
-* Install zig:
-    - Windows:
+* Install clang and gcc compilers:
+    - Windows WinLibs [Scoop](https://scoop.sh/):
 
-            winget install -e --id zig.zig
+            scoop install versions/mingw-winlibs-llvm-ucrt
 
-        or [Scoop](https://scoop.sh/):
+        For Windows you need to Enable Developer Mode.
 
-            scoop install zig
-
-    - Linux: TODO
+    - Linux: **TODO**
 
 ### Telescope:
 
@@ -45,13 +43,7 @@ My config of neovim for windows and linux.
 
     - Linux: **TODO**
 
-* Install gcc:
-    - Windows [Scoop](https://scoop.sh/):
-
-            scoop bucket add versions
-            scoop install tdm-gcc
-
-    - Linux: **TODO*+
+* Install gcc: Already installed with treesitter.
 
 * Install fd
     - Windows [Scoop](https://scoop.sh/):
@@ -102,16 +94,7 @@ My config of neovim for windows and linux.
 
 * Install ripgrep: Already installed with Telescope.
 
-* Install clang:
-
-    - Windows [Scoop](https://scoop.sh/):
-
-            scoop bucket add main
-            scoop install llvm
-
-        For Windows you need to Enable Developer Mode.
-
-    - Linux: **TODO**
+* Install clang: Already installed with treesitter.
 
 * Install lua-language-server:
     - Windows [Scoop](https://scoop.sh/):
@@ -135,6 +118,13 @@ My config of neovim for windows and linux.
 * Install tailwind-language-server:
 
         npm install -g @tailwindcss/language-server
+
+* Install CMake:
+    - Windows:
+
+            winget install Kitware.CMake
+
+    - Linux: **TODO**
 
 * Install cmake-language-server:
     - Windows [Scoop](https://scoop.sh/):

@@ -40,6 +40,7 @@ return {
     search = "",
     gear = "",
     no_text = "󰐓",
+    launch = "󱓞",
     gitsigns = {
         change = "▎",
         deleted = "󰐊",

@@ -9,6 +9,7 @@ K.n = {
     move_text_up = "<A-k>",
     move_text_down = "<A-j>",
     select_all_text = "<C-a>",
+    black_hole = "Q",
     open_link = "gx",
 }
 
