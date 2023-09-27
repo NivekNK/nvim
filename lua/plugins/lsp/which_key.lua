@@ -10,4 +10,8 @@ if Utils.require_check("lspsaga") then
     lsp.rename = { "<cmd>Lspsaga rename ++project<CR>", "Rename" }
 end
 
+if Utils.require_check("actions-preview") then
+    lsp.code_action = { "<cmd>lua require('actions-preview').code_actions()<CR>", "Code Action" }
+end
+
 return lsp;
