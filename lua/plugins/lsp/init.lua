@@ -325,14 +325,7 @@ return {
             capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
         end)
 
-        -- To make folding available
-        capabilities.textDocument.foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-        }
-
         local filetypes = {}
-
         for _, server in pairs(require("user.utils.servers").lsp()) do
             if server ~= "ignore" then
                 local opts = {

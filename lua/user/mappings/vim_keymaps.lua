@@ -62,6 +62,7 @@ commands.n = {
 		vim.notify("Link not found!", vim.log.levels.INFO)
 	end,
 }
+
 -- https://www.reddit.com/r/neovim/comments/ro6oye/open_link_from_neovim/
 commands.i = {
 	escape_alternative = "<ESC>",

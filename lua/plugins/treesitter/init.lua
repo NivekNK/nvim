@@ -66,18 +66,72 @@ local autotag_config = {
     },
 }
 
-local indent_blankline_config = {
-    char = "▏",
-    space_char_blankline = " ",
-    show_trailing_blankline_indent = false,
-    show_first_indent_level = true,
-    use_treesitter = true,
-    show_current_context = true,
-    buftype_exclude = { "terminal", "nofile" },
-    filetype_exclude = {
-        "help",
-        "packer",
-        "neo-tree",
+local ibl_config = {
+    enabled = true,
+    debounce = 200,
+    viewport_buffer = {
+        min = 30,
+        max = 500,
+    },
+    indent = {
+        char = "▏",
+        tab_char = nil,
+        highlight = "IblIndent",
+        smart_indent_cap = true,
+        priority = 1,
+        repeat_linebreak = true,
+    },
+    whitespace = {
+        highlight = "IblWhitespace",
+        remove_blankline_trail = true,
+    },
+    scope = {
+        enabled = true,
+        char = nil,
+        show_start = false,
+        show_end = true,
+        show_exact_scope = false,
+        injected_languages = true,
+        highlight = "IblScope",
+        priority = 1024,
+        include = {
+            node_type = {},
+        },
+        exclude = {
+            language = {},
+            node_type = {
+                ["*"] = {
+                    "source_file",
+                    "program",
+                },
+                lua = {
+                    "chunk",
+                },
+                python = {
+                    "module",
+                },
+            },
+        },
+    },
+    exclude = {
+        filetypes = {
+            "lspinfo",
+            "packer",
+            "lazy",
+            "checkhealth",
+            "help",
+            "man",
+            "gitcommit",
+            "TelescopePrompt",
+            "TelescopeResults",
+            "neo-tree",
+        },
+        buftypes = {
+            "terminal",
+            "nofile",
+            "quickfix",
+            "prompt",
+        },
     },
 }
 
@@ -183,8 +237,8 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            Utils.callback_if_ok_msg("indent_blankline", function(indent_blankline)
-                indent_blankline.setup(indent_blankline_config)
+            Utils.callback_if_ok_msg("ibl", function(ibl)
+                ibl.setup(ibl_config)
             end)
         end,
     },

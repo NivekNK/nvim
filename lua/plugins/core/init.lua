@@ -2,13 +2,21 @@ local Utils = require("user.utils")
 
 return {
     "nvim-lua/plenary.nvim",
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd([[ colorscheme tokyonight-moon ]])
+    --     end,
+    -- },
     {
-        "folke/tokyonight.nvim",
+        "NivekNK/nk-theme.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd([[ colorscheme tokyonight-moon ]])
-        end,
+            vim.cmd("colorscheme nk-theme")
+        end
     },
     {
         -- https://github.com/mg979/vim-visual-multi
@@ -35,7 +43,7 @@ return {
         -- After typing the first character, you see "labels" appearing next to some of the {c1}{?} pairs. You cannot use the labels yet.
         -- Enter {c2}. If the pair was not labeled, then voilà, you're already there. No need to be bothered by remaining labels - those are guaranteed "safe" letters -, just continue editing.
         -- Else: select a label. In case of multiple groups, first switch to the desired one, using <space> (step back with <tab>, if needed).
-        "ggandr/leap.nvim",
+        "ggandor/leap.nvim",
         config = function()
             Utils.callback_if_ok_msg("leap", function(leap)
                 leap.add_default_mappings()
