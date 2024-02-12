@@ -208,4 +208,17 @@ function Utils.get_home_directory()
 	end
 end
 
+function Utils.hsl_to_hex(hue, saturation, lightness)
+    lightness = lightness / 100
+    local chroma = saturation * math.min(lightness, 1 - lightness) / 100
+
+    local function f(angle)
+        local k = (angle + hue / 30) % 12
+        local color = lightness - chroma * math.max(math.min(k - 3, 9 - k, 1), -1)
+        return string.format("#%02x", math.floor(255 * color))
+    end
+
+    return f(0) .. f(8) .. f(4)
+end
+
 return Utils
