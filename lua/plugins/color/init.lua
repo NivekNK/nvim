@@ -1,9 +1,8 @@
 local keymaps = require("config.keymaps").color
 local Utils = require("user.utils")
 
--- TODO: Make a tailwind extesion for this plugin.
--- TODO: Add rgba to input and output.
 -- TODO: Clone this plugin and change output functionality
+-- TODO: Make a tailwind extension.
 local function get_ccc_config(mapping, builtin, custom)
     return {
         default_color = "#000000",

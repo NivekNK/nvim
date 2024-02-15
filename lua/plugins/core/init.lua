@@ -48,11 +48,11 @@ return {
             Utils.callback_if_ok_msg("leap", function(leap)
                 leap.add_default_mappings()
 
-                vim.keymap.del({'x', 'o'}, 'x')
-                vim.keymap.del({'x', 'o'}, 'X')
+                vim.keymap.del({ 'x', 'o' }, 'x')
+                vim.keymap.del({ 'x', 'o' }, 'X')
                 -- To set alternative keys for "exclusive" selection:
-                vim.keymap.set({'x', 'o'}, "t", '<Plug>(leap-forward-till)')
-                vim.keymap.set({'x', 'o'}, "t", '<Plug>(leap-backward-till)')
+                vim.keymap.set({ 'x', 'o' }, "t", '<Plug>(leap-forward-till)')
+                vim.keymap.set({ 'x', 'o' }, "t", '<Plug>(leap-backward-till)')
             end)
         end,
     },

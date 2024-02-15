@@ -1,36 +1,36 @@
 local efm = require("user.utils.efm_detail")
 
 return {
-	lua = {
+    lua = {
         efm.stylua,
-	},
-	astro = {
+    },
+    astro = {
         efm.eslint_d,
         efm.prettierd,
-	},
-	json = {
-		efm.prettierd,
-	},
-	css = {
-		efm.prettierd,
-	},
-	html = {
-		efm.prettierd,
-	},
-	javascript = {
+    },
+    json = {
+        efm.prettierd,
+    },
+    css = {
+        efm.prettierd,
+    },
+    html = {
+        efm.prettierd,
+    },
+    javascript = {
         efm.eslint_d,
-		efm.prettierd,
-	},
-	javascriptreact = {
+        efm.prettierd,
+    },
+    javascriptreact = {
         efm.eslint_d,
-		efm.prettierd,
-	},
-	typescript = {
+        efm.prettierd,
+    },
+    typescript = {
         efm.eslint_d,
-		efm.prettierd,
-	},
-	typescriptreact = {
+        efm.prettierd,
+    },
+    typescriptreact = {
         efm.eslint_d,
-		efm.prettierd,
-	},
+        efm.prettierd,
+    },
 }

@@ -17,8 +17,8 @@ end
 
 local function comments(config)
     if not config then
-        vim.notify("[plugins.todo-comments.which-key] Error >> opts for which-key command not set!", vim.log.levels
-            .ERROR)
+        vim.notify("[plugins.todo-comments.which-key] Error >> opts for which-key command not set!",
+            vim.log.levels.ERROR)
     end
 
     local opts = config and config.theme or {}

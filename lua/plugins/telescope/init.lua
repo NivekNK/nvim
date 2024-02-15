@@ -28,7 +28,7 @@ local function get_telescope_config(themes, actions, undo)
                 override_generic_sorter = true, -- override the generic sorter
                 override_file_sorter = true,    -- override the file sorter
                 case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-                                                -- the default case_mode is "smart_case"
+                -- the default case_mode is "smart_case"
             },
             undo = {
                 use_delta = true,
@@ -72,7 +72,8 @@ return {
     event = "BufEnter",
     config = function()
         Utils.callback_if_ok_msg("telescope", function(telescope)
-            local config = get_telescope_config(require("telescope.themes"), require("telescope.actions"), require("telescope-undo.actions"))
+            local config = get_telescope_config(require("telescope.themes"), require("telescope.actions"),
+                require("telescope-undo.actions"))
             telescope.setup(config)
 
             telescope.load_extension("fzf")

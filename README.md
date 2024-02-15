@@ -1,6 +1,12 @@
 # nvim
 My config of neovim for windows and linux.
 
+# TODO
+
+- Remove mason.
+- Update to harpoon 2.
+- Change neo-tree for nvim-tree.
+
 ## Requirements:
 
 ### markdown-preview:

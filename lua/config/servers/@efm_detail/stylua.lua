@@ -1,4 +1,4 @@
 return {
-	formatCommand = "stylua --search-parent-directories --stdin-filepath ${INPUT} -- -",
-	formatStdin = true,
+    formatCommand = "stylua --search-parent-directories --stdin-filepath ${INPUT} -- -",
+    formatStdin = true,
 }

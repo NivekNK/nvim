@@ -1,4 +1,4 @@
 return {
-	formatCommand = "clang-format --assume-filename=${INPUT}",
-	formatStdin = true,
+    formatCommand = "clang-format --assume-filename=${INPUT}",
+    formatStdin = true,
 }
