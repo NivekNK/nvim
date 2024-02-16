@@ -1,6 +1,11 @@
 return {
-    toggle_marks = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Marks" },
-    add_mark = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Add Mark" },
-    marks_next = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "Next Mark" },
-    marks_prev = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "Prev Mark" },
+    add_mark = { "<cmd>lua require('harpoon'):list():append()<CR>", "Add Mark" },
+    marks_next = { "<cmd>lua require('harpoon'):list():next()<CR>", "Next Mark" },
+    marks_prev = { "<cmd>lua require('harpoon'):list():prev()<CR>", "Prev Mark" },
+    toggle_marks = {
+        function()
+            local harpoon = require("harpoon")
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+        end, "Marks"
+    },
 }

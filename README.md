@@ -3,9 +3,9 @@ My config of neovim for windows and linux.
 
 # TODO
 
-- Remove mason.
-- Update to harpoon 2.
 - Change neo-tree for nvim-tree.
+- Change keymaps/which-key creation and create Telescope plugin for my keymaps per file.
+- Install none-ls, new null-ls.
 
 ## Requirements:
 
@@ -67,16 +67,6 @@ My config of neovim for windows and linux.
 * On a fresh install run the following command inside neovim
 
         :Copilot auth
-
-### Mason:
-
-* Install 7zip:
-    - Windows [Scoop](https://scoop.sh/):
-
-            scoop bucket add main
-            scoop install main/7zip
-
-    - Linux: **TODO**
 
 ### efm-langserver:
 

@@ -67,27 +67,6 @@ K.neo_tree = {
     git_next_modified = "]g",
 }
 
-K.mason = {
-    -- Keymap to expand a package
-    toggle_package_expand = "<CR>",
-    -- Keymap to install the package under the current cursor position
-    install_package = "i",
-    -- Keymap to reinstall/update the package under the current cursor position
-    update_package = "u",
-    -- Keymap to check for new version for the package under the current cursor position
-    check_package_version = "c",
-    -- Keymap to update all installed packages
-    update_all_packages = "U",
-    -- Keymap to check which installed packages are outdated
-    check_outdated_packages = "C",
-    -- Keymap to uninstall a package
-    uninstall_package = "X",
-    -- Keymap to cancel a package installation
-    cancel_installation = "<C-c>",
-    -- Keymap to apply language filter
-    apply_language_filter = "<C-f>",
-}
-
 K.lsp = {
     finder = "gh",
     code_action = "<Tab-e>",
@@ -192,13 +171,6 @@ K.which_key = {
     scroll_up = "<C-k>",   -- binding to scroll up inside the popup
 }
 
-K.ufo = {
-    scroll_up = "<C-k>",
-    scroll_down = "<C-j>",
-    jump_top = "[",
-    jump_bottom = "]",
-}
-
 K.yanky = {
     paste_indent_right_after = ">P",
     paste_indent_left_after = "<P",
@@ -256,6 +228,11 @@ K.color = {
     set_to_max = "=",
     toggle_output_mode = "o",
     toggle_input_mode = "i",
+}
+
+K.harpoon = {
+    open_vertical_split = "<C-s>",
+    open_horizontal_split = "<C-S>",
 }
 
 return K
