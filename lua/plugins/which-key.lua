@@ -83,7 +83,7 @@ local whichkey_config = {
         v = { "j", "k" },
     },
     -- disable the WhichKey popup for certain buf types and file types.
-    -- Disabled by deafult for Telescope
+    -- Disabled by default for Telescope
     disable = {
         buftypes = {},
         filetypes = {},
@@ -92,11 +92,11 @@ local whichkey_config = {
 
 return {
     "folke/which-key.nvim",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
+    event = "VeryLazy",
     config = function()
         Utils.callback_if_ok_msg("which-key", function(which_key)
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
             which_key.setup(whichkey_config)
         end)
     end,

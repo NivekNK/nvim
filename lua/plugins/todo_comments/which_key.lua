@@ -27,7 +27,7 @@ local function comments(config)
     vim.list_extend(opts.vimgrep_arguments, Config.options.search.args)
 
     opts.search = Config.search_regex(keywords_filter(config.opts.keywords))
-    opts.prompt_title = "Comments"
+    opts.prompt_title = config.opts.keywords
     opts.use_regex = true
     local entry_maker = make_entry.gen_from_vimgrep(opts)
     opts.entry_maker = function(line)

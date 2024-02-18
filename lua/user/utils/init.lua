@@ -145,6 +145,24 @@ function Utils.table_contains(table, value)
     return false
 end
 
+function Utils.table_contains_value(table, value)
+    for _, v in pairs(table) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+
+function Utils.table_contains_key(table, key)
+    for k, _ in pairs(table) do
+        if k == key then
+            return true
+        end
+    end
+    return false
+end
+
 function Utils.foreach_filename(files_path, callback, ignore, add_dirs, only_dirs)
     if not ignore then
         ignore = {}
@@ -221,6 +239,20 @@ function Utils.hsl_to_hex(hue, saturation, lightness)
     end
 
     return f(0) .. f(8) .. f(4)
+end
+
+function Utils.table_is_array(table)
+    for k, _ in pairs(table) do
+        if type(k) == "number" then
+            return true
+        else
+            return false
+        end
+    end
+end
+
+function Utils.is_table(value)
+    return type(value) == "table"
 end
 
 return Utils

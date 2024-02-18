@@ -64,13 +64,13 @@ return {
             end
 
             if Utils.require_check("scrollbar") then
-                -- TODO: Update to neovim API
-                vim.cmd([[
-                    augroup scrollbar_search_hide
-                        autocmd!
-                        autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
-                    augroup END
-                ]])
+                vim.api.nvim_create_autocmd({ "CmdlineLeave" }, {
+                    pattern = { "*" },
+                    group = "scrollbar_search_hide",
+                    callback = function(_)
+                        require('scrollbar.handlers.search').handler.hide()
+                    end,
+                })
             end
         end)
     end,

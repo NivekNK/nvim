@@ -33,31 +33,27 @@ local cmake_commands = function(opts)
     if cmake_tools.has_cmake_preset() then
         table.insert(results, "Select Configure Preset")
         table.insert(results, "Select Build Preset")
-    end
-
-    if not cmake_tools.has_cmake_preset() then
+    else
         table.insert(results, "Select Build Type")
         table.insert(results, "Select Kit")
     end
 
     opts = opts or {}
-    pickers
-        .new(opts, {
-            prompt_title = "CMake",
-            finder = finders.new_table({
-                results = results,
-            }),
-            sorter = conf.generic_sorter(opts),
-            attach_mappings = function(prompt_bufnr, _)
-                actions.select_default:replace(function()
-                    actions.close(prompt_bufnr)
-                    local selection = action_state.get_selected_entry()
-                    vim.cmd(commands[selection[1]])
-                end)
-                return true
-            end,
-        })
-        :find()
+    pickers.new(opts, {
+        prompt_title = "CMake",
+        finder = finders.new_table({
+            results = results,
+        }),
+        sorter = conf.generic_sorter(opts),
+        attach_mappings = function(prompt_bufnr, _)
+            actions.select_default:replace(function()
+                actions.close(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                vim.cmd(commands[selection[1]])
+            end)
+            return true
+        end,
+    }):find()
 end
 
 vim.api.nvim_create_user_command("NKCMakeTelescope", function()

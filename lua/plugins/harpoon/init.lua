@@ -33,6 +33,8 @@ return {
                     end, { buffer = cx.bufnr })
                 end
             })
+
+            require("plugins.harpoon.telescope")
         end)
     end
 }

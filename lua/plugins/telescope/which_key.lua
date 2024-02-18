@@ -12,5 +12,6 @@ return {
     branches = { "<cmd>Telescope git_branches<CR>", "Branches" },
     commit_history = { "<cmd>Telescope git_commits<CR>", "Commit History" },
     lsp_references = { "<cmd>Telescope lsp_references<CR>", "References" },
-    undo = { "<cmd>Telescope undo<CR>", "Undo" }
+    undo = { "<cmd>Telescope undo<CR>", "Undo" },
+    keymaps = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
 }

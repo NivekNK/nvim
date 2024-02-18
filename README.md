@@ -4,7 +4,6 @@ My config of neovim for windows and linux.
 # TODO
 
 - Change neo-tree for nvim-tree.
-- Change keymaps/which-key creation and create Telescope plugin for my keymaps per file.
 - Install none-ls, new null-ls.
 
 ## Requirements:

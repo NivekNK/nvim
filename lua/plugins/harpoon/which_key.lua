@@ -8,4 +8,5 @@ return {
             harpoon.ui:toggle_quick_menu(harpoon:list())
         end, "Marks"
     },
+    marks = { "<cmd>NKHarpoonMarksTelescope<CR>", "Marks" }
 }
