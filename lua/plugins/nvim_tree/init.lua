@@ -1,4 +1,5 @@
 local Utils = require("user.utils")
+local icons = require("config.icons")
 
 local nvim_tree_config = {
     hijack_cursor = false,
@@ -81,7 +82,7 @@ local nvim_tree_config = {
             diagnostics_placement = "signcolumn",
             bookmarks_placement = "signcolumn",
             padding = " ",
-            symlink_arrow = " ➛ ",
+            symlink_arrow = string.format(" %s ", icons.separator),
             show = {
                 file = true,
                 folder = true,
@@ -92,28 +93,28 @@ local nvim_tree_config = {
                 bookmarks = true,
             },
             glyphs = {
-                default = "",
-                symlink = "",
-                bookmark = "󰆤",
-                modified = "●",
+                default = icons.files,
+                symlink = icons.selection,
+                bookmark = icons.done,
+                modified = icons.item_modified,
                 folder = {
-                    arrow_closed = "",
-                    arrow_open = "",
-                    default = "",
-                    open = "",
-                    empty = "",
-                    empty_open = "",
-                    symlink = "",
-                    symlink_open = "",
+                    arrow_closed = icons.tree_collapsed,
+                    arrow_open = icons.tree_expanded,
+                    default = icons.folder_closed,
+                    open = icons.folder_open,
+                    empty = icons.folder_empty_closed,
+                    empty_open = icons.folder_empty_open,
+                    symlink = icons.selection,
+                    symlink_open = icons.selection,
                 },
                 git = {
-                    unstaged = "✗",
-                    staged = "✓",
-                    unmerged = "",
-                    renamed = "➜",
-                    untracked = "★",
-                    deleted = "",
-                    ignored = "◌",
+                    unstaged = icons.git_unstaged,
+                    staged = icons.git_staged,
+                    unmerged = icons.git_conflict,
+                    renamed = icons.item_renamed,
+                    untracked = icons.git_untracked,
+                    deleted = icons.item_deleted,
+                    ignored = icons.git_ignored,
                 },
             },
         },
@@ -149,10 +150,10 @@ local nvim_tree_config = {
             max = vim.diagnostic.severity.ERROR,
         },
         icons = {
-            hint = "",
-            info = "",
-            warning = "",
-            error = "",
+            hint = icons.hint,
+            info = icons.info,
+            warning = icons.warning,
+            error = icons.error,
         },
     },
     modified = {
@@ -274,9 +275,7 @@ return {
                         default_yes = false,
                     },
                 },
-                on_attach = function(bufnr)
-                    nvim_tree_utils.on_attach_nvim_tree_keymaps(bufnr)
-                end
+                on_attach = nvim_tree_utils.on_attach_nvim_tree_keymaps,
             })
 
             nvim_tree.setup(nvim_tree_config)

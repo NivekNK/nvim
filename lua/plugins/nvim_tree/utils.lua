@@ -1,4 +1,5 @@
 local Utils = require("user.utils")
+local keymaps = require("config.keymaps").nvim_tree
 local nvim_tree_api = require("nvim-tree.api")
 
 local M = {}
@@ -51,9 +52,9 @@ M.on_attach_nvim_tree_keymaps = function(bufnr)
 
         local message
         if #marks == 1 then
-            message = string.format("Remove '%s'? [y/n]: ", marks[1].name)
+            message = string.format("Delete '%s'? [y/n]: ", marks[1].name)
         else
-            message = string.format("Remove %s files? [y/n]: ", #marks)
+            message = string.format("Delete %s files? [y/n]: ", #marks)
         end
 
         vim.ui.input({ prompt = message },
@@ -109,30 +110,31 @@ M.on_attach_nvim_tree_keymaps = function(bufnr)
         nvim_tree_api.tree.reload()
     end
 
-    local keymaps = {
-        ["d"] = { mark_and_trash, "Trash File(s)" },
-        ["D"] = { mark_and_remove, "Remove File(s)" },
-        ["y"] = { mark_and_copy, "Copy File(s)" },
-        ["x"] = { mark_and_cut, "Cut File(s)" },
-        ["p"] = { nvim_tree_api.fs.paste, "Paste" },
-        ["h"] = { nvim_tree_api.marks.toggle, "Select File" },
-        ["m"] = { mark_and_move, "Move File(s)" },
-        ["<CR>"] = { nvim_tree_api.node.open.edit, "Open" },
-        ["r"] = { nvim_tree_api.fs.rename, "Rename" },
-        ["R"] = { nvim_tree_api.fs.rename_sub, "Rename: Omit filename" },
-        ["n"] = { nvim_tree_api.fs.create, "New File" },
-        ["ca"] = { nvim_tree_api.fs.copy.absolute_path, "Copy Absolute Path" },
-        ["cr"] = { nvim_tree_api.fs.copy.relative_path, "Copy Relative Path" },
-        ["cf"] = { nvim_tree_api.fs.copy.filename, "Copy Filename" },
-        ["cd"] = { nvim_tree_api.tree.change_root_to_node, "Change Working Directory" },
-        ["S"] = { nvim_tree_api.node.open.horizontal, "Open: Horizontal Split" },
-        ["s"] = { nvim_tree_api.node.open.vertical, "Open: Vertical Split" },
+    local nvim_tree_keymaps = {
+        [keymaps.trash_file] = { mark_and_trash, "Trash File(s)" },
+        [keymaps.delete_file] = { mark_and_remove, "Delete File(s)" },
+        [keymaps.copy_file] = { mark_and_copy, "Copy File(s)" },
+        [keymaps.cut_file] = { mark_and_cut, "Cut File(s)" },
+        [keymaps.paste] = { nvim_tree_api.fs.paste, "Paste" },
+        [keymaps.select_file] = { nvim_tree_api.marks.toggle, "Select File" },
+        [keymaps.move_file] = { mark_and_move, "Move File(s)" },
+        [keymaps.open] = { nvim_tree_api.node.open.edit, "Open" },
+        [keymaps.rename] = { nvim_tree_api.fs.rename, "Rename" },
+        [keymaps.rename_omit_filename] = { nvim_tree_api.fs.rename_sub, "Rename: Omit filename" },
+        [keymaps.new_file] = { nvim_tree_api.fs.create, "New File" },
+        [keymaps.copy_absolute_path] = { nvim_tree_api.fs.copy.absolute_path, "Copy Absolute Path" },
+        [keymaps.copy_relative_path] = { nvim_tree_api.fs.copy.relative_path, "Copy Relative Path" },
+        [keymaps.copy_filename] = { nvim_tree_api.fs.copy.filename, "Copy Filename" },
+        [keymaps.change_working_directory] = { nvim_tree_api.tree.change_root_to_node, "Change Working Directory" },
+        [keymaps.open_horizontal_split] = { nvim_tree_api.node.open.horizontal, "Open: Horizontal Split" },
+        [keymaps.open_vertical_split] = { nvim_tree_api.node.open.vertical, "Open: Vertical Split" },
     }
 
     local opts = function(desc)
         return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
     end
-    for keymap, values in pairs(keymaps) do
+
+    for keymap, values in pairs(nvim_tree_keymaps) do
         vim.keymap.set("n", keymap, values[1], opts(values[2]))
     end
 end

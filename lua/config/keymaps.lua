@@ -242,4 +242,24 @@ K.mini_move = {
     line_up = "<A-k>",
 }
 
+K.nvim_tree = {
+    trash_file = "d",
+    delete_file = "D",
+    copy_file = "y",
+    cut_file = "x",
+    paste = "p",
+    select_file = "h",
+    move_file = "m",
+    open = "<CR>",
+    rename = "r",
+    rename_omit_filename = "R",
+    new_file = "n",
+    copy_absolute_path = "ca",
+    copy_relative_path = "cr",
+    copy_filename = "cf",
+    change_working_directory = "cd",
+    open_horizontal_split = "S",
+    open_vertical_split = "s",
+}
+
 return K
