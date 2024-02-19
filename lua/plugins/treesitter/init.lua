@@ -261,6 +261,11 @@ return {
                     end)
                 end,
             },
+            {
+                "danymat/neogen",
+                config = true,
+                version = "*",
+            },
             "b0o/schemastore.nvim",
         },
         config = function()

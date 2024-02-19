@@ -96,7 +96,6 @@ W.git = {
         stage_hunk = "s",
         undo_stage_hunk = "u",
         diff = "d",
-        gitignore = "g",
     }
 }
 
@@ -122,7 +121,7 @@ W.core = {
         },
     },
     {
-        name = "Surround Text",
+        name = "Surround",
         keymap = "r",
         filetype = "modifiable-buffer",
         child_keymaps = {
@@ -187,6 +186,7 @@ W.treesitter = {
     filetype = "modifiable-buffer",
     keymaps = {
         split_toggle = "S",
+        document = "|",
     }
 }
 

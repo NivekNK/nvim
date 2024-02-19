@@ -188,7 +188,7 @@ end
 
 local lsp_signarute_config = {
     debug = false,                                                                -- set to true to enable debug logging
-    log_path = Utils.path_combine(vim.fn.stdpath("cache"), "/lsp_signature.log"), -- log dir when debug is on
+    log_path = Utils.path_combine(Utils.stdpath("cache"), "/lsp_signature.log"), -- log dir when debug is on
     -- default is  ~/.cache/nvim/lsp_signature.log
     verbose = false,                                                              -- show debug line number
     bind = true,                                                                  -- This is mandatory, otherwise border config won't get registered.
@@ -349,7 +349,7 @@ return {
                 end)
 
                 for _, filetype in ipairs(opts.filetypes) do
-                    if not Utils.table_contains(filetypes, filetype) then
+                    if not Utils.table_contains_value(filetypes, filetype) then
                         table.insert(filetypes, filetype)
                     end
                 end
