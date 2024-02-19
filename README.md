@@ -3,10 +3,8 @@ My config of neovim for windows and linux.
 
 # TODO
 
-- Ignore NvimTree buffer on lualine.
-- Change lualine to show also the folder containing the archive.
-- Remove which_key_ignore of plugins, and auto-generate it.
 - Install none-ls, new null-ls.
+- Update nvim-tree icons highlight when nk-theme is ready.
 
 ## Requirements:
 

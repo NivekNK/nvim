@@ -53,13 +53,17 @@ local lualine_config = {
         lualine_c = {
             {
                 function()
-                    return vim.fn.expand("%:t")
+                    local fullpath = vim.fn.expand("%:p:h")
+                    local directory = vim.fn.fnamemodify(fullpath, ":t")
+                    local filename = vim.fn.expand("%:t")
+                    return directory .. "/" .. filename
                 end,
                 separator = { right = " " },
                 cond = function()
                     local buffer = vim.fn.expand("%:t")
                     local disabled_filenames = {
-                        "neo-tree",
+                        "NvimTree",
+                        "harpoon",
                     }
 
                     if type(buffer) == "string" then

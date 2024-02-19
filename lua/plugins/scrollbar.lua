@@ -115,8 +115,7 @@ local function get_scrollbar_config(search_available)
         excluded_filetypes = {
             "prompt",
             "TelescopePrompt",
-            "noice",
-            "neo-tree",
+            "NvimTree",
         },
         autocmd = {
             render = {

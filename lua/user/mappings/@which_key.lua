@@ -37,6 +37,10 @@ local function generate_from_which_key_table(table, commands)
         if not command then
             Utils.notify_error("Keymap named: '" .. k .. "' couldn't find its command!")
         else
+            if #command <= 1 then
+                command[2] = "which_key_ignore"
+            end
+
             local keymap = type(v) == "string" and v or v.keymap
             local filetype = type(v) == "string" and table.filetype or v.filetype
 
@@ -68,10 +72,12 @@ local function generate_from_which_key_section(section, commands)
     for k, v in pairs(section.child_keymaps) do
         local command = commands[k]
         if not command then
-            Utils.notify(k)
-            Utils.notify_table(commands)
             Utils.notify_error("Keymap named: '" .. k .. "' couldn't find its command. Section: '" .. section.name .. "'.")
         else
+            if #command <= 1 then
+                command[2] = "which_key_ignore"
+            end
+
             local keymap = type(v) == "string" and v or v.keymap
             local filetype = type(v) == "string" and section.filetype or v.filetype
 
@@ -126,8 +132,10 @@ end
 local function generate_from_which_key_array(array, commands)
     for _, v in ipairs(array) do
         if v.name ~= nil then -- WhichKeySection
+            ---@diagnostic disable-next-line: param-type-mismatch
             generate_from_which_key_section(v, commands)
         else -- WhichKeyTable
+            ---@diagnostic disable-next-line: param-type-mismatch
             generate_from_which_key_table(v, commands)
         end
     end
