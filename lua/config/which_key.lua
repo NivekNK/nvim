@@ -96,6 +96,7 @@ W.git = {
         stage_hunk = "s",
         undo_stage_hunk = "u",
         diff = "d",
+        gitignore = "g",
     }
 }
 
