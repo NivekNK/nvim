@@ -8,9 +8,7 @@ commands.n = {
     resize_panel_down = ":resize -2<CR>",
     resize_panel_left = ":vertical resize -2<CR>",
     resize_panel_right = ":vertical resize +2<CR>",
-    move_text_up = "<ESC>:m .-2<CR>",
-    move_text_down = "<ESC>: m .+1<CR>",
-    select_all_text = "ggvG",
+    select_all_text = "gg0vG$",
     black_hole = '"_',
     -- NOTE: Stoled from https://github.com/xiyaowong/link-visitor.nvim
     open_link = function()
@@ -59,22 +57,17 @@ commands.n = {
 
 commands.i = {
     escape_alternative = "<ESC>",
-    save_file = "<ESC>:w<CR><i>",
-    move_text_up = "<ESC>:m .-2<CR><a>",
-    move_text_down = "<ESC>:m .+1<CR><a>",
+    save_file = "<ESC>:w<CR>i",
+    move_text_up = "<ESC>:m .-2<CR>i",
+    move_text_down = "<ESC>:m .+1<CR>i",
 }
 
 commands.v = {
     indent_left = "<gv",
     indent_right = ">gv",
-    move_text_up = ":m .-1<CR>==",
-    move_text_down = ":m .+1<CR>==",
     better_paste = '"_dP',
 }
 
-commands.x = {
-    move_text_up = ":move '<-2<CR>gv-gv",
-    move_text_down = ":move '>+1<CR>gv-gv",
-}
+commands.x = {}
 
 return commands

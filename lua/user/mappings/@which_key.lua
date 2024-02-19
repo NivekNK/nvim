@@ -32,49 +32,30 @@ local which_key_keymaps = {
 ---@param table WhichKeyTable
 ---@param commands WhichKeyCommands
 local function generate_from_which_key_table(table, commands)
-    for k, v in pairs(commands) do
-        local keymap = table.keymaps[k]
-        if not keymap then
-            Utils.notify_error("Coommand named: '" .. k .. "' couldn't find its keymap!")
-        elseif type(keymap) == "string" then
-            if table.filetype == "global" or table.filetype == "modifiable-buffer" then
-                which_key_keymaps[table.filetype] = vim.tbl_deep_extend(
-                    "force", which_key_keymaps[table.filetype], { [keymap] = v })
-            elseif type(table.filetype) == "string" then
+    for k, v in pairs(table.keymaps) do
+        local command = commands[k]
+        if not command then
+            Utils.notify_error("Keymap named: '" .. k .. "' couldn't find its command!")
+        else
+            local keymap = type(v) == "string" and v or v.keymap
+            local filetype = type(v) == "string" and table.filetype or v.filetype
+
+            if filetype == "global" or filetype == "modifiable-buffer" then
+                which_key_keymaps[filetype] = vim.tbl_deep_extend(
+                    "force", which_key_keymaps[filetype], { [keymap] = command })
+            elseif type(filetype) == "string" then
                 local aux = {
-                    [table.filetype] = { [keymap] = v }
+                    [filetype] = { [keymap] = command }
                 }
                 which_key_keymaps["filetype"] = vim.tbl_deep_extend(
                     "force", which_key_keymaps["filetype"], aux)
-            else
-                ---@diagnostic disable-next-line: param-type-mismatch
-                for _, value in ipairs(table.filetype) do
+            else -- string[]
+                for _, value in ipairs(filetype) do
                     local aux = {
-                        [value] = { [keymap] = v }
+                        [value] = { [keymap] = command }
                     }
                     which_key_keymaps["filetype"] = vim.tbl_deep_extend(
                         "force", which_key_keymaps["filetype"], aux)
-                end
-            end
-        else -- WhichKeyKeymap
-            if keymap.filetype == "global" or keymap.filetype == "modifiable-buffer" then
-                which_key_keymaps[keymap.filetype] = vim.tbl_deep_extend(
-                    "force", which_key_keymaps[keymap.filetype], { [keymap.keymap] = v })
-            elseif type(keymap.filetype) == "string" then
-                local aux = {
-                    [keymap.filetype] = { [keymap.keymap] = v }
-                }
-                which_key_keymaps["filetype"] = vim.tbl_deep_extend(
-                    "force", which_key_keymaps["filetype"], aux)
-            else
-                ---@diagnostic disable-next-line: param-type-mismatch
-                for _, value in ipairs(keymap.filetype) do
-                    local aux = {
-                        [value] = { [keymap.keymap] = v }
-                    }
-                    which_key_keymaps["filetype"] = vim.tbl_deep_extend(
-                        "force", which_key_keymaps["filetype"], aux
-                    )
                 end
             end
         end
@@ -84,82 +65,48 @@ end
 ---@param section WhichKeySection
 ---@param commands WhichKeyCommands
 local function generate_from_which_key_section(section, commands)
-    for k, v in pairs(commands) do
-        local keymap = section.child_keymaps[k]
-        if not keymap then
-            Utils.notify_error("Coommand named: '" .. k .. "' couldn't find its keymap in section '" .. section.name .. "'.")
-        elseif type(keymap) == "string" then
-            if section.filetype == "global" or section.filetype == "modifiable-buffer" then
+    for k, v in pairs(section.child_keymaps) do
+        local command = commands[k]
+        if not command then
+            Utils.notify(k)
+            Utils.notify_table(commands)
+            Utils.notify_error("Keymap named: '" .. k .. "' couldn't find its command. Section: '" .. section.name .. "'.")
+        else
+            local keymap = type(v) == "string" and v or v.keymap
+            local filetype = type(v) == "string" and section.filetype or v.filetype
+
+            if filetype == "global" or filetype == "modifiable-buffer" then
                 local aux = {
                     [section.keymap] = {
                         name = section.name,
-                        [keymap] = v
+                        [keymap] = command,
                     }
                 }
-                which_key_keymaps[section.filetype] = vim.tbl_deep_extend(
-                    "force", which_key_keymaps[section.filetype], aux)
-            elseif type(section.filetype) == "string" then
+                which_key_keymaps[filetype] = vim.tbl_deep_extend(
+                    "force", which_key_keymaps[filetype], aux)
+            elseif type(filetype) == "string" then
                 local aux = {
-                    [section.filetype] = {
+                    [filetype] = {
                         [section.keymap] = {
                             name = section.name,
-                            [keymap] = v
+                            [keymap] = command,
                         }
                     }
                 }
                 which_key_keymaps["filetype"] = vim.tbl_deep_extend(
                     "force", which_key_keymaps["filetype"], aux)
-            else
-                ---@diagnostic disable-next-line: param-type-mismatch
-                for _, value in ipairs(section.filetype) do
+            else -- string[]
+                for _, value in ipairs(filetype) do
                     local aux = {
                         [value] = {
                             [section.keymap] = {
                                 name = section.name,
-                                [keymap] = v
+                                [keymap] = command,
                             }
                         }
                     }
                     which_key_keymaps["filetype"] = vim.tbl_deep_extend(
                         "force", which_key_keymaps["filetype"], aux)
-                end
-            end
-        else
-            if keymap.filetype == "global" or keymap.filetype == "modifiable-buffer" then
-                local aux = {
-                    [section.keymap] = {
-                        name = section.name,
-                        [keymap.keymap] = v
-                    }
-                }
-                which_key_keymaps[keymap.filetype] = vim.tbl_deep_extend(
-                    "force", which_key_keymaps[keymap.filetype], aux)
-            elseif type(keymap.filetype) == "string" then
-                local aux = {
-                    [keymap.filetype] = {
-                        [section.keymap] = {
-                            name = section.name,
-                            [keymap.keymap] = v
-                        }
-                    }
-                }
-                which_key_keymaps["filetype"] = vim.tbl_deep_extend(
-                    "force", which_key_keymaps["filetype"], aux
-                )
-            else
-                ---@diagnostic disable-next-line: param-type-mismatch
-                for _, value in ipairs(keymap.filetype) do
-                    local aux = {
-                        [value] = {
-                            [section.keymap] = {
-                                name = section.name,
-                                [keymap.keymap] = v
-                            }
-                        }
-                    }
-                    which_key_keymaps["filetype"] = vim.tbl_deep_extend(
-                        "force", which_key_keymaps["filetype"], aux
-                    )
                 end
             end
         end
@@ -178,27 +125,10 @@ end
 ---@param commands WhichKeyCommands
 local function generate_from_which_key_array(array, commands)
     for _, v in ipairs(array) do
-        local current_commands = {}
         if v.name ~= nil then -- WhichKeySection
-            for k, _ in pairs(v.child_keymaps) do
-                if commands[k] ~= nil then
-                    current_commands[k] = commands[k]
-                else
-                    Utils.notify("Command for keymap: '" .. k .. "', doesn't exists!")
-                end
-            end
-            ---@diagnostic disable-next-line: param-type-mismatch
-            generate_from_which_key_section(v, current_commands)
+            generate_from_which_key_section(v, commands)
         else -- WhichKeyTable
-            for k, _ in pairs(v.keymaps) do
-                if commands[k] ~= nil then
-                    current_commands[k] = commands[k]
-                else
-                    Utils.notify("Command for keymap: '" .. k .. "', doesn't exists!")
-                end
-            end
-            ---@diagnostic disable-next-line: param-type-mismatch
-            generate_from_which_key_table(v, current_commands)
+            generate_from_which_key_table(v, commands)
         end
     end
 end

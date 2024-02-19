@@ -66,9 +66,8 @@ return {
             if Utils.require_check("scrollbar") then
                 vim.api.nvim_create_autocmd({ "CmdlineLeave" }, {
                     pattern = { "*" },
-                    group = "scrollbar_search_hide",
                     callback = function(_)
-                        require('scrollbar.handlers.search').handler.hide()
+                        require("scrollbar.handlers.search").handler.hide()
                     end,
                 })
             end

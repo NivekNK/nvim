@@ -6,8 +6,6 @@ K.n = {
     resize_panel_down = "<C-Down>",
     resize_panel_left = "<C-Left>",
     resize_panel_right = "<C-Right>",
-    move_text_up = "<A-k>",
-    move_text_down = "<A-j>",
     select_all_text = "<C-a>",
     black_hole = "Q",
     open_link = "gx",
@@ -23,15 +21,10 @@ K.i = {
 K.v = {
     indent_left = "<",
     indent_right = ">",
-    move_text_up = "<A-k>",
-    move_text_down = "<A-j>",
     better_paste = "p",
 }
 
-K.x = {
-    move_text_up = "<A-k>",
-    move_text_down = "<A-j>",
-}
+K.x = {}
 
 K.neo_tree = {
     toggle_node = "<Space>",
@@ -233,6 +226,20 @@ K.color = {
 K.harpoon = {
     open_vertical_split = "<C-s>",
     open_horizontal_split = "<C-S>",
+}
+
+K.mini_move = {
+    -- Move visual selection in Visual mode. Defajlts are Alt (Meta) + hjkl.
+    left = "<A-h>",
+    right = "<A-l>",
+    down = "<A-j>",
+    up = "<A-k>",
+
+    -- Move current line in Normal mode
+    line_left = "<A-h>",
+    line_right = "<A-l>",
+    line_down = "<A-j>",
+    line_up = "<A-k>",
 }
 
 return K

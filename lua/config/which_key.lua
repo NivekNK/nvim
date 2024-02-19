@@ -194,7 +194,6 @@ W.treesitter = {
     filetype = "modifiable-buffer",
     keymaps = {
         split_toggle = "S",
-        go_to_context = "[",
     }
 }
 

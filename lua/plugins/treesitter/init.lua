@@ -192,10 +192,6 @@ local function get_treesitter_config()
             -- Instead of true it can also be a list of languages
             additional_vim_regex_highlighting = false,
         },
-        context_commentstring = {
-            enable = true,
-            enable_autocmd = false,
-        },
         autopairs = {
             enable = true,
         },
@@ -278,6 +274,13 @@ return {
             require("nvim-treesitter.install").prefer_git = false
 
             require("nvim-treesitter.configs").setup(get_treesitter_config())
+
+            vim.g.skip_ts_context_commentstring_module = true
+            ---@diagnostic disable-next-line: missing-fields
+            require("ts_context_commentstring").setup({
+                enable_autocmd = false,
+            })
+
             vim.cmd("TSUpdateSync")
         end,
     },
