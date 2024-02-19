@@ -269,4 +269,13 @@ W.array.harpoon = {
     }
 }
 
+W.notify = {
+    name = "Search",
+    keymap = "s",
+    filetype = "global",
+    child_keymaps = {
+        notifications = "n",
+    }
+}
+
 return W
