@@ -159,7 +159,9 @@ local treesj_config = {
 local function get_treesitter_config()
     return {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = require("user.utils.servers").lang(),
+        ensure_installed = vim.tbl_deep_extend("force", {
+            "vim", "vimdoc",
+        }, require("user.utils.servers").lang()),
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
         -- Automatically install missing parsers when entering buffer
@@ -240,7 +242,7 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        event = "BufReadPost",
+        build = ":TSUpdate",
         dependencies = {
             {
                 "JoosepAlviste/nvim-ts-context-commentstring",

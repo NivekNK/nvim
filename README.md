@@ -3,7 +3,12 @@ My config of neovim for windows and linux.
 
 # TODO
 
-- Change neo-tree for nvim-tree.
+- Move nvim-tree keymaps to config.keymaps.
+- Modify new file to show a better path in nvim-tree.
+- Replace the icons in nvim-tree.
+- Ignore NvimTree buffer on lualine.
+- Change lualine to show also the folder containing the archive.
+- Remove which_key_ignore of plugins, and auto-generate it.
 - Install none-ls, new null-ls.
 
 ## Requirements:

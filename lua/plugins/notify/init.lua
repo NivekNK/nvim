@@ -15,7 +15,7 @@ local config = {
 	minimum_width = 50,
 	render = "wrapped-compact",
 	stages = "fade_in_slide_out",
-	timeout = 500,
+	timeout = 300,
 	top_down = true,
 }
 

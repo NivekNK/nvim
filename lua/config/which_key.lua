@@ -47,14 +47,6 @@ W.vim = {
     }
 }
 
----@type WhichKeyTable
-W.neo_tree = {
-    filetype = "global",
-    keymaps = {
-        toggle_explorer = "e",
-    }
-}
-
 ---@type WhichKeySection[]
 W.telescope = {
     {
@@ -130,20 +122,20 @@ W.core = {
     },
     {
         name = "Surround Text",
-        keymap = "t",
+        keymap = "r",
         filetype = "modifiable-buffer",
         child_keymaps = {
             -- surr*ound_words             ysiw)           (surround_words)
             surround_word = "w",
+            -- 'change quot*es'            cs'"            "change quotes"
+            -- <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+            surround_change_arround = "c",
             -- *make strings               ys$"            "make strings"
             surround_to_end = "e",
             -- [delete ar*ound me!]        ds]             delete around me!
             surround_delete_arround = "d",
             -- remove <b>HTML t*ags</b>    dst             remove HTML tags
             surround_delete_html_tags = "h",
-            -- 'change quot*es'            cs'"            "change quotes"
-            -- <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
-            surround_change_arround = "c",
             -- delete(functi*on calls)     dsf             function calls
             surround_delete_function_call = "f",
         }
@@ -269,6 +261,7 @@ W.array.harpoon = {
     }
 }
 
+---@type WhichKeySection
 W.notify = {
     name = "Search",
     keymap = "s",
@@ -276,6 +269,23 @@ W.notify = {
     child_keymaps = {
         notifications = "n",
     }
+}
+
+W.array.nvim_tree = {
+    {
+        filetype = "global",
+        keymaps = {
+            toggle = "e",
+        }
+    },
+    {
+        name = "Search",
+        keymap = "s",
+        filetype = "global",
+        child_keymaps = {
+            find_directory = "d",
+        }
+    },
 }
 
 return W
