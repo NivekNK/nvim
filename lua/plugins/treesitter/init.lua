@@ -22,48 +22,11 @@ local autopairs_config = {
 }
 
 local autotag_config = {
-    enable_rename = true,
-    enable_close = true,
-    enable_close_on_slash = true,
-    filetypes = {
-        "html",
-        "javascript",
-        "typescript",
-        "javascriptreact",
-        "typescriptreact",
-        "svelte",
-        "vue",
-        "tsx",
-        "jsx",
-        "rescript",
-        "xml",
-        "php",
-        "markdown",
-        "astro",
-        "glimmer",
-        "handlebars",
-        "hbs",
-    },
-    skip_tags = {
-        "area",
-        "base",
-        "br",
-        "col",
-        "command",
-        "embed",
-        "hr",
-        "img",
-        "slot",
-        "input",
-        "keygen",
-        "link",
-        "meta",
-        "param",
-        "source",
-        "track",
-        "wbr",
-        "menuitem",
-    },
+    opts = {
+        enable_close = true,
+        enable_rename = true,
+        enable_close_on_slash = true,
+    }
 }
 
 local ibl_config = {
@@ -159,9 +122,7 @@ local treesj_config = {
 local function get_treesitter_config()
     return {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = vim.tbl_deep_extend("force", {
-            "vim", "vimdoc",
-        }, require("user.utils.servers").lang()),
+        ensure_installed = require("user.utils.servers").lang(),
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
         -- Automatically install missing parsers when entering buffer
@@ -197,9 +158,6 @@ local function get_treesitter_config()
         autopairs = {
             enable = true,
         },
-        autotag = {
-            enable = true,
-        },
         indent = {
             enable = true,
         },
@@ -220,15 +178,6 @@ return {
                     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
                     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
                 end)
-            end)
-        end,
-    },
-    {
-        "windwp/nvim-ts-autotag",
-        event = "InsertEnter",
-        config = function()
-            Utils.callback_if_ok_msg("nvim-ts-autotag", function(autotag)
-                autotag.setup(autotag_config)
             end)
         end,
     },
@@ -265,6 +214,15 @@ return {
                 "danymat/neogen",
                 config = true,
                 version = "*",
+            },
+            {
+                "windwp/nvim-ts-autotag",
+                event = "InsertEnter",
+                config = function()
+                    Utils.callback_if_ok_msg("nvim-ts-autotag", function(autotag)
+                        autotag.setup(autotag_config)
+                    end)
+                end,
             },
             "b0o/schemastore.nvim",
         },

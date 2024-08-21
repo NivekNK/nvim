@@ -45,13 +45,6 @@ local function get_cmp_config(cmp, luasnip, config)
                         confirm_opts.behavior = cmp.ConfirmBehavior.Insert
                     end
 
-                    local entry = cmp.get_selected_entry()
-                    local is_copilot = entry and entry.source.name == "copilot"
-                    if is_copilot then
-                        confirm_opts.behavior = cmp.ConfirmBehavior.Replace
-                        confirm_opts.select = true
-                    end
-
                     if cmp.confirm(confirm_opts) then
                         return -- success, exit early
                     end
@@ -86,36 +79,34 @@ local function get_cmp_config(cmp, luasnip, config)
             format = function(entry, vim_item)
                 local icon_kind = vim_item.kind
 
-                if entry.source.name == "copilot" then
-                    icon_kind = "Copilot"
-                    vim_item.kind_hl_group = "CmpItemKindCopilot"
-                end
-
                 vim_item.kind = icons.kinds[icon_kind]
                 vim_item.menu = ({
                     nvim_lsp = "[LSP]",
                     path = "[Path]",
                     luasnip = "[Snippet]",
                     buffer = "[Buffer]",
-                    copilot = "[Copilot]",
                     treesitter = "[Tree-sitter]",
+                    spell = "[Spell]"
                 })[entry.source.name]
                 return vim_item
             end,
         },
         sources = {
-            {
-                name = "copilot",
-                max_item_count = 3,
-                trigger_characters = {
-                    { ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", "/", "\\", "+", "?", " " },
-                },
-            },
             { name = "nvim_lsp" },
             { name = "path" },
             { name = "luasnip" },
             { name = "buffer" },
             { name = "treesitter" },
+            {
+                name = "spell",
+                option = {
+                    keep_all_entries = false,
+                    enable_in_context = function()
+                        return true
+                    end,
+                    preselect_correct_word = true,
+                },
+            }
         },
         confirm_opts = {
             behavior = cmp.ConfirmBehavior.Replace,
@@ -153,6 +144,7 @@ return {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
+        "f3fora/cmp-spell",
         "saadparwaiz1/cmp_luasnip",
         {
             "L3MON4D3/LuaSnip",

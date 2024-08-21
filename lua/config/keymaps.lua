@@ -26,40 +26,6 @@ K.v = {
 
 K.x = {}
 
-K.neo_tree = {
-    toggle_node = "<Space>",
-    open = "<CR>",
-    open_secondary = "<2-LeftK.use>",
-    open_horizontal_split = "S",
-    open_vertical_split = "s",
-    open_on_new_tab = "t",
-    revert_preview = "<ESC>",
-    toggle_preview = "P",
-    focus_preview = "l",
-    close_node = "C",
-    close_all_nodes = "z",
-    add_file = "n",
-    add_directory = "a",
-    delete = "d",
-    buffer_delete = "bd",
-    rename = "r",
-    copy_to_clipboard = "y",
-    cut_to_clipboard = "x",
-    paste_from_clipboard = "p",
-    copy = "c",
-    move = "m",
-    close_window = "q",
-    refresh = "R",
-    show_help = "?",
-    prev_source = "<",
-    next_source = ">",
-    navigate_up = "<bs>", -- TODO: Change.
-    set_as_root = ".",
-    toggle_hidden = "H",
-    git_prev_modified = "[g",
-    git_next_modified = "]g",
-}
-
 K.lsp = {
     finder = "gh",
     code_action = "<Tab-e>",
@@ -132,6 +98,7 @@ K.telescope = {
     undo_restore = "<CR>",
     undo_yank_additions = "<C-CR>",
     undo_yank_deletions = "<S-CR>",
+    spell_suggestions = "z=",
 }
 
 K.comment = {

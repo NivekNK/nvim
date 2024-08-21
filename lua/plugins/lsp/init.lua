@@ -187,13 +187,13 @@ local function get_lspsaga_config()
 end
 
 local lsp_signarute_config = {
-    debug = false,                                                                -- set to true to enable debug logging
+    debug = false,                                                               -- set to true to enable debug logging
     log_path = Utils.path_combine(Utils.stdpath("cache"), "/lsp_signature.log"), -- log dir when debug is on
     -- default is  ~/.cache/nvim/lsp_signature.log
-    verbose = false,                                                              -- show debug line number
-    bind = true,                                                                  -- This is mandatory, otherwise border config won't get registered.
+    verbose = false,                                                             -- show debug line number
+    bind = true,                                                                 -- This is mandatory, otherwise border config won't get registered.
     -- If you want to hook lspsaga or other signature handler, pls set to false
-    doc_lines = 10,                                                               -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
+    doc_lines = 10,                                                              -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
     -- set to 0 if you DO NOT want any API comments be shown
     -- This setting only take effect in insert mode, it does not affect signature help in normal
     -- mode, 10 by default
@@ -236,24 +236,6 @@ local lsp_signarute_config = {
     move_cursor_key = nil,                        -- imap, use nvim_set_current_win to move cursor between current win and floating
 }
 
-local function get_actions_preview_config(telescope_themes)
-    return {
-        telescope = {
-            sorting_strategy = "ascending",
-            layout_strategy = "vertical",
-            layout_config = {
-                width = 0.8,
-                height = 0.9,
-                prompt_position = "top",
-                preview_cutoff = 20,
-                preview_height = function(_, _, max_lines)
-                    return max_lines - 15
-                end,
-            },
-        },
-    }
-end
-
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -279,12 +261,6 @@ return {
             "ray-x/lsp_signature.nvim",
             event = "VeryLazy",
         },
-        {
-            "aznhe21/actions-preview.nvim",
-            dependencies = {
-                "nvim-telescope/telescope.nvim",
-            },
-        }
     },
     config = function()
         Utils.callback_if_ok_msg("neodev", function(neodev)
@@ -413,11 +389,6 @@ return {
         Utils.callback_if_ok_msg("lsp_signature", function(lsp_signature)
             lsp_signature.setup(lsp_signarute_config)
             vim.keymap.set("n", keymaps.signature_help, lsp_signature.toggle_float_win)
-        end)
-
-        Utils.callback_if_ok_msg_mult({ "actions-preview", "telescope.themes" }, function(required)
-            local actions_preview_config = get_actions_preview_config(required["telescope.themes"])
-            required["actions-preview"].setup(actions_preview_config)
         end)
     end,
 }

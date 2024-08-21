@@ -2,7 +2,7 @@ local icons = require("config.icons")
 local Utils = require("user.utils")
 
 local config = {
-	background_colour = "Normal",
+	background_colour = "NormalFloat",
 	fps = 30,
 	icons = {
 		DEBUG = icons.debug,

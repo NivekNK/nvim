@@ -44,6 +44,9 @@ vim.opt.linebreak = true
 vim.opt.endoffile = false
 vim.opt.fixendofline = false
 
+-- Set spell settings
+vim.opt.spelllang = { "en", "es" }
+
 -- Set Leader keymap
 vim.keymap.set("", "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "

@@ -30,7 +30,7 @@ local hlslens_config = {
     --     @param nearest boolean whether nearest lens
     --     @param idx number nearest index in the plist
     --     @param relIdx number relative index, negative means before current position, positive means after
-    override_lens      = nil,
+    override_lens = nil,
     build_position_cb  = function(plist, _, _, _)
         if Utils.require_check("scrollbar") then
             require("scrollbar.handlers.search").handler.show(plist.start_pos)
@@ -44,24 +44,6 @@ return {
     config = function()
         Utils.callback_if_ok_msg("hlslens", function(hlslens)
             hlslens.setup(hlslens_config)
-
-            if Utils.require_check("ufo") then
-                local function nN(char)
-                    local ok, winid = hlslens.nNPeekWithUFO(char)
-                    if ok and winid then
-                        -- Safe to override buffer scope keymaps remapped by ufo,
-                        -- ufo will restore previous buffer keymaps before closing preview window
-                        -- Type <CR> will switch to preview window and fire `trace` action
-                        vim.keymap.set("n", "<CR>", function()
-                            local keyCodes = vim.api.nvim_replace_termcodes("<Tab><CR>", true, false, true)
-                            vim.api.nvim_feedkeys(keyCodes, "im", false)
-                        end, { buffer = true })
-                    end
-                end
-
-                vim.keymap.set({ "n", "x" }, "n", function() nN("n") end)
-                vim.keymap.set({ "n", "x" }, "N", function() nN("N") end)
-            end
 
             if Utils.require_check("scrollbar") then
                 vim.api.nvim_create_autocmd({ "CmdlineLeave" }, {

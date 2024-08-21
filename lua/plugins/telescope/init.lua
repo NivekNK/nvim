@@ -1,7 +1,7 @@
 local Utils = require("user.utils")
+local keymaps = require("config.keymaps").telescope
 
 local function get_telescope_config(themes, actions, undo)
-    local keymaps = require("config.keymaps").telescope
     local icons = require("config.icons")
     return {
         defaults = {
@@ -34,7 +34,9 @@ local function get_telescope_config(themes, actions, undo)
                 use_delta = true,
                 use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
                 side_by_side = false,
-                diff_context_lines = vim.o.scrolloff,
+                vim_dif_opts = {
+                    ctxlen = vim.o.scrolloff,
+                },
                 entry_format = "state #$ID, $STAT, $TIME",
                 time_format = "",
                 mappings = {
@@ -74,6 +76,10 @@ return {
         Utils.callback_if_ok_msg("telescope", function(telescope)
             local config = get_telescope_config(require("telescope.themes"), require("telescope.actions"), require("telescope-undo.actions"))
             telescope.setup(config)
+
+            vim.keymap.set("n", keymaps.spell_suggestions, function()
+                require("telescope.builtin").spell_suggest(require("telescope.themes").get_cursor({}))
+            end, { desc = "Spelling Suggestions" })
 
             telescope.load_extension("fzf")
             telescope.load_extension("undo")

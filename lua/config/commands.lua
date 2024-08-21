@@ -1,3 +1,5 @@
+local Utils = require("user.utils")
+
 vim.api.nvim_create_user_command("NKToggleSpace", function()
     vim.cmd("set list!")
 end, { desc = "Toggle between showing space characters or not." })
@@ -13,3 +15,28 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         vim.fn.setpos(".", save_cursor)
     end,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function(_)
+        local filetypes = {
+            "asciidoc",
+            "gitcommit",
+            "latex",
+            "mail",
+            "markdown",
+            "rst",
+            "tex",
+            "text",
+        }
+
+        if Utils.check_filetype(filetypes) then
+            vim.cmd("ToggleWrapMode")
+            vim.cmd("setlocal spell")
+        end
+    end,
+})
+
+vim.api.nvim_create_user_command("NKToggleSpell", function()
+    vim.cmd("setlocal spell!")
+end, { desc = "Toggle spell checking!" })
+

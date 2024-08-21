@@ -329,4 +329,35 @@ function Utils.stdpath(path)
     end
 end
 
+---@return string|nil path
+function Utils.get_npm_global_directory()
+    local path = vim.fn.system({
+        "npm",
+        "root",
+        "-g"
+    })
+    return path
+end
+
+---@param filetype string|string[]|"global"|"modifiable-file"|nil
+---@return boolean
+function Utils.check_filetype(filetype)
+    if filetype == "global" then
+        return true
+    elseif filetype == "modifiable-file" then
+        return vim.bo.modifiable
+    elseif type(filetype) == "string" then
+        return filetype == vim.bo.filetype
+    elseif type(filetype) == "table" then
+        for _, value in ipairs(filetype) do
+            if value == vim.bo.filetype then
+                return true
+            end
+        end
+        return false
+    else
+        return false
+    end
+end
+
 return Utils

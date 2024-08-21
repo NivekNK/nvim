@@ -65,166 +65,201 @@ local function comments(config)
     pickers.grep_string(opts)
 end
 
-return {
-    comments = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+local Utils = require("user.utils")
+
+local M = {}
+
+---@param wk wk
+function M.setup(wk)
+    wk.add({
+        {
+            "<leader>c",
+            group = "Comments",
+            buffer = true,
+        },
+        {
+            "<leader>cc",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                        search_dirs = { vim.api.nvim_buf_get_name(0) },
+                    }),
+                    opts = {
+                        display = false,
                     },
-                    initial_mode = "normal",
-                    search_dirs = { vim.api.nvim_buf_get_name(0) },
-                }),
-                opts = {
-                    display = false,
-                },
-            })
-        end,
-        "Comments",
-    },
-    all_comments = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+                })
+            end,
+            desc = "Comments",
+            buffer = true,
+            cond = function()
+                return Utils.check_filetype("modifiable-file")
+            end,
+        },
+        {
+            "<leader>ca",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                    }),
+                    opts = {
+                        display = true,
                     },
-                    initial_mode = "normal",
-                }),
-                opts = {
-                    display = true,
-                },
-            })
-        end,
-        "All Comments",
-    },
-    fix = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+                })
+            end,
+            desc = "All Comments",
+            buffer = true,
+        },
+        {
+            "<leader>cf",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                    }),
+                    opts = {
+                        display = true,
+                        keywords = "FIX",
                     },
-                    initial_mode = "normal",
-                }),
-                opts = {
-                    display = true,
-                    keywords = "FIX",
-                },
-            })
-        end,
-        "FIX",
-    },
-    todo = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+                })
+            end,
+            desc = "FIX",
+            buffer = true,
+        },
+        {
+            "<leader>ct",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                    }),
+                    opts = {
+                        display = true,
+                        keywords = "TODO",
                     },
-                    initial_mode = "normal",
-                }),
-                opts = {
-                    display = true,
-                    keywords = "TODO",
-                },
-            })
-        end,
-        "TODO",
-    },
-    hack = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+                })
+            end,
+            desc = "TODO",
+            buffer = true,
+        },
+        {
+            "<leader>ch",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                    }),
+                    opts = {
+                        display = true,
+                        keywords = "HACK",
                     },
-                    initial_mode = "normal",
-                }),
-                opts = {
-                    display = true,
-                    keywords = "HACK",
-                },
-            })
-        end,
-        "HACK",
-    },
-    warn = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+                })
+            end,
+            desc = "HACK",
+            buffer = true,
+        },
+        {
+            "<leader>cw",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                    }),
+                    opts = {
+                        display = true,
+                        keywords = "WARN",
                     },
-                    initial_mode = "normal",
-                }),
-                opts = {
-                    display = true,
-                    keywords = "WARN",
-                },
-            })
-        end,
-        "WARN",
-    },
-    perf = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+                })
+            end,
+            desc = "WARN",
+            buffer = true,
+        },
+        {
+            "<leader>cp",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                    }),
+                    opts = {
+                        display = true,
+                        keywords = "PERF",
                     },
-                    initial_mode = "normal",
-                }),
-                opts = {
-                    display = true,
-                    keywords = "PERF",
-                },
-            })
-        end,
-        "PERF",
-    },
-    note = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+                })
+            end,
+            desc = "PERF",
+            buffer = true,
+        },
+        {
+            "<leader>cn",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                    }),
+                    opts = {
+                        display = true,
+                        keywords = "NOTE",
                     },
-                    initial_mode = "normal",
-                }),
-                opts = {
-                    display = true,
-                    keywords = "NOTE",
-                },
-            })
-        end,
-        "NOTE",
-    },
-    test = {
-        function()
-            comments({
-                theme = require("telescope.themes").get_ivy({
-                    previewer = false,
-                    layout_config = {
-                        height = 20,
+                })
+            end,
+            desc = "NOTE",
+            buffer = true,
+        },
+        {
+            "<leader>ce",
+            function()
+                comments({
+                    theme = require("telescope.themes").get_ivy({
+                        previewer = false,
+                        layout_config = {
+                            height = 20,
+                        },
+                        initial_mode = "normal",
+                    }),
+                    opts = {
+                        display = true,
+                        keywords = "TEST",
                     },
-                    initial_mode = "normal",
-                }),
-                opts = {
-                    display = true,
-                    keywords = "TEST",
-                },
-            })
-        end,
-        "TEST",
-    },
-}
+                })
+            end,
+            desc = "TEST",
+            buffer = true,
+        },
+    })
+end
+
+return M

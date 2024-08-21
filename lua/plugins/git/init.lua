@@ -4,42 +4,45 @@ local Utils = require("user.utils")
 local gitsigns_config = {
     signs = {
         add = {
-            hl = "GitSignsAdd",
             text = icons.gitsigns.change,
-            numhl = "GitSignsAddNr",
-            linehl = "GitSignsAddLn",
         },
         change = {
-            hl = "GitSignsChange",
             text = icons.gitsigns.change,
-            numhl = "GitSignsChangeNr",
-            linehl = "GitSignsChangeLn",
         },
         delete = {
-            hl = "GitSignsDelete",
             text = icons.gitsigns.deleted,
-            numhl = "GitSignsDeleteNr",
-            linehl = "GitSignsDeleteLn",
         },
         topdelete = {
-            hl = "GitSignsDelete",
             text = icons.gitsigns.deleted,
-            numhl = "GitSignsDeleteNr",
-            linehl = "GitSignsDeleteLn",
         },
         changedelete = {
-            hl = "GitSignsChange",
             text = icons.gitsigns.change,
-            numhl = "GitSignsChangeNr",
-            linehl = "GitSignsChangeLn",
         },
         untracked = {
-            hl = "GitSignsUntracked",
             text = icons.gitsigns.change,
-            numhl = "GitSignsUntrackedNr",
-            linehl = "GitSignsUntrackedLn",
         },
     },
+    signs_staged = {
+        add = {
+            text = icons.gitsigns.change,
+        },
+        change = {
+            text = icons.gitsigns.change,
+        },
+        delete = {
+            text = icons.gitsigns.deleted,
+        },
+        topdelete = {
+            text = icons.gitsigns.deleted,
+        },
+        changedelete = {
+            text = icons.gitsigns.change,
+        },
+        untracked = {
+            text = icons.gitsigns.change,
+        },
+    },
+    signs_staged_enable = true,
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
     numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
     linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
@@ -55,10 +58,9 @@ local gitsigns_config = {
         virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
         delay = 1000,
         ignore_whitespace = false,
+        virt_text_priority = 100,
     },
-    current_line_blame_formatter_opts = {
-        relative_time = false,
-    },
+    current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
     sign_priority = 6,
     update_debounce = 100,
     status_formatter = nil, -- Use default
@@ -70,9 +72,6 @@ local gitsigns_config = {
         relative = "cursor",
         row = 0,
         col = 1,
-    },
-    yadm = {
-        enable = false,
     },
 }
 

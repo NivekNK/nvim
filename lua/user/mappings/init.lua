@@ -9,4 +9,4 @@ for _, keymap_type in ipairs(keymap_types) do
     end
 end
 
-require("user.mappings.@which_key")
+require("user.mappings.which-key")

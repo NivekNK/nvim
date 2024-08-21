@@ -1,17 +1,101 @@
-return {
-    find_files = {
-        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
-        "Files",
-    },
-    live_grep = { "<cmd>Telescope live_grep theme=ivy<CR>", "Text" },
-    buffers = {
-        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false, layout_config = { height = 8 } }))<CR>",
-        "Buffers",
-    },
-    changed_files = { "<cmd>Telescope git_status<CR>", "Changed Files" },
-    branches = { "<cmd>Telescope git_branches<CR>", "Branches" },
-    commit_history = { "<cmd>Telescope git_commits<CR>", "Commit History" },
-    lsp_references = { "<cmd>Telescope lsp_references<CR>", "References" },
-    undo = { "<cmd>Telescope undo<CR>", "Undo" },
-    keymaps = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
-}
+local Utils = require("user.utils")
+
+local M = {}
+
+---@param wk wk
+function M.setup(wk)
+    wk.add({
+        {
+            "<leader>s",
+            group = "Search",
+            buffer = true,
+        },
+        {
+            "<leader>sf",
+            "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
+            desc = "Files",
+            buffer = true,
+        },
+        {
+            "<leader>st",
+            "<cmd>Telescope live_grep theme=ivy<CR>",
+            desc = "Text",
+            buffer = true,
+        },
+        {
+            "<leader>sb",
+            "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false, layout_config = { height = 8 } }))<CR>",
+            desc = "Buffers",
+            buffer = true,
+        },
+        {
+            "<leader>su",
+            "<cmd>Telescope undo<CR>",
+            desc = "Undo",
+            buffer = true,
+            cond = function()
+                return Utils.check_filetype("modifiable-file")
+            end,
+        },
+        {
+            "<leader>sk",
+            "<cmd>Telescope keymaps<CR>",
+            desc = "Keymaps",
+            buffer = true,
+        },
+    })
+
+    wk.add({
+        {
+            "<leader>g",
+            group = "Git",
+            buffer = true,
+            cond = function()
+                return Utils.check_filetype("modifiable-file")
+            end,
+        },
+        {
+            "<leader>gf",
+            "<cmd>Telescope git_status<CR>",
+            desc = "Changed Files",
+            buffer = true,
+            cond = function()
+                return Utils.check_filetype("modifiable-file")
+            end,
+        },
+        {
+            "<leader>gh",
+            "<cmd>Telescope git_commits<CR>",
+            desc = "Commit History",
+            buffer = true,
+            cond = function()
+                return Utils.check_filetype("modifiable-file")
+            end,
+        },
+        {
+            "<leader>gb",
+            "<cmd>Telescope git_branches<CR>",
+            desc = "Branches",
+            buffer = true,
+            cond = function()
+                return Utils.check_filetype("modifiable-file")
+            end,
+        },
+    })
+
+    wk.add({
+        {
+            "<leader>p",
+            group = "LSP",
+            buffer = true,
+        },
+        {
+            "<leader>pe",
+            "<cmd>Telescope lsp_references<CR>",
+            desc = "References",
+            buffer = true,
+        },
+    })
+end
+
+return M

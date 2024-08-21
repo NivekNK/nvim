@@ -61,12 +61,6 @@ My config of neovim for windows and linux.
 
 * Install ripgrep: Already installed with Telescope.
 
-### Copilot:
-
-* On a fresh install run the following command inside neovim
-
-        :Copilot auth
-
 ### efm-langserver:
 
 * Install go and then the efm-langserver:

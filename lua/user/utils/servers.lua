@@ -36,6 +36,11 @@ M.lang = function()
     end
 
     servers_lang = {}
+
+    for lang, _ in pairs(require("config.servers.@detail")) do
+        table.insert(servers_lang, lang)
+    end
+
     Utils.foreach_filename("/config/servers", function(server_name)
         local server = require("config.servers." .. server_name)
         if server.lang then
