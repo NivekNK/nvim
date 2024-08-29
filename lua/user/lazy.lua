@@ -73,7 +73,7 @@ end
 
 local langs = { "en", "es" }
 
+vim.notify("Checking spell files...")
 for _, lang in ipairs(langs) do
     download_spell_file(lang)
 end
-

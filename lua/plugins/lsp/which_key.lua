@@ -2,6 +2,8 @@ local Utils = require("user.utils")
 
 local M = {}
 
+M.diagnostic_enabled = true
+
 ---@param wk wk
 function M.setup(wk)
     wk.add({
@@ -14,6 +16,19 @@ function M.setup(wk)
             "<leader>pd",
             "<cmd>lua vim.lsp.buf.declaration()<CR>",
             desc = "Go to declaration",
+            buffer = true,
+        },
+        {
+            "<leader>pv",
+            function()
+                M.diagnostic_enabled = !M.diagnostic_enabled
+                if M.diagnostic_enabled then
+                    vim.diagnostic.enable(vim.api.nvim_get_current_buf())
+                else
+                    vim.diagnostic.disable(vim.api.nvim_get_current_buf())
+                end
+            end,
+            desc = "Toggle Virtual Text",
             buffer = true,
         }
     })

@@ -17,6 +17,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = { "*" },
     callback = function(_)
         local filetypes = {
             "asciidoc",
@@ -30,7 +31,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
         }
 
         if Utils.check_filetype(filetypes) then
-            vim.cmd("ToggleWrapMode")
             vim.cmd("setlocal spell")
         end
     end,

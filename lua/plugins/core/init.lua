@@ -98,6 +98,26 @@ return {
         "andrewferrier/wrapping.nvim",
         config = function()
             Utils.callback_if_ok_msg("wrapping", function(wrapping)
+                vim.api.nvim_create_autocmd("BufEnter", {
+                    pattern = { "*" },
+                    callback = function(_)
+                        local filetypes = {
+                            "asciidoc",
+                            "gitcommit",
+                            "latex",
+                            "mail",
+                            "markdown",
+                            "rst",
+                            "tex",
+                            "text",
+                        }
+
+                        if Utils.check_filetype(filetypes) then
+                            wrapping.soft_wrap_mode()
+                        end
+                    end,
+                })
+
                 wrapping.setup(wrapping_opts)
             end)
         end,
