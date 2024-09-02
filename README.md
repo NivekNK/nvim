@@ -1,12 +1,14 @@
 # nvim
 My config of neovim for windows and linux.
 
-# TODO
-
-- Install none-ls, new null-ls.
-- Update nvim-tree icons highlight when nk-theme is ready.
-
 ## Requirements:
+
+- Windows [Scoop]
+
+            scoop bucket add versions
+            scoop install versions/neovim-nightly
+
+- Linux: **TODO**
 
 ### markdown-preview:
 
