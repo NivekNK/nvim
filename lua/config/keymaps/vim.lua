@@ -73,12 +73,3 @@ vim.keymap.set("v", ">", ">gv")
 
 -- Paste
 vim.keymap.set("v", "p", '"_dP')
-
--- Expand window up
-vim.keymap.set("n", "<leader>k", "<cmd>wincmd k<CR>")
--- Expand window down
-vim.keymap.set("n", "<leader>j", "<cmd>wincmd j<CR>")
--- Expand window left
-vim.keymap.set("n", "<leader>h", "<cmd>wincmd h<CR>")
--- Expand window right
-vim.keymap.set("n", "<leader>l", "<cmd>wincmd l<CR>")
